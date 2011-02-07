@@ -1,0 +1,35 @@
+name: Zach Bartlett
+date: Feb 7, 2011
+program: i1
+instructor: Dr. Page
+
+time log:
+	-date: Jan 19, 2011 
+	start time: 4:30PM
+	end time: 6:00PM
+	phase: plan
+	comment: Brainstormed on topics for group project, decided on APNG creator and discussed options.
+
+	-date: Jan 24, 2011
+	start time: 10:00PM
+	end time: 1:00AM
+	phase: plan
+	comment: Researched PNG specifications as well as zlib DEFLATE and INFLATE implementations (puff.c)
+
+	-date: Jan 26, 2011
+	start time: 2:00PM
+	end time: 4:00PM
+	phase: plan
+	comment: Worked on t2 and updated diagrams for the forward and reverse pnga process as well as xml schema.
+
+	-date: Jan 31, 2011
+	start time: 4:30PM
+	end time: 5:30PM
+	phase: plan
+	comment: Looked over Mrankings in order to prune data for the new PROBE table
+
+	-date: Feb 6, 2011
+	start time: 12:00AM
+	end time: 1:00AM
+	phase: plan
+	comment: Updated t3.odt -included Brett's probe table and graph -updated Style and Standards to include code comments sections
