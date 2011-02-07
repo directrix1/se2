@@ -1,9 +1,33 @@
-name: 
+name: Edward Flick
 date: Feb 7, 2011
 program: se2
 instructor: Dr. Page
 
 time log:
+	- date: Jan 19, 2011
+	  start time: 12:00PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Research APNG and PNG file formats.
+
+	- date: Jan 24, 2011
+	  start time: 1:30PM
+	  end time: 8:30PM
+	  phase: plan
+	  comment: Research Deflate file formats uploaded relevant standards to GIT. Help write project proposal.
+
+	- date: Jan 31, 2011
+	  start time: 4:30PM
+	  end time: 8:30PM
+	  phase: plan
+	  comment: Planned out PROBE estimate, and calculated number of lines for xmlminidom. Work on progress report A and engineering procedures and standards.
+
+	- date: Feb 7, 2011
+	  start time: 3:30PM
+	  end time: 9:30PM
+	  phase: plan
+	  comment: Work on multilevel design and PROBE estimate. Split up xmlminidom implementation.
+
 	- date:
 	  start time:
 	  end time:
@@ -25,7 +49,7 @@ reused objects:
 defect log:
 
 	- date: 
-	  type: Conceptual
+	  type: design
 	  fix time:
 	  comment:
 
