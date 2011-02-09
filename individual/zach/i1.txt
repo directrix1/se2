@@ -33,3 +33,16 @@ time log:
 	end time: 1:00AM
 	phase: plan
 	comment: Updated t3.odt -included Brett's probe table and graph -updated Style and Standards to include code comments sections
+	
+	-date: Feb 9, 2011
+	start time: 12:00AM
+	end time: 2:00AM
+	phase: plan
+	comment: Worked on i2 peer evalulations and concatenated files together to submit. Ran PSP++ on i1
+
+defect log:
+
+	-date: Feb 6, 2011
+	type: design
+	fix time: 20
+	comment: Fixed Defect Database schema to be more consistent with PSP++ schema
