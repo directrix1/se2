@@ -26,35 +26,12 @@ time log:
 	  start time: 3:30PM
 	  end time: 9:30PM
 	  phase: plan
-	  comment: Work on multilevel design and PROBE estimate. Split up xmlminidom implementation.
-
-	- date:
-	  start time:
-	  end time:
-	  phase: plan
-	  comment: 
-
-new objects:
-
-	- name:
-	  estimated lines:
-	  type: Calculation
-
-reused objects:
-
-	- name: 
-	  estimated base:
-	  type: Calculation
+	  comment: Work on multilevel design and PROBE estimate. Started split up of xmlminidom implementation into two modules.
 
 defect log:
 
-	- date: 
+	- date: Feb 7, 2011
 	  type: design
-	  fix time:
-	  comment:
+	  fix time: 10
+	  comment: Decided how to split the xmlminidom functions up into modules for serialization/deserialization and xml dom traversal.
 
-
-actual added lines:
-actual base lines:
-actual modified lines:
-actual removed lines:
