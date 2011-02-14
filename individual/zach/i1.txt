@@ -40,6 +40,18 @@ time log:
 	phase: plan
 	comment: Worked on i2 peer evalulations and concatenated files together to submit. Ran PSP++ on i1
 
+	-date: Feb 14, 2011
+	start time: 3:00PM
+	end time: 4:30PM
+	phase: plan
+	comment: Added PNG and APNG specification documentation to t5update explaining chunks and data types
+
+	-date: Feb 14, 2011
+	start time: 4:30PM
+	end time: 5:45PM
+	phase: plan
+	comment: Worked on t6 with Brett in sections prior to Modules. Mostly cosmetic and need for explanation markers in review of t5.
+
 defect log:
 
 	-date: Feb 6, 2011
