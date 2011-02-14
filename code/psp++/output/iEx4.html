@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+	<head>
+		<title>PSP Report</title> 
+		
+		<style>
+		td.fieldname {
+			text-align:right;
+			font-weight:bold;
+		}
+		body {
+			font-family:Verdana;
+		}
+		div.section-title {
+			font-size:150%;
+			font-weight:bold;
+			margin-top:20px;
+		}
+		
+		div.graph-title {
+			font-style: italic;
+		}
+		
+		table.log-table {
+			border-collapse:collapse;
+		}
+		table.log-table td {
+			border-width:1px;
+			border-style:solid;
+			border-color:#888888;
+			padding:5px 5px 5px 5px;
+		}
+		table.log-table th {
+			border-width:2px;
+			border-style:solid;
+			border-color:#888888;
+			background-color:#CCCCCC;
+			padding:5px 5px 5px 5px;
+		}
+		</style>
+	</head> 
+	<body> 
+	
+		<div>
+			<h1>iEx4</h1>
+			<em>Personal Software Process Summary</em>
+		</div>
+		
+		<div class="section-title">Project Essentials</div>
+			<table>
+				<tr><td class="fieldname">Name:</td><td>Edward Flick</td></tr>
+				<tr><td class="fieldname">Instructor:</td><td>Dr. Page</td></tr>
+				<tr><td class="fieldname">Date:</td><td>Oct 5, 2010</td></tr>
+				<tr><td class="fieldname">Language:</td><td>ACL2</td></tr>
+			</table>
+	
+		<div class="section-title">Lines of Code</div>
+		<table>
+			<tr><th>Type</th><th>Prediction by user</th><th>Actual</th></tr>
+			<tr>
+				<td>Added</td>
+				<td>32</td>
+				<td>73</td>
+			</tr>
+			<tr>
+				<td>Base</td>
+				<td>0</td>
+				<td>321</td>
+			</tr>
+			<tr>
+				<td>Modified</td>
+				<td>0</td>
+				<td>171</td>
+			</tr>
+			<tr>
+				<td>Removed</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+		</table>
+		
+		<div class="section-title">PSP Projection</div>
+		<table>
+		<tr><td align=center>
+			<div class="graph-title">LoC Certainty</div>
+			Not enough data to make a meaningful prediction
+		</td><td align=center>
+			<div class="graph-title">Time Certainty</div>
+			Not enough data to make a meaningful prediction
+		</td></tr></table>
+		
+		<div class="section-title">Project Data</div>
+		<table>
+		<tr><td align=center valign=top>
+			<div class="graph-title">Time Per Defect Type</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:11&chs=300x150&chl=code&chtt='>
+		</td><td align=center valign=top>
+			<div class="graph-title">Time Per Phase</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:510,840,30&chs=300x150&chl=planning|code|design&chtt='>
+		</td></tr>
+		<tr><td colspan=2 align=center valign=top>
+			<div class="graph-title">Time by Day</div>
+			<img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:0,0,0,0,0,0,0,0,0,0|0,120,0,0,0,0,0,0,0,0|30,0,0,0,0,0,0,0,0,0&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=planning|code|design&chxt=x,y&chxl=0:|Sept 26|Sept 27|Sept 28|Sept 29|Sept 30|Oct 1|Oct 2|Oct 3|Oct 4|Oct 5&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'><br><img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:0,0,0,0,510,0,0,0,0|0,0,0,0,0,480,120,0,120|0,0,0,0,0,0,0,0,0&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=planning|code|design&chxt=x,y&chxl=0:|Oct 6|Oct 7|Oct 8|Oct 9|Oct 10|Oct 11|Oct 12|Oct 13|Oct 14&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'>
+		</td></tr>
+		</table>
+		
+		
+		<div class="section-title">Cumulative Data</div>
+		
+		<table cellspacing=20>
+		<tr><td align=center valign=top>
+			<div class="graph-title">Time Per Defect Type</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:120,2,11&chs=300x150&chl=Implementation|Conceptual|code&chtt='>
+		</td><td align=center valign=top>
+			<div class="graph-title">Time Per Phase</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:870,510,1109,30&chs=300x150&chl=plan|planning|code|design&chtt='>
+		</td></tr>
+		<tr><td colspan align=center valign=top>
+			<div class="graph-title">Actual vs Estimated LoC</div>
+			<img src='http://chart.apis.google.com/chart?cht=s&chd=t:0,0|0,31&chxt=x,y,x,y&chxr=0,0,150,30|1,0,150,30&chxl=2:|User-Estimated+LOC|3:|Actual+LOC&chxp=2,50|3,50&chs=300x200&chtt=Actual-Estimate History&chm=d,000000,1,1.0,10.0&chg=20,20'>
+		</td>
+		<td colspan align=center valign=top>
+			<div class="graph-title">Actual vs Estimated LoC</div>
+			<table>
+			<tr><th>Project</th><th>Estimate</th><th>Actual</th></tr><tr><td>iEx2</td><td>0</td><td>0</td></tr><tr><td>iEx1</td><td>0</td><td>31</td></tr>
+			</table>
+		</td></tr>
+		
+		</table>
+	
+		<div class="section-title">Time Log</div>
+		<table class="log-table"> 
+			<tr><th>Date</th><th>Type</th><th>Int. Time</th><th width="50%">Description</th></tr><tr><td>Sept 26, 2010, 12:00 PM - 12:30 PM</td><td>design</td><td>0</td><td>Drafted basic design document. Included necessary functions, data types and rough process.</td></tr><tr><td>Sept 27, 2010, 12:30 PM - 2:30 PM</td><td>code</td><td>0</td><td>Implemented test suite and wrote this file.</td></tr><tr><td>Oct 10, 2010, 12:00 PM - 8:30 PM</td><td>planning</td><td>0</td><td>Read several documents and all the examples on how to generate good tests. Still trying to find ways to form theorems for operations on structured lists and mvs that nest without using lots of implications. Eventually just resigned to its necessity.</td></tr><tr><td>Oct 11, 2010, 5:00 PM - 1:00 PM</td><td>code</td><td>0</td><td>Implemented all functions, fixed check-expects.</td></tr><tr><td>Oct 12, 2010, 1:00 AM - 3:00 AM</td><td>code</td><td>0</td><td>Refined tests, and design documentation.</td></tr><tr><td>Oct 14, 2010, 12:00 PM - 2:00 PM</td><td>code</td><td>0</td><td>Tried making working theorems.</td></tr>
+		</table> 
+		
+		<div class="section-title">Defect Log</div>
+		<table class="log-table">
+			<tr><th>Date</th><th>Phase</th><th>Fix Time</th><th width="50%">Description</th></tr><tr><td>Oct 5, 2010</td><td>code</td><td>1</td><td>Don't know. Can't run tests without implementations.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Forget to pass state to file->string.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Added code to append .xml and .html to the input and output filenames.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>file->string second return in mv null indicates success; not the other way around.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Reordered defuns because it matters.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Changed design getgames should get list of "game" nodes.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Changed to defconst instead of defconstant, duh.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Created stringutils with function stringlist-append that appends the items in a stringlist in order into one string.</td></tr><tr><td>Oct 11, 2010</td><td>code</td><td>1</td><td>Found significant variation in one of the example xml files. Corrected code to ignore this significantly more complex variation.</td></tr><tr><td>Oct 12, 2010</td><td>code</td><td>1</td><td>Accidentally had it showing direction instead of "Dealer"</td></tr><tr><td>Oct 12, 2010</td><td>code</td><td>1</td><td>Fixed check-expects to use stringlist-append instead of string-append. Also corrected some invalid expected values, and badly specified input.</td></tr>
+		</table>
+	</body>
+</html> 
+ 

@@ -1,0 +1,29 @@
+name: Edward Flick
+date: Sept 13, 2010
+program: iEx2
+instructor: Dr. Page
+language: ACL2
+actual added lines: 0
+actual base lines: 31
+actual modified lines: 0
+actual removed lines: 0
+
+time log:
+
+	- date: Sept 14, 2010
+	  start time: 3:00AM
+	  end time: 5:00AM
+	  phase: code
+	  comment: Total implementation.
+	  
+defect log:
+	- date: Sept 10, 2010
+	  type: Conceptual
+	  fix time: 1
+	  comment: Updated split-on-token to conform to spec.
+
+	- date: Sept 14, 2010
+	  type: Implementation
+	  fix time: 120
+	  comment: Smash head against wall trying to debug theorems.
+

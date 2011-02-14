@@ -1,0 +1,182 @@
+name: Brett Marcott
+date: October 28, 2010
+program: iEx5
+instructor: Dr. Page
+language: ACL2
+
+time log:
+
+	- date: October 20, 2010
+	  start time: 10:30PM
+	  end time: 11:30PM
+	  phase: plan
+	  comment: Design method for solving problem, very similar to iEx4 except adding new methods to extract results section
+
+	- date: October 21, 2010
+	  start time: 12:30AM
+	  end time: 1:00AM
+	  phase: plan
+	  comment: estimate LOC, new/reused objects
+
+	- date: October 21, 2010
+	  start time: 1:15AM
+	  end time: 2:00AM
+	  phase: plan
+	  comment: write check-expects for new objects
+
+	- date: October 21, 2010
+	  start time: 2:00AM
+	  end time: 3:00AM
+	  phase: plan
+	  comment: write predicate tests and modify iex4 tests
+
+	- date: October 26, 2010
+	  start time: 9:15PM
+	  end time: 1:00AM
+	  phase: code
+	  comment: modified xml-utilities so that it finds tags correctly (for instance it shouldn't find Board in <BoardNo>). Also added get-results method and incorporated it in the game-content method. The next step is to add in the results table to the html output
+
+	- date: October 27, 2010
+	  start time: 8:30PM
+	  end time: 12:00AM
+	  phase: code
+	  comment: code the get-results, build-results-table, and build-results-table-row functions to read in the results and add them to the html output
+
+	- date: October 28, 2010
+	  start time: 12:00AM
+	  end time: 2:30AM
+	  phase: test
+	  comment: wrote tests and theorems for get-results, tag-content+, and build-results-table-row
+
+new objects:
+
+	- name: get-results
+	  estimated lines: 4
+	  type: calculation
+
+	- name: get-IDs
+	  estimated lines: 4
+	  type: calculation
+
+	- name: get-totalScore
+	  estimated lines: 4
+	  type: calculation
+
+	- name: get-matchPoints
+	  estimated lines: 4
+	  type: calculation
+
+	- name: build-results-tables
+	  estimated lines: 7
+	  type: calculation
+
+	- name: build-results-table-row
+	  estimated lines: 7
+	  type: calculation
+
+
+reused objects:
+
+	#### iex4 ####
+
+	- name:	get-suits
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	get-hands
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	game-content
+	  type: xml operations
+	  estimated base: 7
+	  estimated modified: 3
+	  estimated added: 5
+
+	- name:	build-table
+	  type: html operations
+	  estimated base: 7
+
+	- name:	build-table-cell
+	  type: html operations
+	  estimated base: 4
+
+	- name:	build-html-tables
+	  type: xml operations
+	  estimated base: 7
+
+	- name:	get-deal-info
+	  type: xml operations
+	  estimated base: 4
+	
+	- name:	formatted-string-to-html
+	  type: xml operations
+	  estimated base: 7
+	  estimated modified: 3
+	  estimated added: 5
+
+
+	#### iex3 ####
+
+	- name:	intr-to-file
+	  type: xml operations
+	  estimated base: 8
+
+	- name:	main
+	  type: xml operations
+	  estimated base: 1
+
+	- name:	read-file
+	  type: xml operations
+	  estimated base: 4
+
+	#### xml-utilities ####
+
+	- name:	tag-content-given-open/close
+	  type: xml operations
+	  estimated base: 7
+
+	- name:	tag-content+
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	attribute-value
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	tag-packets
+	  type: xml operations
+	  estimated base: 4
+
+	#### basic lex ####
+
+	- name: split-at-delimeter
+	  type: list operations
+	  estimated base: 1
+
+	- name: span
+	  type: list operations
+	  estimated base: 1
+
+	- name: splitoff-prefix
+	  type: list operations
+	  estimated base: 4
+
+	- name: split-on-token
+	  type: list operations
+	  estimated base: 4
+
+defect log:
+
+	- date: October 21, 2010
+	  type: design
+	  fix time: 1
+	  comment: originally did not think to modify game-content and formatted-string-to-html tests, which does reflect the change I will make
+
+	- date: October 28, 2010
+	  type: code
+	  fix time: 1
+	  comment: program takes way too long to run, I think it may be my "fix" for xml-utilities that finds tags correctly (doesn't find boardNo when looking for board)
+
+actual added lines: 250
+actual base lines: 17

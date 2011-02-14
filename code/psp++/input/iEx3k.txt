@@ -1,0 +1,98 @@
+name: Kye Rabon
+date: Sept 20, 2010
+program: Dealing Instructions from XML data (iEx3)
+instructor: Dr. Page
+language: ACL2
+actual added lines: 114
+
+actual base lines: 0
+
+
+
+time log:
+
+	- date: Sept 19, 2010
+	  start time: 8:00AM
+	  end time: 10:30AM
+	  phase: plan
+	  comment: Did some reading on the web about XML. Read through the modules that we will be using. Began thinking about the design document and how to organize it. 
+
+	- date: Sept 20, 2010
+	  start time: 8:00AM
+	  end time: 12:00PM
+	  phase: plan
+	  comment: Decided on a format and began writing up the design. Not sure about which data structures will be used. 
+
+	- date: Sept 22, 2010
+	  start time: 7:00AM
+	  end time: 10:00AM
+	  phase: plan
+	  comment: Finished up the design document.
+
+	- date: Sept 23, 2010
+	  start time: 9:00AM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Entered estimations into PSP project file. Began writing tests and coding.
+
+	- date: Sept 24, 2010
+	  start time: 9:00AM
+	  end time: 12:00PM
+	  phase: code
+	  comment: Got file I/O working. Still working on calculation functions.
+
+	- date: Sept 25, 2010
+	  start time: 9:00AM
+	  end time: 6:00PM
+	  phase: code
+	  comment: Successfully got I/O working for the header. Still working on calculations for the dealing instructions.
+
+	- date: Sept 26, 2010
+	  start time: 9:00AM
+	  end time: 6:00PM
+	  phase: code
+	  comment: I was able to extract the hands from the xml file and output them. Started work on the theorems.
+
+
+
+
+
+new objects:
+
+
+	- name: read
+	  estimated lines: 2
+	  type: IO
+
+	- name: write
+	  estimated lines: 2
+	  type: IO
+
+	- name: various functions
+	  estimated lines: 40
+	  type: Calculation
+
+reused objects:
+
+	- name: split-on-token
+	  type: Calculation
+	  estimated base: 10
+
+defect log:
+	- date: Sept 27, 2010
+	  type: Conceptual
+	  fix time: 1
+	  comment: 4 check-expects failed. I forgot that the card extractors deliver the first group of cards twice. Need to use the cdr to get the proper groups of cards.
+
+	- date: Sept 27, 2010
+	  type: Conceptual
+	  fix time: 1
+	  comment: Wrote a property that card extractors will always deliver a list containing one element. 20 tests failed. Rewrote the property to include one element or less.
+
+	- date: Sept 27, 2010
+	  type: Conceptual
+	  fix time: 0
+	  comment: Cannot admit book iEx3 into the theorem prover. "It is illegal to invoke FILE->STRING here because of a signature mismatch."
+
+
+

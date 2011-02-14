@@ -1,0 +1,109 @@
+name: Kye Rabon
+date: Oct 28, 2010
+program: Bridge Hands with Travelers (iEx5)
+instructor: Dr. Page
+language: ACL2
+actual added lines:  11
+
+actual base lines: 106
+
+
+time log:
+
+	- date: Oct 18, 2010
+	  start time: 7:00AM
+	  end time: 9:00AM
+	  phase: plan
+	  comment: Thought about the design and wrote the document
+
+	- date: Oct 19, 2010
+	  start time: 7:00AM
+	  end time: 10:00AM
+	  phase: plan
+	  comment: Wrote check-expects and properties.
+
+	- date: Oct 22, 2010
+	  start time: 8:00AM
+	  end time: 10:00AM
+	  phase: code
+	  comment: Began work on producing output in HTML.
+
+	- date: Oct 24, 2010
+	  start time: 10:00AM
+	  end time: 12:00AM
+	  phase: code
+	  comment: Finished up producing output in the directional format using HTML.
+
+	- date: Oct 27, 2010
+	  start time: 4:00PM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Worked on improving the efficiency of the code.
+
+	
+
+new objects:
+
+	- name: htmlhands
+	  estimated lines: 12
+	  type: Calculation
+
+
+reused objects:
+
+	- name: readfile
+	  type: I/O
+	  estimated base: 2
+
+	- name: writefile
+	  type: I/O
+	  estimated base: 6
+
+	- name: split-on-token
+	  type: Calculation
+	  estimated base: 10
+
+	- name: getspades
+	  type: Calculation
+	  estimated base: 6
+
+	- name: gethearts
+	  type: Calculation
+	  estimated base: 10
+
+	- name: getdiamonds
+	  type: Calculation
+	  estimated base: 6
+
+	- name: getclubs
+	  type: Calculation
+	  estimated base: 6
+
+	- name: gethands
+	  type: Calculation
+	  estimated base: 10
+
+	- name: getdealer
+	  type: Calculation
+	  estimated base: 6
+
+	- name: getvulnerable
+	  type: Calculation
+	  estimated base: 7
+
+	- name: direction
+	  type: Calculation
+	  estimated base: 9
+
+	- name: getdirection
+	  type: Calculation
+	  estimated base: 7
+
+defect log:
+
+	- date: Oct 24, 2010
+	  type: code
+	  fix time: 1
+	  comment: Realized when working with larger xml files that my code is taking exponential time.
+	
+

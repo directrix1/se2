@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+	<head>
+		<title>PSP Report</title> 
+		
+		<style>
+		td.fieldname {
+			text-align:right;
+			font-weight:bold;
+		}
+		body {
+			font-family:Verdana;
+		}
+		div.section-title {
+			font-size:150%;
+			font-weight:bold;
+			margin-top:20px;
+		}
+		
+		div.graph-title {
+			font-style: italic;
+		}
+		
+		table.log-table {
+			border-collapse:collapse;
+		}
+		table.log-table td {
+			border-width:1px;
+			border-style:solid;
+			border-color:#888888;
+			padding:5px 5px 5px 5px;
+		}
+		table.log-table th {
+			border-width:2px;
+			border-style:solid;
+			border-color:#888888;
+			background-color:#CCCCCC;
+			padding:5px 5px 5px 5px;
+		}
+		</style>
+	</head> 
+	<body> 
+	
+		<div>
+			<h1>iEx3</h1>
+			<em>Personal Software Process Summary</em>
+		</div>
+		
+		<div class="section-title">Project Essentials</div>
+			<table>
+				<tr><td class="fieldname">Name:</td><td>Edward Flick</td></tr>
+				<tr><td class="fieldname">Instructor:</td><td>Dr. Page</td></tr>
+				<tr><td class="fieldname">Date:</td><td>Sept 29, 2010</td></tr>
+				<tr><td class="fieldname">Language:</td><td>ACL2</td></tr>
+			</table>
+	
+		<div class="section-title">Lines of Code</div>
+		<table>
+			<tr><th>Type</th><th>Prediction by user</th><th>Actual</th></tr>
+			<tr>
+				<td>Added</td>
+				<td>0</td>
+				<td>290</td>
+			</tr>
+			<tr>
+				<td>Base</td>
+				<td>0</td>
+				<td>31</td>
+			</tr>
+			<tr>
+				<td>Modified</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Removed</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+		</table>
+		
+		<div class="section-title">PSP Projection</div>
+		<table>
+		<tr><td align=center>
+			<div class="graph-title">LoC Certainty</div>
+			Not enough data to make a meaningful prediction
+		</td><td align=center>
+			<div class="graph-title">Time Certainty</div>
+			Not enough data to make a meaningful prediction
+		</td></tr></table>
+		
+		<div class="section-title">Project Data</div>
+		<table>
+		<tr><td align=center valign=top>
+			<div class="graph-title">Time Per Defect Type</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:1,5&chs=300x150&chl=conceptual|code&chtt='>
+		</td><td align=center valign=top>
+			<div class="graph-title">Time Per Phase</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:1470,240&chs=300x150&chl=code|design&chtt='>
+		</td></tr>
+		<tr><td colspan=2 align=center valign=top>
+			<div class="graph-title">Time by Day</div>
+			<img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:0,810,660|240,0,0&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=code|design&chxt=x,y&chxl=0:|Sept 26|Sept 27|Sept 28&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'>
+		</td></tr>
+		</table>
+		
+		
+		<div class="section-title">Cumulative Data</div>
+		
+		<table cellspacing=20>
+		<tr><td align=center valign=top>
+			<div class="graph-title">Time Per Defect Type</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:120,3,3,5&chs=300x150&chl=Implementation|Conceptual|conceptual|code&chtt='>
+		</td><td align=center valign=top>
+			<div class="graph-title">Time Per Phase</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:870,1739,240&chs=300x150&chl=plan|code|design&chtt='>
+		</td></tr>
+		<tr><td colspan align=center valign=top>
+			<div class="graph-title">Actual vs Estimated LoC</div>
+			<img src='http://chart.apis.google.com/chart?cht=s&chd=t:0,0|0,31&chxt=x,y,x,y&chxr=0,0,150,30|1,0,150,30&chxl=2:|User-Estimated+LOC|3:|Actual+LOC&chxp=2,50|3,50&chs=300x200&chtt=Actual-Estimate History&chm=d,000000,1,1.0,10.0&chg=20,20'>
+		</td>
+		<td colspan align=center valign=top>
+			<div class="graph-title">Actual vs Estimated LoC</div>
+			<table>
+			<tr><th>Project</th><th>Estimate</th><th>Actual</th></tr><tr><td>iEx2</td><td>0</td><td>0</td></tr><tr><td>iEx1</td><td>0</td><td>31</td></tr>
+			</table>
+		</td></tr>
+		
+		</table>
+	
+		<div class="section-title">Time Log</div>
+		<table class="log-table"> 
+			<tr><th>Date</th><th>Type</th><th>Int. Time</th><th width="50%">Description</th></tr><tr><td>Sept 26, 2010, 8:00 PM - 12:00 PM</td><td>design</td><td>0</td><td>Drafted basic design document. Included necessary functions and rough process.</td></tr><tr><td>Sept 27, 2010, 5:00 PM - 6:30 PM</td><td>code</td><td>0</td><td>Completely implemented xmlminidom's functionality.</td></tr><tr><td>Sept 28, 2010, 2:00 AM - 4:30 AM</td><td>code</td><td>0</td><td>Started writing iEx3 main file.</td></tr><tr><td>Sept 28, 2010, 8:00 PM - 4:30 PM</td><td>code</td><td>0</td><td>Completed iEx3 main file implementation, and wrote test suites.</td></tr>
+		</table> 
+		
+		<div class="section-title">Defect Log</div>
+		<table class="log-table">
+			<tr><th>Date</th><th>Phase</th><th>Fix Time</th><th width="50%">Description</th></tr><tr><td>Sept 26, 2010</td><td>code</td><td>1</td><td>Changed all functions to call xml-unescape on all string parts.</td></tr><tr><td>Sept 28, 2010</td><td>code</td><td>1</td><td>Fixed xmlminidom to recognize whitespace appropriately including tabs and newlines</td></tr><tr><td>Sept 28, 2010</td><td>conceptual</td><td>1</td><td>Changed iEx3's const *cards* to map from low to high so cards will sort correctly when flattened.</td></tr><tr><td>Sept 29, 2010</td><td>code</td><td>1</td><td>Tried to append a list of strings and then remembered that isn't what it's for. Created string-appendlist.</td></tr><tr><td>Sept 29, 2010</td><td>code</td><td>1</td><td>Worked through random errors in getting tests to work.</td></tr><tr><td>Sept 29, 2010</td><td>code</td><td>1</td><td>Theorem solver doesn't want to accept</td></tr>
+		</table>
+	</body>
+</html> 
+ 

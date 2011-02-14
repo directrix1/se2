@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+	<head>
+		<title>PSP Report</title> 
+		
+		<style>
+		td.fieldname {
+			text-align:right;
+			font-weight:bold;
+		}
+		body {
+			font-family:Verdana;
+		}
+		div.section-title {
+			font-size:150%;
+			font-weight:bold;
+			margin-top:20px;
+		}
+		
+		div.graph-title {
+			font-style: italic;
+		}
+		
+		table.log-table {
+			border-collapse:collapse;
+		}
+		table.log-table td {
+			border-width:1px;
+			border-style:solid;
+			border-color:#888888;
+			padding:5px 5px 5px 5px;
+		}
+		table.log-table th {
+			border-width:2px;
+			border-style:solid;
+			border-color:#888888;
+			background-color:#CCCCCC;
+			padding:5px 5px 5px 5px;
+		}
+		</style>
+	</head> 
+	<body> 
+	
+		<div>
+			<h1>tImplTeamSteele</h1>
+			<em>Personal Software Process Summary</em>
+		</div>
+		
+		<div class="section-title">Project Essentials</div>
+			<table>
+				<tr><td class="fieldname">Name:</td><td>Zach Bartlett</td></tr>
+				<tr><td class="fieldname">Instructor:</td><td>Dr. Page</td></tr>
+				<tr><td class="fieldname">Date:</td><td>Nov 11, 2010</td></tr>
+				<tr><td class="fieldname">Language:</td><td>---</td></tr>
+			</table>
+	
+		<div class="section-title">Lines of Code</div>
+		<table>
+			<tr><th>Type</th><th>Prediction by user</th><th>Actual</th></tr>
+			<tr>
+				<td>Added</td>
+				<td>327</td>
+				<td>1515</td>
+			</tr>
+			<tr>
+				<td>Base</td>
+				<td>377</td>
+				<td>394</td>
+			</tr>
+			<tr>
+				<td>Modified</td>
+				<td>0</td>
+				<td>183</td>
+			</tr>
+			<tr>
+				<td>Removed</td>
+				<td>0</td>
+				<td>10</td>
+			</tr>
+		</table>
+		
+		<div class="section-title">PSP Projection</div>
+		<table>
+		<tr><td align=center>
+			<div class="graph-title">LoC Certainty</div>
+			<img src='http://chart.apis.google.com/chart?cht=lc&chd=t:270,248,226,203,179,152,122,87,42,-27|270,292,315,338,362,389,419,454,499,568&chs=450x300&chco=FF0000,00FF00&chxt=x,y,x,y&chxr=1,0,150,30&chdl=Lower bound|Upper bound&chxl=0:|10%|20%|30%|40%|50%|60%|70%|80%|90%|2:|Certainty|3:|LOC&chxp=2,50|3,50&chtt=&chds=0,568&chxr=1,0,568'>
+		</td><td align=center>
+			<div class="graph-title">Time Certainty</div>
+			<img src='http://chart.apis.google.com/chart?cht=lc&chd=t:3223,3053,2880,2701,2511,2305,2074,1801,1453,918|3223,3393,3566,3745,3935,4141,4372,4644,4993,5527&chs=450x300&chco=FF0000,00FF00&chxt=x,y,x,y&chxr=1,0,150,30&chdl=Lower bound|Upper bound&chxl=0:|10%|20%|30%|40%|50%|60%|70%|80%|90%|2:|Certainty|3:|LOC&chxp=2,50|3,50&chtt=&chds=0,5527&chxr=1,0,5527'>
+		</td></tr></table>
+		
+		<div class="section-title">Project Data</div>
+		<table>
+		<tr><td align=center valign=top>
+			<div class="graph-title">Time Per Defect Type</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:15,10,520&chs=300x150&chl=Banjos|Syntax|Conceptual&chtt='>
+		</td><td align=center valign=top>
+			<div class="graph-title">Time Per Phase</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:2310,825&chs=300x150&chl=code|plan&chtt='>
+		</td></tr>
+		<tr><td colspan=2 align=center valign=top>
+			<div class="graph-title">Time by Day</div>
+			<img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:0,0,0,0,0,0,0,0,0,0|120,0,120,0,0,0,0,120,0,120&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=code|plan&chxt=x,y&chxl=0:|Nov 2|Nov 3|Nov 4|Nov 5|Nov 6|Nov 7|Nov 8|Nov 9|Nov 10|Nov 11&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'><br><img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:0,0,0,0,120,120,120,0,0,0|0,0,120,120,105,0,0,0,0,0&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=code|plan&chxt=x,y&chxl=0:|Nov 12|Nov 13|Nov 14|Nov 15|Nov 16|Nov 17|Nov 18|Nov 19|Nov 20|Nov 21&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'><br><img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:90,120,0,0,0,0,0,0,315,0|0,0,0,0,0,0,0,0,0,0&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=code|plan&chxt=x,y&chxl=0:|Nov 22|Nov 23|Nov 24|Nov 25|Nov 26|Nov 27|Nov 28|Nov 29|Nov 30|Dec 1&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'><br><img src='http://chart.apis.google.com/chart?cht=bvs&chd=t:465,270,0,0,0,495,0,195|0,0,0,0,0,0,0,0&chco=FFCC00,CC3300,CC6600,99CC00,CCCC00&chdl=code|plan&chxt=x,y&chxl=0:|Dec 2|Dec 3|Dec 4|Dec 5|Dec 6|Dec 7|Dec 8|Dec 9&chtt=&chs=500x200&chbh=30,10,10&chds=0,240,0,240,0,240,0,240,0,240&chxr=1,0,240,60'>
+		</td></tr>
+		</table>
+		
+		
+		<div class="section-title">Cumulative Data</div>
+		
+		<table cellspacing=20>
+		<tr><td align=center valign=top>
+			<div class="graph-title">Time Per Defect Type</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:1,120,1,15,633,105,45,88,1,88,0,150,30,5,6,27,74,85,101,150,10,15,15,633&chs=300x150&chl=algorithm|Implementation|Programmer Error|syntax|conceptual|mechanized logic|io|Logic|program|logic|planning|api|function-length|prog-lang|design|code|Logic Error|Syntax Error|Design Error|API|Output|Banjos|Syntax|Conceptual&chtt='>
+		</td><td align=center valign=top>
+			<div class="graph-title">Time Per Phase</div>
+			<img src='http://chart.apis.google.com/chart?cht=p3&chd=t:839,930,20,510,700,868,415,868,1080,15239,4610&chs=300x150&chl=programming|Design and Code|document|planning|Design / Test coding|design|Coding|Design|test|code|plan&chtt='>
+		</td></tr>
+		<tr><td colspan align=center valign=top>
+			<div class="graph-title">Actual vs Estimated LoC</div>
+			<img src='http://chart.apis.google.com/chart?cht=s&chd=t:40,77,12,33,40,84,112,39,32,6,92,52,44,0,63,0,0,0,0,0,0|62,156,11,95,250,143,101,46,244,175,145,71,114,290,125,91,0,33,40,31,33&chxt=x,y,x,y&chxr=0,0,150,30|1,0,150,30&chxl=2:|User-Estimated+LOC|3:|Actual+LOC&chxp=2,50|3,50&chs=300x200&chtt=Actual-Estimate History&chm=d,000000,1,1.0,10.0&chg=20,20'>
+		</td>
+		<td colspan align=center valign=top>
+			<div class="graph-title">Actual vs Estimated LoC</div>
+			<table>
+			<tr><th>Project</th><th>Estimate</th><th>Actual</th></tr><tr><td>iEx5</td><td>40</td><td>62</td></tr><tr><td>Individual Exercise 5</td><td>77</td><td>156</td></tr><tr><td>Bridge Hands with Travelers (iEx5)</td><td>12</td><td>11</td></tr><tr><td>iEx5</td><td>33</td><td>95</td></tr><tr><td>iEx5</td><td>40</td><td>250</td></tr><tr><td>iEx4</td><td>84</td><td>143</td></tr><tr><td>Individual Exercise 4</td><td>112</td><td>101</td></tr><tr><td>Bridge Hand Displays (iEx4)</td><td>39</td><td>46</td></tr><tr><td>iEx4</td><td>32</td><td>244</td></tr><tr><td>iEx4</td><td>6</td><td>175</td></tr><tr><td>iEx3</td><td>92</td><td>145</td></tr><tr><td>Individual Exercise 3</td><td>52</td><td>71</td></tr><tr><td>Dealing Instructions from XML data (iEx3)</td><td>44</td><td>114</td></tr><tr><td>iEx3</td><td>0</td><td>290</td></tr><tr><td>iEx3</td><td>63</td><td>125</td></tr><tr><td>Individual Exercise 2</td><td>0</td><td>91</td></tr><tr><td>iEx2</td><td>0</td><td>0</td></tr><tr><td>Project 2</td><td>0</td><td>33</td></tr><tr><td>Individual Exercise 1</td><td>0</td><td>40</td></tr><tr><td>iEx1</td><td>0</td><td>31</td></tr><tr><td>Project 1</td><td>0</td><td>33</td></tr>
+			</table>
+		</td></tr>
+		
+		</table>
+	
+		<div class="section-title">Time Log</div>
+		<table class="log-table"> 
+			<tr><th>Date</th><th>Type</th><th>Int. Time</th><th width="50%">Description</th></tr><tr><td>Nov 2, 2010, 3:00 PM - 5:00 PM</td><td>plan</td><td>0</td><td>Completed a rough sketch (design) of modules and interfaces. Discussed Project Description and requirements. Discussed previous code implementations to be used in tImpl.</td></tr><tr><td>Nov 4, 2010, 12:00 PM - 2:00 PM</td><td>plan</td><td>0</td><td>Worked more on the design, completed a visio diagram of modules and function definitions and assigned tasks to each team member for tDsgn. Looked more at the project description.</td></tr><tr><td>Nov 9, 2010, 3:00 PM - 5:00 PM</td><td>plan</td><td>0</td><td>Brought together the function descriptions, decided on github as our distributed version control system. Assigned additional assignments to team members. Looked even more at project description, noting possible difficulties.</td></tr><tr><td>Nov 11, 2010, 3:00 PM - 5:00 PM</td><td>plan</td><td>0</td><td>worked on PSP++ report, discussed the project description more to decide how to manage the linkage aspect. More difficult to do score cards and rankings. Set up github accounts, etc.</td></tr><tr><td>Nov 14, 2010, 6:00 PM - 8:00 PM</td><td>plan</td><td>0</td><td>Colby, Edward, and Zach worked on Design Review more. Renamed several functions in design to better explain what they should do. Expanded upon annotations of functions especially in psc / rankings.</td></tr><tr><td>Nov 15, 2010, 6:00 PM - 8:00 PM</td><td>plan</td><td>0</td><td>Kye, Brett, and Micah worked on Design Review. Updated PROBE data to be more accurate and appended IO module data.</td></tr><tr><td>Nov 16, 2010, 11:45 AM - 1:30 PM</td><td>plan</td><td>0</td><td>Group met to perform a final review of tDsgn and tDsgnreview. Looked over function contracts and descriptions, finalized psp data, finalized architecture.</td></tr><tr><td>Nov 16, 2010, 3:00 PM - 5:00 PM</td><td>code</td><td>0</td><td>Decided to use Ed's iex5 as a starting point for tImpl. Looked over code and began work on splitting up existing code into modules and interfaces. Realized we needed to repackage xmlminidom and basiclex into modules/interfaces as well.</td></tr><tr><td>Nov 17, 2010, 6:00 PM - 8:00 PM</td><td>code</td><td>0</td><td>Ed worked on updating xmlminidom and repackaging it inside a module/interface.Kye worked on repackaging IO. Micah worked on creating module/interface stubs for Rankings. Colby worked on creating module/interface stubs PSC. Zach and Brett worked on repackaging Board.</td></tr><tr><td>Nov 18, 2010, 3:00 PM - 5:00 PM</td><td>code</td><td>0</td><td>Discussed tDsgn with group and began to understand, after creating modules / interfaces, what else would be required in modules. Focused primarily on Rankings and PSC modules / interfaces as they would require the most work.</td></tr><tr><td>Nov 22, 2010, 11:30 PM - 1:00 PM</td><td>code</td><td>0</td><td>Zach put together a general idea of what getseparateresults should look like. This included a mix of code and psuedo code comments.</td></tr><tr><td>Nov 23, 2010, 3:00 PM - 5:00 PM</td><td>code</td><td>0</td><td>Reviewed Mboard for tCodeRvw during class time. Group was able to cover this entire module (around 260 lines).</td></tr><tr><td>Nov 30, 2010, 11:45 AM - 3:00 PM</td><td>code</td><td>0</td><td>Met and reviewed code so far. For this session this included going over the implemented functions so far in Mio (including boards-no-trav, boards-trav, and main primarily).</td></tr><tr><td>Nov 30, 2010, 3:00 PM - 5:00 PM</td><td>code</td><td>0</td><td>Group met and fixed getseparateresults. Needed a somewhat complicated mixture of mv-let structures and associated lists from these mv-let structures to create an easily searchable list based on the unique id of a direction, id, and section.</td></tr><tr><td>Dec 2, 2010, 11:45 AM - 6:00 PM</td><td>code</td><td>0</td><td>Group met and worked on Tmio and PSC. Ed, Colby, Micah, and Zach worked on implementing PSC and Brett and Kye worked on getting all other modules debugged and runnable in Tmio. PSC currently outputs all but Rankings related information.</td></tr><tr><td>Dec 2, 2010, 6:00 PM - 7:30 PM</td><td>code</td><td>0</td><td>Colby worked on Rankings module to implement getcontestants and a few helper xml node functions.</td></tr><tr><td>Dec 3, 2010, 1:30 PM - 6:00 PM</td><td>code</td><td>0</td><td>Group worked together on finishing up the implementations to Rankings module. Created a few new functions (serializedcontestants, etc.) and renamed functions to fit scheme. Rankings is finished other than creating a list of name ID pairs for PSC.</td></tr><tr><td>Dec 7, 2010, 11:45 AM - 3:00 PM</td><td>code</td><td>0</td><td>Colby worked on getcontestants and above, Micah worked on cleaning up the CSS.</td></tr><tr><td>Dec 7, 2010, 3:00 PM - 6:00 PM</td><td>code</td><td>0</td><td>Colby and Zach fixed PSC to display names for IDs in the "Versus" column. Group worked on contracts.</td></tr><tr><td>Dec 7, 2010, 9:00 PM - 11:00 PM</td><td>code</td><td>0</td><td>Ed worked on Ixmlminidom and created a working property function as well as functions that create "dummy" xml data.</td></tr><tr><td>Dec 9, 2010, 11:45 AM - 3:00 PM</td><td>code</td><td>0</td><td>Finished up contracts, cleaned up design, worked on finalizing psp, made final changes to headers for psc cards.</td></tr>
+		</table> 
+		
+		<div class="section-title">Defect Log</div>
+		<table class="log-table">
+			<tr><th>Date</th><th>Phase</th><th>Fix Time</th><th width="50%">Description</th></tr><tr><td>Nov 4, 2010</td><td>Conceptual</td><td>15</td><td>Realized XML files given as examples had given schemas. Resulted in less work required to differentiate between placement of results tags for boards.</td></tr><tr><td>Nov 4, 2010</td><td>Conceptual</td><td>30</td><td>Wrote new xmlminidom (utilities) functions that performs a Depth First Search of nodes of a particular name.</td></tr><tr><td>Nov 9, 2010</td><td>Conceptual</td><td>20</td><td>Decided that getseparateresults needed a helper function to send results data that is not appended with html tags.</td></tr><tr><td>Nov 14, 2010</td><td>Conceptual</td><td>30</td><td>Decided that board functions required addition specification and new names (serialized...).</td></tr><tr><td>Nov 16, 2010</td><td>Conceptual</td><td>45</td><td>Realized the need for functions that returned results in a way that could be easily searched based on a player's ID (direction, id, and section). Additionally this information cannot be serialized in html.</td></tr><tr><td>Nov 23, 2010</td><td>Conceptual</td><td>35</td><td>Fixed many syntax errors in Mboard and Mio, such as incorrect sigs and defuns and misplaced parenthesis. Ed, Zach, and Colby focused on Mboard and Brett, Kye, and Micah focused on Mio.</td></tr><tr><td>Nov 30, 2010</td><td>Conceptual</td><td>35</td><td>Realized we needed to remove the old mv associated list structure from the list of associated lists we were creating after inserting its old information with our new information from a new board. This way a search on these lists returns a single list.</td></tr><tr><td>Nov 30, 2010</td><td>Conceptual</td><td>15</td><td>Realized we need to pass in an initial north-south and east-west list to allow the structure of building the associated mvs we wanted. Called these ns1 and ew1.</td></tr><tr><td>Nov 30, 2010</td><td>Conceptual</td><td>45</td><td>Called wrong let in getseparateresults. Wanted TotalScore attribute text and gave function TotalScore node.</td></tr><tr><td>Dec 2, 2010</td><td>Conceptual</td><td>25</td><td>Fixed error in getAllPairs where ew list was being iterated needlessly along with ns, causing the function to end on the end of the ns pairs and check only whatever ew pairs whose index was after the length of ns.</td></tr><tr><td>Dec 2, 2010</td><td>Conceptual</td><td>35</td><td>Fixed problem in linking in Tmio where the order of the linkage mattered in terms of what modules relied on other modules.</td></tr><tr><td>Dec 3, 2010</td><td>Conceptual</td><td>25</td><td>Created function sortmvranks so that we could fix an error where the lack of an A rank would cause an error in serializedrankings not outputting B and C if they existed, likewise with B not existing but C existing.</td></tr><tr><td>Dec 3, 2010</td><td>Conceptual</td><td>10</td><td>Replaced nil in sortmvranks with &nbsp; to solve need for separate handling of empty table entries.</td></tr><tr><td>Dec 3, 2010</td><td>Conceptual</td><td>15</td><td>Fixed error syntax error in Rankings function sortmvranks, (mvs) should have been mvs, confused compiler.</td></tr><tr><td>Dec 3, 2010</td><td>Conceptual</td><td>10</td><td>Fixed infinite loop in rankings, forgot ending condition on serializedrankings after modifing it.</td></tr><tr><td>Dec 3, 2010</td><td>Conceptual</td><td>30</td><td>Fixed error where Rankings function sortmvranks was taking in the wrong order of ranks (such as Section / Overall).</td></tr><tr><td>Dec 7, 2010</td><td>Conceptual</td><td>30</td><td>Fixed error where Rankings function sortmvranks was taking in the wrong order of ranks (such as Section / Overall).</td></tr><tr><td>Dec 8, 2010</td><td>Conceptual</td><td>10</td><td>Moved bfsfindnodes out of rankings and into xmlminidom (personal score cards module now uses and made sense).</td></tr><tr><td>Dec 8, 2010</td><td>Conceptual</td><td>15</td><td>Fixed formatting in link header for all files.</td></tr><tr><td>Dec 8, 2010</td><td>Conceptual</td><td>25</td><td>Made significant formatting changes to all html, centered output and table width.</td></tr><tr><td>Dec 8, 2010</td><td>Syntax</td><td>10</td><td>Improper signatures for new functions</td></tr><tr><td>Dec 8, 2010</td><td>Conceptual</td><td>20</td><td>Fixed sigs for many functions that were being modified.</td></tr><tr><td>Dec 8, 2010</td><td>Banjos</td><td>15</td><td>Fixed length of ragtime.wav to match property test time.</td></tr>
+		</table>
+	</body>
+</html> 
+ 

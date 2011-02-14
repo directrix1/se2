@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>PSP++ Readme</title>
+<style>
+span.filename {
+	font-family: Courier;
+	font-size: 90%;
+}
+body {
+	margin-left:20%;
+	margin-right:20%;
+}
+
+
+</style>
+</head>
+<h1><font color="#800000">About PSP++</font></h1>
+<p>PSP++ is a tool to help you estimate the time and amount of code required to write a piece of software. It uses the PROBE method described in Watts S. Humphrey's <i>A Discipline for Software Engineering</i>. The basis of this method is that if your predictions are wrong, they are probably wrong somewhat consistently. That is, you probably either consistently over- or underestimate the size of your projects. </p>
+
+<p>Given a history of your predictions and the corresponding actual results, PSP++ will take your latest prediction and make a prediction of its own, using that history to inform it.</p>
+
+
+
+<h1><font color="#800000">Running PSP++</font></h1>
+You will probably want to run PSP++ once after making your initial plan (in order to see its predictions) and once after the project is complete. In either case, follow these steps:
+<ol>
+<li>Open the<span class="filename"> main.lisp </span>file with Dr. Scheme and set the language to ACL2.</li>
+<li>Click the Run button in the upper right. Wait patiently while the program prepares itself.</li>
+<li>Execute the following two commands
+<pre>(set-state-ok t)
+(main &quot;input/&quot; &quot;output/&quot; state)</pre>
+  The specified "input/" and "output/" strings specify <a href="#input">input</a> and
+  <a href="#output"> output</a> directories. They are named &quot;input/&quot;
+  and &quot;output/&quot; in the installation examples provided with the <a href="PSP++.zip">PSP++
+  installation archive</a>.
+<li>If all goes well, it will print something like
+<pre>(&quot;Generated report for PSP Revision&quot; STATE)</pre>
+and a new report will exist in the <a name="output"></a><font color="#800000"><b> output
+  directory</b></font>.
+</ol>
+
+
+
+<h1><font color="#800000">Project List File</font></h1>
+<p>PSP reads all its inputs from a single directory. That directory must contain a file named <span class="filename">projects.txt</span>, which will tell it what your projects (historical and current) are called. These projects are simply listed one per line, with the most recent last. For each project listed, there should exist a corresponding text file in the <font color="#800000"><b>input directory</b></font>. For example, if your <span class="filename">projects.txt</span> contains
+<pre>
+trig
+stat
+graph
+</pre>
+your <a name="input"></a><font color="#800000"><b> input directory</b></font> should contain (alongside <span class="filename">projects.txt</span>) <span class="filename">trig.txt</span>, <span class="filename">stat.txt</span>, and <span class="filename">graph.txt</span>. A report will be generated for the graph project, using the trig and stat projects as history.
+
+
+
+<h1><font color="#800000">Project File</font></h1>
+The project file contains the following:
+<ul>
+	<li><b>Project information</b> (date, language, etc)</li>
+	<li><b>Predicted code objects</b>, with sizes. "Code objects" will usually refer to functions.</li>
+	<li><b>Time log</b></li>
+	<li><b>Defect log</b></li>
+	<li><b>Actual lines of code</b>, once the project is complete</li>
+</ul>
+These elements can appear in any order in the file. Examples of entire files are available in the <span class="filename">input/</span> directory that
+comes with the <a href="PSP++.zip">PSP++ installation archive</a>.
+
+
+<h2>Project Information</h2>
+<p>
+To give some basic information about the project in the report, PSP++ asks for your name, the program's name, your instructor's name, and the date. These can be left out if you so choose. This section takes the following form:
+<pre>
+name: Your Name
+date: November 11, 2009
+program: Exercise 1
+instructor: Dr. Instructor
+</pre>
+
+<h2>Predicted Code Objects</h2>
+<p>There are two types of predicted objects: new and reused. In a new object, you simply estimated how many lines it will take. For a reused object, you estimate lines of base, added, modified, and removed code. "Base" lines refers to how large the object is when you start with it. "Added," "modified," and "removed" lines refer to how much you add to, modify of, or remove from that base. For any object, you can also name it, classify it into a type, and write a comment. (There are no restrictions on any of these fields.)</p>
+
+<p>An example section follows. Note that lines starting with # are comments.
+<pre>
+new objects:
+
+    #### file-bundle module ####
+
+	- name: read-bundle
+	  estimated lines: 25
+	  type: IO
+
+	- name: write-bundle
+	  estimated lines: 25
+	  type: IO
+
+	- name: get-from-bundle
+	  estimated lines: 6
+	  type: Calculation
+	  
+reused objects:
+	- name: split-on-whitespace
+	  type: Parse
+	  estimated base: 22
+</pre>
+
+<h2>Time Log</h2>
+<p>Next comes the time log. The times in this section are used to inform PSP++'s later time predictions. Each time is tagged with a phase, which can be named as you choose. For example, you might choose to tag work sessions as "plan", "code", or "test". This choice will be reflected as categories in the report generated. An example time log follows.</p>
+
+<pre>
+time log:
+
+	- date: Nov 19, 2009
+	  start time: 3:00PM
+	  end time: 4:15PM
+	  phase: plan
+	  comment: Group meeting during class time. Planned out input format, modular breakdown.
+
+	- date: Nov 19, 2009
+	  start time: 5:30PM
+	  end time: 5:49PM
+	  phase: plan
+	  comment: Started planning output document
+	
+	- date: Nov 21, 2009
+	  start time: 6:07PM
+	  end time: 7:43PM
+	  phase: code
+	  comment: Implemented string distance algorithm.
+</pre>
+ 
+<h2>Defect Log</h2>
+<p>In the defect log, you list and categorize any defects you added to (and fixed in) the software. Like with the time log, these can be categorized by whatever system you choose.</p>
+<pre>
+defect log:
+	- date: Nov 19, 2009
+	  type: API
+	  fix time: 2
+	  comment: Switched char-code with code-char
+
+	- date: Nov 19, 2009
+	  type: Contract
+	  fix time: 3
+	  comment: Sending a (mv file-bundle state) instead of a file-bundle
+
+</pre>
+
+<h2>Actual Lines of Code</h2>
+Once your project is done, you can record how many lines of code it actually took in this section. This will inform PSP++'s judgement of your line-of-code prediction accuracy. Again, here is an example:
+<pre>
+actual added lines: 825
+actual base lines: 87
+actual modified lines: 56
+actual removed lines: 12</pre>
+
+</html>

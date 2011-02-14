@@ -28,10 +28,21 @@ time log:
 	  phase: plan
 	  comment: Work on multilevel design and PROBE estimate. Started split up of xmlminidom implementation into two modules.
 
+	- date: Feb 14, 2011
+	  start time: 3:00PM
+	  end time: 
+	  phase: plan
+	  comment: Updated peer review and submitted i2. Worked on xmlminidom split documentation in t5, and assisted with updates to t5.
+
 defect log:
 
 	- date: Feb 7, 2011
 	  type: design
 	  fix time: 10
 	  comment: Decided how to split the xmlminidom functions up into modules for serialization/deserialization and xml dom traversal.
+
+	- date: Feb 14, 2011
+	  type: design
+	  fix time: 10
+	  comment: Updated t5 to show the proper location of the xmlminidom split.
 

@@ -1,0 +1,65 @@
+name: Brett Marcott
+date: September 13, 2010
+program: Project 2
+instructor: Dr. Page
+language: ACL2
+
+time log:
+
+	- date: Sept 13, 2010
+	  start time: 8:50PM
+	  end time: 9:03PM
+	  phase: code
+	  comment: only needed to add the extra output value tok, nil if not found in xs
+
+	- date: Sept 13, 2010
+	  start time: 9:15PM
+	  end time: 1:58AM
+	  phase: code
+	  comment: spent a long time trying to make interesting tests using e, but never satisfied, so sticked with testing lengths
+
+	- date: Sept 14, 2010
+	  start time: 1:59AM
+	  end time: 3:29AM
+	  phase: code
+	  comment: all the length theorems work, but not together
+
+	- date: Sept 14, 2010
+	  start time: 8::30AM
+	  end time: 8:45AM
+	  phase: code
+	  comment: got 4 theorems able to be proven sequentially
+
+
+defect log:
+	- date: Sept 13, 2010
+	  type: logic
+	  fix time: 1
+	  comment: wrong output for split-on-token, forgot to use caddr on split-on-token output to get "remaining xs" (had just cadr from earlier specification)
+
+	- date: Sept 13, 2010
+	  type: logic
+	  fix time: 1
+	  comment: used cons when attempting to concatenate two lists, realized should be using append
+
+	- date: Sept 13, 2010
+	  type: logic
+	  fix time: 1
+	  comment: check that the three outputs concatenated together equaled xs of split-on-token failed due to returning (nil nil nil) if tok was nil, changed to (xs nil nil) for new specification
+
+	- date: Sept 13, 2010
+	  type: logic
+	  fix time: 1
+	  comment:trying to make sure no ds are in 1st output of split-at-delimeter using random value e
+
+	- date: Sept 13, 2010
+	  type: syntax
+	  fix time: 1
+	  comment:can't prove two theorems, the theorems can be proved, but former is interfering with the latter
+
+	- date: Sept 13, 2010
+	  type: syntax
+	  fix time: 1
+	  comment: got 4 theorems to work by switching the order of values in (equal xs (f blah)) to (equal (f blah) xs))
+
+actual added lines: 33

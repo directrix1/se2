@@ -1,0 +1,30 @@
+# Project List File
+#
+# List your projects here, one per line. For each project in this list, there should
+# be a cooresponding text file. For example, if you have "myproject" listed, there
+# should be a file called "myproject.txt" in this folder. Most recent projects should
+# be at the bottom. PSP++ will generate a report for the final project listed, using
+# previous projects as historical data.
+
+iEx1b
+iEx1e
+iex1m
+iEx2b
+iEx2e
+iex2m
+iEx3b
+iEx3e
+iEx3k
+iex3m
+iEx3z
+iEx4b
+iEx4e
+iEx4k
+iex4m
+iEx4z
+iEx5b
+iEx5e
+iEx5k
+iex5m
+iex5z
+tImplTeamSteelePSP
