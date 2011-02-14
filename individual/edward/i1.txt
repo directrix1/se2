@@ -30,9 +30,15 @@ time log:
 
 	- date: Feb 14, 2011
 	  start time: 3:00PM
-	  end time: 
+	  end time: 4:30
 	  phase: plan
 	  comment: Updated peer review and submitted i2. Worked on xmlminidom split documentation in t5, and assisted with updates to t5.
+
+	- date: Feb 14, 2011
+	  start time: 4:30PM
+	  end time: 7:00
+	  phase: plan
+	  comment: Worked on t6, and split xmlminidom into minidomSerialized and minidomParser.
 
 defect log:
 
@@ -45,4 +51,9 @@ defect log:
 	  type: design
 	  fix time: 10
 	  comment: Updated t5 to show the proper location of the xmlminidom split.
+
+	- date: Feb 14, 2011
+	  type: misc
+	  fix time: 90
+	  comment: Changed xmlminidom into the split minidomParser and minidomSerializer modules.
 
