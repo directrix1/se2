@@ -52,6 +52,12 @@ time log:
 	  phase: plan
 	  comment: Scanned and formatted t6 revised document as PDF.
 
+	- date: Feb 20, 2011
+	  start time: 2:00PM
+	  end time: PM
+	  phase: plan
+	  comment: Documented APNGbuilder
+
 defect log:
 
 	- date: Feb 7, 2011
