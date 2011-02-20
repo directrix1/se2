@@ -54,9 +54,9 @@ time log:
 
 	- date: Feb 20, 2011
 	  start time: 2:00PM
-	  end time: PM
+	  end time: 3:00PM
 	  phase: plan
-	  comment: Documented APNGbuilder
+	  comment: Documented APNGbuilder.
 
 defect log:
 
@@ -84,4 +84,9 @@ defect log:
 	  type: design
 	  fix time: 10
 	  comment: Forgot to include revised module graph in design revision PDF, scanned page, and merged into final PDF.
+
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 1
+	  comment: Changed function signature for buildFrames to include framenum instead of just firstFrame flag. This is a recursive function that needs to know what frame number it is on.
 
