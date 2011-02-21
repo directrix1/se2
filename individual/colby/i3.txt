@@ -27,3 +27,10 @@ start time: 4:00PM
 end time: 4:05PM
 phase: plan
 comment: Added individual time and defect logs to repo.
+
+-date: Feb 21, 2011
+start time: 4:20PM
+end time: 4:22PM
+phase: review
+comment: Change the wording in t7-apngexploder.odt.  Change "subsequent" to
+"constituent".
