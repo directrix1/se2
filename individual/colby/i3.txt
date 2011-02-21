@@ -32,5 +32,11 @@ comment: Added individual time and defect logs to repo.
 start time: 4:20PM
 end time: 4:22PM
 phase: review
-comment: Change the wording in t7-apngexploder.odt.  Change "subsequent" to
-"constituent".
+comment: Change the wording in t7-apngexploder.odt: change "subsequent" to "constituent".
+
+-date: Feb 21, 2011
+start time: 4:35PM
+end time: 4:40PM
+phase: review
+comment: Further describe suspend to explain how the apngfilename parameter is
+used as a base for the file names.
