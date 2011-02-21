@@ -1,0 +1,29 @@
+name: Colby Russell
+date: Feb 23, 2011
+program: i3
+instructor: Dr. Page
+
+time log:
+-date: Feb 14, 2011
+start time: 4:30PM
+end time: 4:31PM
+phase: plan
+comment: Filled out team meeting log.
+
+-date: Feb 16, 2011
+start time: 4:30PM
+end time: 4:31PM
+phase: plan
+comment: Filled out team meeting log.
+
+-date: Feb 21, 2011
+start time: 3:30PM
+end time: 6:31PM
+phase: plan
+comment: Submitted past meeting logs and started a new one.
+
+-date: Feb 21, 2011
+start time: 4:00PM
+end time: 4:05PM
+phase: plan
+comment: Added individual time and defect logs to repo.
