@@ -45,10 +45,16 @@ used as a base for the file names.
 start time: 4:55PM
 end time: 5:05PM
 phase: code
-comment: Stub out APNGBuilder interface
+comment: Stub out APNGBuilder interface.
 
 -date: Feb 21, 2011
 start time: 5:15PM
 end time: 5:19PM
 phase: code
-comment: Stub out APNGBuilder interface
+comment: Stub out PNGUtils interface.
+
+-date: Feb 21, 2011
+start time: 5:35PM
+end time: 5:38PM
+phase: plan
+comment: Stub out IxmlUtils interface.
