@@ -52,9 +52,34 @@ time log:
 	phase: plan
 	comment: Worked on t6 with Brett in sections prior to Modules. Mostly cosmetic and need for explanation markers in review of t5.
 
+	-date: Feb 17, 2011 
+	start time: 12:30PM
+	end time: 5:00PM
+	comment: worked on t6 and t7, rehashed design and module diagram after intensive reorganization of modules and functions 
+
+	-date: Feb 20, 2011
+	start time: 9:30PM
+	end time: 11:00PM
+	comment: Created detailed documentation for APNGExploder and PNGUtilities modules including all functions contained within, their parameters, and return schema 
+
+	-date: Feb 21, 2011
+	start time: 4:30PM
+	end time: 6:00PM
+	comment: concatenated all group members work on t7 modules and Kye's diagrams into t7.odt, also worked on interface sigs and cons
+
 defect log:
 
 	-date: Feb 6, 2011
 	type: design
 	fix time: 20
 	comment: Fixed Defect Database schema to be more consistent with PSP++ schema
+
+	-date: Feb 17, 2011
+	type: design
+	fix time: 60
+	comment: Fixed the program flow for forward diagram, separated XMLUtils from IO and need to pass state.
+
+	-date Feb 17, 2011
+	type: design
+	fix time: 45
+	comment: Fixed the program flow for the reverse diagram, combined unnecessary module into PNGUtils and reworked incorrect data flow in APNGExploder.
