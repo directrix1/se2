@@ -1,0 +1,103 @@
+name: Brett Marcott
+date: February 23, 2011
+program: PNGA
+instructor: Dr. Page
+language: ACL2
+
+time log:
+
+	- date: Jan 19, 2011
+	  start time: 4:30PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Brainstormed on team programming project ideas, including accounting systems and possibly a small game. Decided APNG editor and discussed further options.
+	  
+	- date: Jan 23, 2011
+	  start time: 8:00PM
+	  end time: 10:00PM
+	  phase: plan
+	  comment: Research more into the APNG and PRNG file specifications to plan for more concrete design.
+
+	- date: Jan 26, 2011
+	  start time: 2:00PM
+	  end time: 4:00PM
+	  phase: plan
+	  comment: Discussed the modular design of our project, including the XML schema as the interface for our program. Prepared for presentation to class.
+
+	- date: Jan 31, 2011
+	  start time: 5:00PM
+	  end time: 5:15PM
+	  phase: plan
+	  comment: Discussed and set our Code Style and Standards with Colby
+
+	- date: Feb 2, 2011
+	  start time: 9:00PM
+	  end time: 12:00AM
+	  phase: plan
+	  comment: Aggregated all team member's individual projects and last semester team's projects LOC information to create one comprehensive PROBE table.
+
+	- date: Feb 9, 2011
+	  start time: 4:30PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: completed i1 and team peer evaluations for i2
+
+	- date: Feb 14, 2011
+	  start time: 4:30PM
+	  end time: 4:35PM
+	  phase: plan
+	  comment: read over syllabus and delivers, let group know about classly submissions we were missing
+
+	- date: Feb 14, 2011
+	  start time: 4:45PM
+	  end time: 5:15PM
+	  phase: plan
+	  comment: Worked with Colby and Zach to revise project design, marked up paper copy
+
+	- date: Feb 17, 2011
+	  start time: 1:00PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: Completely redesign modules with detailed parameters, program flow, input/outputs, etc.
+
+	- date: Feb 21, 2011
+	  start time: 3:45PM
+	  end time: 4:00PM
+	  phase: plan
+	  comment: Discuss action items with Colby, plan to begin stub modules and write tests this week
+
+	- date: Feb 21, 2011
+	  start time: 4:30PM
+	  end time: 5:45PM
+	  phase: plan
+	  comment: Work with Zach on finishing up and reformatting t7, help guide meeting and urging completion of tasks
+
+	- date: Feb 23, 2011
+	  start time: 12:30AM
+	  end time: 1:00PM
+	  phase: plan
+	  comment: Work on and complet i3
+
+
+defect log:
+
+	- date: Feb 2, 2011
+	  type: design
+	  fix time: 45
+	  comment: PROBE table initially didn't include all the individual projects, merged into one file and recounted to include them
+
+	- date: Feb 2, 2011
+	  type: design
+	  fix time: 15
+	  comment: Mishandled the team file structure on github, but fixed in later commits.
+
+	- date: Feb 16, 2011
+	  type: design
+	  fix time: 15
+	  comment: Change function names to match our coding standards
+
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 180
+	  comment: Project design needed a complete overhaul, function parameters made logical as well as program flow and modularity
+
