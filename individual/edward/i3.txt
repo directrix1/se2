@@ -58,6 +58,12 @@ time log:
 	  phase: plan
 	  comment: Documented APNGbuilder.
 
+	- date: Feb 21, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Helped revise design document.
+
 defect log:
 
 	- date: Feb 7, 2011
