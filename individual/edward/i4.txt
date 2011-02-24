@@ -70,6 +70,12 @@ time log:
 	  phase: plan
 	  comment: Updated IapngExploder interface.
 
+	- date: Feb 24, 2011
+	  start time: 1:15PM
+	  end time: 2:45PM
+	  phase: plan
+	  comment: Added constructors and getters for the various xml types in minidomParser.
+
 defect log:
 
 	- date: Feb 7, 2011

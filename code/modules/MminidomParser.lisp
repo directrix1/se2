@@ -22,6 +22,50 @@
 
   (include-book "list-utilities" :dir :teachpacks)
 
+  ;xml-text (text) → returns a text node with specified text.
+  (defun xml-text (text)
+    (mv 'text nil text))
+
+  ;xml-node (nodetype attributes children) → returns a node with specified
+  ;  nodetype attributes and children.
+  (defun xml-node (nodetype attributes children)
+    (mv nodetype attributes children))
+
+  ;xml-attribute (attrname attrvalue) → returns an attribute with specified
+  ;  name and value.
+  (defun xml-attribute (attrname attrvalue)
+    (mv attrname attrvalue))
+  
+  ;xml-getnodetype (node) → return the type of the node
+  (defun xml-getnodetype (node)
+    (mv-let (nodetype a b)
+            node
+            nodetype))
+  
+  ;xml-getattrlist (node) → return the list of attributes of the node
+  (defun xml-getattrlist (node)
+    (mv-let (a attrs b)
+            node
+            attrs))
+  
+  ;xml-getchildren (node) → return the children of the nodes
+  (defun xml-getchildren (node)
+    (mv-let (a b children)
+            node
+            children))
+  
+  ;xml-getattrname (attribute) → return the name of the attribute
+  (defun xml-getattrname (attribute)
+    (mv-let (attrname b)
+            attribute
+            attrname))
+  
+  ;xml-getattrvalue (attribute) → return the value of the attribute
+  (defun xml-getattrvalue (attribute)
+    (mv-let (a attrvalue)
+            attribute
+            attrvalue))
+  
   ;xml-getnodes (node nodename) → returns children of node with type
   ;  nodename
   (defun xml-getnodes (node nodename)

@@ -10,6 +10,32 @@
 |#
 
 (interface IminidomParser
+  ;xml-text (text) → returns a text node with specified text.
+  (sig xml-text (text))
+  
+  ;xml-node (nodetype attributes children) → returns a node with specified
+  ;  nodetype attributes and children.
+  (sig xml-node (nodetype attributes children))
+
+  ;xml-attribute (attrname attrvalue) → returns an attribute with specified
+  ;  name and value.
+  (sig xml-attribute (attrname attrvalue))
+  
+  ;xml-getnodetype (node) → return the type of the node
+  (sig xml-getnodetype (node))
+  
+  ;xml-getattrlist (node) → return the list of attributes of the node
+  (sig xml-getattrlist (node))
+  
+  ;xml-getchildren (node) → return the children of the nodes
+  (sig xml-getchildren (node))
+  
+  ;xml-getattrname (attribute) → return the name of the attribute
+  (sig xml-getattrname (attribute))
+  
+  ;xml-getattrvalue (attribute) → return the value of the attribute
+  (sig xml-getattrvalue (attribute))
+
   ;xml-getnodes (node nodename) → returns children of node with type
   ;  nodename
   (sig xml-getnodes (node nodename))
