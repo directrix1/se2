@@ -25,12 +25,12 @@
   (sig explodeAPNG (apngdata))
 
   ; Given APNG chunks, returns the IHDR chunk contained within.
-  ;     chunks = processed (or raw) data chunks contained within the input APNG
+  ; chunks = processed (or raw) data chunks contained within the input APNG
   (sig getIHDR (chunks))
   
   ; Given APNG chunks, returns the numFrames and numPlays contained within
   ; the acTL chunk following the IHDR chunk. These two elements completely
-  ; comprise the acTL chunk.
+  ;   comprise the acTL chunk.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (sig getacTL (chunks))
   
@@ -40,9 +40,52 @@
   ; PNG file. 
   ; chunks = processed (or raw) data chunks contained within the input APNG
   ; lastFCTL = last found fcTL chunk, or the fcTL for which the next fdAT
-  ;            chunk is defined
+  ;   chunk is defined
   ; ihdr = ihdr for entire APNG file, data contained herein will be used to
-  ;        reconstruct all PNG files
+  ;   reconstruct all PNG files
   (sig getFrames (chunks lastFCTL ihdr))
   
+  
+  
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;; Contracts
+  #|
+  (defun listofmv-check-len (input length)
+    (if (null input)
+        't
+        (if (equal length (len (car input)))
+            (listofmv-check-len (cdr input) length)
+            'nil)))
+  |#
+  (con explodeAPNG-returns-null-or-mvs
+       (implies (stringp input)
+                (let ((output (explodeAPNG input)))
+                  (or (null output)
+                      (and (listp output)
+                           (equal (len (car output))
+                                  2))))))
+  
+  (con getIHDR-returns-string-or-null
+       (implies (stringp input)
+                (let ((output (getIHDR input)))
+                  (or (null output)
+                      (stringp output)))))
+  
+  (con getacTL-returns-string-or-null
+       (implies (stringp input)
+                (let ((output (getacTL input)))
+                  (or (null output)
+                      (stringp output)))))
+  
+  ;Need to confirm output
+  (con getFrames-returns-string-or-null
+       (implies (and (stringp chunks)
+                     (stringp lastFCTL)
+                     (stringp ihdr))
+                (let ((output (getFrames chunks lastFCTL ihdr)))
+                  (or (null output)
+                      (stringp output)))))
+  
+  
+ 
   )
