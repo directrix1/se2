@@ -59,8 +59,8 @@
   ;xml-gettext (node) → returns the composite of all text inside of a node
   (sig xml-gettext (node))
   
-  ;xml-isattribute (attribute) → returns true iff attribute is an mv of
-  ;  length 2 with both elements of the mv being strings
+  ;xml-isattribute (attribute) → returns true iff attribute is an list of
+  ;  length 2 with both elements of the list being strings
   (sig xml-isattribute (attribute))
   
   ;xml-isattributelist (attributes) → returns true iff attributes

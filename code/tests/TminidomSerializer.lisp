@@ -23,55 +23,55 @@
   
 ;  (play-wav "ragtime.wav" t)
 ;   
-;  (defconst
-;    *Oface*
-;    "<bob><slidell id=\"porter\">12 &amp; 3<jumptoconclusions /></slidell></bob>")
-;
-;  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;  ; Functions to generate an xmlminidom tree
-;  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;  (defun normalize-text (nodes)
-;    (if (< (length nodes) 2)
-;        nodes
-;        (let ((a (car nodes))
-;              (b (cadr nodes))
-;              (rest (cddr nodes)))
-;          (if (and
-;               (equal (car a) 'text)
-;               (equal (car b) 'text))
-;              (normalize-text
-;               (cons (mv 'text nil 
-;                         (string-append (caddr a) (caddr b))) rest))
-;              (cons (if (equal (car a) 'text)
-;                        a
-;                        (mv (car a) (cadr a) (normalize-text (caddr a))))
-;                    (normalize-text (cons b rest)))))))
-;  
-;  (defrandom randomxmltext (min)
-;    (if (equal min 0)
-;        ""
-;        (string-append
-;         (coerce (list (code-char
-;                        (random-case
-;                         (random-between 33 46)
-;                         (random-between 48 60)
-;                         62
-;                         (random-between 64 126)
-;                         ))) 'string)
-;         (randomxmltext (- min 1)))))
-;  
-;  (defrandom randomattribute ()
-;    (mv (randomxmltext (random-between 1 30)) (random-string)))
-;
-;  (defrandom randomnode (maxdepth)
-;    (random-case
-;     (mv 'text nil (randomxmltext (random-between 1 30)))
-;     (mv
-;      (randomxmltext (random-between 1 30))
-;      (random-list-of (randomattribute) :size (random-between 0 10)) 
-;      (normalize-text (random-list-of
-;       (randomnode (- maxdepth 1)) :size (random-between 0 maxdepth))))))
-;
+  (defconst
+    *Oface*
+    "<bob><slidell id=\"porter\">12 &amp; 3<jumptoconclusions /></slidell></bob>")
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; Functions to generate an xmlminidom tree
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun normalize-text (nodes)
+    (if (< (length nodes) 2)
+        nodes
+        (let ((a (car nodes))
+              (b (cadr nodes))
+              (rest (cddr nodes)))
+          (if (and
+               (equal (car a) 'text)
+               (equal (car b) 'text))
+              (normalize-text
+               (cons (list 'text nil 
+                         (string-append (caddr a) (caddr b))) rest))
+              (cons (if (equal (car a) 'text)
+                        a
+                        (list (car a) (cadr a) (normalize-text (caddr a))))
+                    (normalize-text (cons b rest)))))))
+  
+  (defrandom randomxmltext (min)
+    (if (equal min 0)
+        ""
+        (string-append
+         (coerce (list (code-char
+                        (random-case
+                         (random-between 33 46)
+                         (random-between 48 60)
+                         62
+                         (random-between 64 126)
+                         ))) 'string)
+         (randomxmltext (- min 1)))))
+  
+  (defrandom randomattribute ()
+    (list (randomxmltext (random-between 1 30)) (random-string)))
+
+  (defrandom randomnode (maxdepth)
+    (random-case
+     (list 'text nil (randomxmltext (random-between 1 30)))
+     (list
+      (randomxmltext (random-between 1 30))
+      (random-list-of (randomattribute) :size (random-between 0 10)) 
+      (normalize-text (random-list-of
+       (randomnode (- maxdepth 1)) :size (random-between 0 maxdepth))))))
+
 ;  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;  ; Property to test if xml is invertible!
 ;  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -98,9 +98,9 @@
 ;  (check-expect
 ;   (xml-serialize-attributes
 ;    (list
-;     (mv "name" "bob")
-;     (mv "age" "80")
-;     (mv "quote" "Bob & Jane's xml quote was, \"<hello />\"")))
+;     (list "name" "bob")
+;     (list "age" "80")
+;     (list "quote" "Bob & Jane's xml quote was, \"<hello />\"")))
 ;   (concatenate 'string 
 ;                " name=\"bob\""
 ;                " age=\"80\""
@@ -108,24 +108,24 @@
 ;                "&quot;&lt;hello /&gt;&quot;\""))
 ;  
 ;  (check-expect
-;   (xml-serialize-dom (mv "Bob" nil nil))
+;   (xml-serialize-dom (list "Bob" nil nil))
 ;   "<?xml version=\"1.0\"?><Bob/>")
 ;  
 ;  (check-expect
 ;   (xml-serialize-dom
-;    (mv "Bob" nil 
+;    (list "Bob" nil 
 ;        (list 
-;         (mv "Joe" nil nil)
-;         (mv 'text nil " hello ")
-;         (mv "Poop" 
+;         (list "Joe" nil nil)
+;         (list 'text nil " hello ")
+;         (list "Poop" 
 ;             (list 
-;              (mv "type" "runny") 
-;              (mv "where" "toilet")) nil))))
+;              (list "type" "runny") 
+;              (list "where" "toilet")) nil))))
 ;   (concatenate 'string
 ;    "<?xml version=\"1.0\"?><Bob><Joe/> hello "
 ;    "<Poop type=\"runny\" where=\"toilet\"/></Bob>"))
 ;  
-;  (defconst *t1* (mv "bob" (list (mv "a" "b")) nil))
+;  (defconst *t1* (list "bob" (list (list "a" "b")) nil))
 ;  (check-expect (xml-readnode (xml-serialize-dom *t1*)) *t1*)
 
   )
