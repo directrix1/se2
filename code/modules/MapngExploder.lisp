@@ -23,6 +23,7 @@
 
 (module MapngExploder
   (include-book "list-utilities" :dir :teachpacks)
+  (include-book "io-utilities" :dir :teachpacks)
   
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
   ; This process involves looking at the acTL chunk to determine number of
