@@ -25,7 +25,15 @@
   (defun suspend (apngfilename, state)nil)
 
   ;Helper function for suspend. Writes PNG files to disk.
-  ;filelist = list of mv (filename filedata).
-  (defun writeFiles (filelist, state)nil)
+  ;filelist = list of list (filename filedata).
+  (defun writeFiles (filelist state)
+    (if (endp filelist) (mv "OK" state)
+        (let ((filename (car (car filelist)))
+              (filedata (cadr (car filelist))))
+                 (mv-let (error state)
+                         (string-list->file filename (list filedata) state)
+                         (if error
+                             (mv error state)
+                             (writeFiles (cdr filelist) state))))))
   
   (export Iio))
