@@ -23,25 +23,6 @@
 
   (include-book "list-utilities" :dir :teachpacks)
   
-  ;These functions just wrap the basiclex functions of the same name
-  ;returning mv's instead of lists because they are a guaranteed size
-  ;and I like using mv-let.
-  (defun split-on-token-mv (tok xs)
-    (let* ((res (split-on-token tok xs)))
-      (mv (car res) (cadr res) (caddr res))))
-  ;See above
-  (defun span-mv (ps xs)
-    (let* ((res (span ps xs)))
-      (mv (car res) (cadr res))))
-  ;See above
-  (defun split-at-delimiter-mv (ds xs)
-    (let* ((res (split-at-delimiter ds xs)))
-      (mv (car res) (cadr res))))
-  ;See above
-  (defun splitoff-prefix-mv (ps xs)
-    (let* ((res (splitoff-prefix ps xs)))
-      (mv (car res) (cadr res) (caddr res))))
-
   ;xml-escape (unescapedchars) → returns string with bad chars replaced
   ;    with entities
   (defun xml-escape (unescapedchars)
@@ -84,8 +65,9 @@
         ""
         (let ((node (car xmlnodes))
               (rest (cdr xmlnodes)))
-          (mv-let (nodename attributes children)
-                  node
+          (let  ((nodename (car node))
+                 (attributes (cadr node))
+                 (children (caddr node)))
                   (string-append
                    (if (equal nodename 'text)
                        (xml-escape (str->chrs children))
@@ -140,27 +122,36 @@
         ""))
   
   ;xml-readnodeproperties (xmlchars) →
-  ; returns (mv attributes remainingxmlstring)
+  ; returns (list attributes remainingxmlstring)
   (defun xml-readnodeproperties (xmlchars)
-    (mv-let (ws1 att1)
-            (span-mv *whitespace* xmlchars)
+    (let* ((t1 (span *whitespace* xmlchars))
+           (ws1 (car t1))
+           (att1 (cadr t1)))
             (if (null att1)
-                (mv nil nil)
+                (list nil nil)
                 (if (member (car att1) *endtagname*)
-                    (mv nil att1)
-                    (mv-let
-                     (propname r1)
-                     (split-at-delimiter-mv *endattrname* att1)
-                     (mv-let
-                      (r2 r3 propvstart)
-                      (split-on-token-mv '(#\" ) r1)
-                      (mv-let
-                       (propvalue r4 rest)
-                       (split-on-token-mv '(#\" ) propvstart)
-                       (mv-let
-                        (props rrest)
-                        (xml-readnodeproperties rest)
-                        (mv (cons (mv 
+                    (list nil att1)
+                    (let* (
+                     (t2 (split-at-delimiter *endattrname* att1))
+                     (propname (car t2))
+                     (r1 (cadr t2)))
+                     (let* (
+                      (t3 (split-on-token '(#\" ) r1))
+                      (r2 (car t3))
+                      (r3 (cadr t3))
+                      (propvstart (caddr t3)))
+                      (let* (
+                       (t4 (split-on-token '(#\" ) propvstart))
+                       (propvalue (car t4))
+                       (r4 (cadr t4))
+                       (rest (caddr t4))
+                       )
+                       (let* (
+                        (t5 (xml-readnodeproperties rest))
+                        (props (car t5))
+                        (rrest (cadr t5))
+                        )
+                        (list (cons (list 
                                    (xml-unescape propname)
                                    (xml-unescape propvalue))
                                   props) rrest)))))
@@ -168,19 +159,27 @@
   
   ;xml-skipdontcares (xmlchars) → returns next xmlchars sans don't cares
   (defun xml-skipdontcares (xmlchars)
-    (mv-let (ws1 tag1)
-            (span-mv *whitespace* xmlchars)
+    (let* (
+           (t1 (span *whitespace* xmlchars))
+           (ws1 (car t1))
+           (tag1 (cadr t1))
+           )
             (if (null tag1)
                 nil
                 (if (equal (car tag1) #\< )
                     (if (equal (cadr tag1) #\? )
-                        (mv-let (dontcare dctok therest)
-                                (split-on-token-mv '(#\? #\> )
-                                                   (cddr tag1))
+                        (let* (
+                                 (t2 (split-on-token '(#\? #\> )
+                                                   (cddr tag1)))
+                                 (therest (caddr t2))
+                                 )
                                 (xml-skipdontcares therest))
-                        (mv-let (matched dontcare comment)
-                                (splitoff-prefix-mv '(#\! #\- #\- )
-                                                    (cdr tag1))
+                        (let* (
+                               (t2 (splitoff-prefix '(#\! #\- #\- )
+                                                    (cdr tag1)))
+                               (matched (car t2))
+                               (comment (caddr t2))
+                               )
                                 (if (= (length matched) 3)
                                     (xml-skipdontcares
                                      (caddr 
@@ -189,61 +188,85 @@
                                     tag1)))
                     xmlchars))))
   
-  ;xml-readnodes (xmlchars) → returns (mv nodes remainingxmlstring)
+  ;xml-readnodes (xmlchars) → returns (list nodes remainingxmlstring)
   (defun xml-readnodes (xmlchars)
-    (mv-let (ws content)
-            (span-mv *whitespace* (xml-skipdontcares xmlchars))
+    (let* (
+           (t1 (span *whitespace* (xml-skipdontcares xmlchars)))
+           (ws (car t1))
+           (content (cadr t1))
+           )
             (if (null content)
-                (mv nil nil)
+                (list nil nil)
                 (if (equal (car content) #\< )
-                    (mv-let (ws1 tag1)
-                            (span-mv *whitespace* (cdr content))
+                    (let* (
+                           (t2 (span *whitespace* (cdr content)))
+                           (ws1 (car t2))
+                           (tag1 (cadr t2))
+                           )
                             (if (null tag1)
-                                (mv nil nil)
+                                (list nil nil)
                                 (if (equal (car tag1) #\/ )
-                                    (mv-let (dontcare dctok therest)
-                                            (split-on-token-mv 
-                                             '(#\> ) tag1)
-                                            (mv nil therest))
-                                    (mv-let (tagname tagattrs)
-                                            (split-at-delimiter-mv
-                                             *endtagname* tag1)
-                                            (mv-let 
-                                             (attribs tagend)
-                                             (xml-readnodeproperties
-                                              tagattrs)
-                                             (mv-let
-                                              (dc1 dc2 inner)
-                                              (split-on-token-mv
-                                               '(#\> ) tagend)
-                                              (mv-let
-                                               (nodes rest)
-                                               (if (equal
+                                    (let* (
+                                             (t3 (split-on-token 
+                                              '(#\> ) tag1))
+                                             (therest (caddr t3))
+                                             )
+                                            (list nil therest))
+                                    (let* (
+                                           (t4 (split-at-delimiter
+                                             *endtagname* tag1))
+                                           (tagname (car t4))
+                                           (tagattrs (cadr t4))
+                                           )
+                                            (let* ( 
+                                             (t5 (xml-readnodeproperties
+                                              tagattrs))
+                                             (attribs (car t5))
+                                             (tagend (cadr t5))
+                                             )
+                                             (let* (
+                                              (t6 (split-on-token
+                                               '(#\> ) tagend))
+                                              (inner (caddr t6))
+                                              )
+                                              (let* (
+                                               (t7 (if (equal
                                                     (car tagend)
                                                     #\/ )
-                                                   (mv nil inner)
+                                                   (list nil inner)
                                                    (xml-readnodes
-                                                    inner))
-                                               (mv-let
-                                                (morenodes morerest)
-                                                (xml-readnodes rest)
-                                                (mv
+                                                    inner)))
+                                               (nodes (car t7))
+                                               (rest (cadr t7))
+                                               )
+                                               (let* (
+                                                (t8 (xml-readnodes rest))
+                                                (morenodes (car t8))
+                                                (morerest (cadr t8))
+                                                )
+                                                (list
                                                  (cons 
-                                                  (mv
+                                                  (list
                                                    (xml-unescape
                                                     tagname)
                                                    attribs
                                                    nodes) morenodes)
                                                  morerest)))))))))
-                    (mv-let (thetext therest)
-                            (split-at-delimiter-mv '(#\< ) content)
+                    (let* (
+                           (t9 (split-at-delimiter '(#\< ) content))
+                           (thetext (car t9))
+                           (therest (cadr t9))
+                           )
                             (if (null thetext)
                                 (xml-readnodes therest)
-                                (mv-let (nodelist restoftext)
-                                        (xml-readnodes therest)
-                                        (mv
+                                (let* (
+                                       (t10 (xml-readnodes therest))
+                                       (nodelist (car t10))
+                                       (restoftext (cadr t10))
+                                       )
+                                        (list
                                          (cons
-                                          (mv 'text nil
+                                          (list 'text nil
                                               (xml-unescape
                                                (append ws thetext)))
                                           nodelist)

@@ -42,13 +42,13 @@
   (sig xml-unescape (escapedchars))
   
   ;xml-readnodeproperties (xmlchars) →
-  ; returns (mv attributes remainingxmlstring)
+  ; returns (list attributes remainingxmlstring)
   (sig xml-readnodeproperties (xmlchars))
 
   ;xml-skipdontcares (xmlchars) → returns next xmlchars sans don't cares
   (sig xml-skipdontcares (xmlchars))
 
-  ;xml-readnodes (xmlchars) → returns (mv nodes remainingxmlstring)
+  ;xml-readnodes (xmlchars) → returns (list nodes remainingxmlstring)
   (sig xml-readnodes (xmlchars))
   
   ;xml-readnode (xmlchars) → returns the root node from xmlstring

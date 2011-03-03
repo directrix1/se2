@@ -24,47 +24,37 @@
 
   ;xml-text (text) → returns a text node with specified text.
   (defun xml-text (text)
-    (mv 'text nil text))
+    (list 'text nil text))
 
   ;xml-node (nodetype attributes children) → returns a node with specified
   ;  nodetype attributes and children.
   (defun xml-node (nodetype attributes children)
-    (mv nodetype attributes children))
+    (list nodetype attributes children))
 
   ;xml-attribute (attrname attrvalue) → returns an attribute with specified
   ;  name and value.
   (defun xml-attribute (attrname attrvalue)
-    (mv attrname attrvalue))
+    (list attrname attrvalue))
   
   ;xml-getnodetype (node) → return the type of the node
   (defun xml-getnodetype (node)
-    (mv-let (nodetype a b)
-            node
-            nodetype))
+    (car node))
   
   ;xml-getattrlist (node) → return the list of attributes of the node
   (defun xml-getattrlist (node)
-    (mv-let (a attrs b)
-            node
-            attrs))
+    (cadr node))
   
   ;xml-getchildren (node) → return the children of the nodes
   (defun xml-getchildren (node)
-    (mv-let (a b children)
-            node
-            children))
+    (caddr node))
   
   ;xml-getattrname (attribute) → return the name of the attribute
   (defun xml-getattrname (attribute)
-    (mv-let (attrname b)
-            attribute
-            attrname))
+    (car attribute))
   
   ;xml-getattrvalue (attribute) → return the value of the attribute
   (defun xml-getattrvalue (attribute)
-    (mv-let (a attrvalue)
-            attribute
-            attrvalue))
+    (cadr attribute))
   
   ;xml-getnodes (node nodename) → returns children of node with type
   ;  nodename
@@ -74,10 +64,10 @@
         (let ((curnode (car (caddr node)))
               (rest (cdr (caddr node))))
           (if (equal (car curnode) 'text)
-              (xml-getnodes (mv nil nil rest) nodename)
+              (xml-getnodes (list nil nil rest) nodename)
               (if (string-equal (car curnode) nodename)
-                  (cons curnode (xml-getnodes (mv nil nil rest) nodename))
-                  (xml-getnodes (mv nil nil rest) nodename))))))
+                  (cons curnode (xml-getnodes (list nil nil rest) nodename))
+                  (xml-getnodes (list nil nil rest) nodename))))))
   
   ;xml-getdeepnodes (node nodename) → returns children of node with type
   ;  nodename searching recursively using DFS with node as root.
@@ -87,17 +77,17 @@
         (let ((curnode (car (caddr node)))
               (rest (cdr (caddr node))))
           (if (equal (car curnode) 'text)
-              (xml-getdeepnodes (mv nil nil rest) nodename)
+              (xml-getdeepnodes (list nil nil rest) nodename)
               (if (string-equal (car curnode) nodename)
                   (cons curnode 
                         (xml-getdeepnodes 
-                         (mv 
+                         (list 
                           nil 
                           nil
                           (concatenate 'list (caddr curnode) rest))
                          nodename))
                   (xml-getdeepnodes 
-                   (mv
+                   (list
                     nil
                     nil 
                     (concatenate 'list (caddr curnode) rest))
@@ -116,11 +106,11 @@
         (let ((curnode (car (caddr node)))
               (rest (cdr (caddr node))))
           (if (equal (car curnode) 'text)
-              (xml-getdeepnode (mv nil nil rest) nodename)
+              (xml-getdeepnode (list nil nil rest) nodename)
               (if (string-equal (car curnode) nodename)
                   curnode
                   (xml-getdeepnode 
-                   (mv
+                   (list
                     nil
                     nil
                     (concatenate 'list (caddr curnode) rest))
@@ -135,7 +125,7 @@
               (rest (cdr (cadr node))))
           (if (string-equal (car curattr) attributename)
               (cadr curattr)
-              (xml-getattribute (mv nil rest nil) attributename)))))
+              (xml-getattribute (list nil rest nil) attributename)))))
   
   
   ;xml-gettext (node) → returns the composite of all text inside of a node
@@ -148,12 +138,12 @@
                   (rest (cdr (caddr node))))
               (if (equal (car curnode) 'text)
                   (string-append (caddr curnode)
-                                 (xml-gettext (mv nil nil rest)))
+                                 (xml-gettext (list nil nil rest)))
                   (string-append (xml-gettext curnode)
-                                 (xml-gettext (mv nil nil rest))))))))
+                                 (xml-gettext (list nil nil rest))))))))
   
-  ;xml-isattribute (attribute) → returns true iff attribute is an mv of
-  ;  length 2 with both elements of the mv being strings
+  ;xml-isattribute (attribute) → returns true iff attribute is an list of
+  ;  length 2 with both elements of the list being strings
   (defun xml-isattribute (attribute)
     (and
      (true-listp attribute)
@@ -206,8 +196,8 @@
   ;   together.
   (defun gluekids (nodes)
     (if (consp nodes)
-      (mv-let (nodename atts kids)
-              (car nodes)
+      (let* ((node (car nodes))
+             (kids (caddr node)))
               (concatenate 'list kids (gluekids (cdr nodes))))
       nil))
 
@@ -217,7 +207,7 @@
     ; Build a dummy node that looks like xmlminidom, so we can act like
     ; nodes are rooted there as children, and we can just use xml-getnodes
     ; on it.
-    (let* ((dummyroot (mv "dummyroot" nil nodes))
+    (let* ((dummyroot (list "dummyroot" nil nodes))
            (maybes (xml-getnodes dummyroot nodename)))
         (if maybes
             ; We found them
