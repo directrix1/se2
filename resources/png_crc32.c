@@ -1,3 +1,6 @@
+   #include <stdio.h>
+   #include <string.h>
+
    /* Table of CRCs of all 8-bit messages. */
    unsigned long crc_table[256];
    
@@ -47,3 +50,32 @@
    {
      return update_crc(0xffffffffL, buf, len) ^ 0xffffffffL;
    }
+
+  /* Prints the crc32 precomputed table in ACL2 list form. */
+  void print_table() {
+    // Let's just precompute the CRC table so we don't have to do much of
+    // this in ACL2 - Ed
+    make_crc_table();
+    int i;
+    printf("'(");
+    for (i=0; i<256; i++) {
+      printf("#x%.8lx ", crc_table[i]);
+      if ((i % 6) == 5)
+  	    printf("\n  ");
+    }
+    printf(")\n");
+  }
+
+  void test_string(char *thestring) {
+    printf("    (\"%s\" . %lu)\n", thestring,
+		    crc(thestring, strlen(thestring)));
+  }
+
+
+  int main() {
+
+	  test_string("Fuck the police!");
+	  test_string("The census taker once tried to test me.");
+	  test_string("I sell sea shells, but no really I sell crack.");
+	  //print_table();
+  }

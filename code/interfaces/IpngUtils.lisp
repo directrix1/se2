@@ -11,6 +11,35 @@
 (in-package "ACL2")
 
 (interface IpngUtils
+  ; Returns the crc32 lookup table value for a given index.
+  ;  index = the key for the value to lookup
+  (sig crc32Lookup (index))
+  
+  ; Given a previously calculated crc32 value and raw data bytes, such as
+  ; that found in the data portion of a PNG Image chunk, returns an updated
+  ; CRC value based on the new bytes.
+  ;  crc32 = previously computed CRC32
+  ;  bytes = raw data from PNG Image or other source
+  (sig updateCRC32 (crc32 bytes))
+  
+  ; Given raw data bytes, such as that found in the data portion of a
+  ; PNG Image chunk, returns the calculated CRC.
+  ;  bytes = raw data from PNG Image or other source
+  (sig calcCRC32 (bytes))
+
+  ; Converts the given number into an unsigned int or other options to be
+  ; used in chunk processing / creating.
+  ;  num = number to be converted 
+  ;  signed = true means make it two's complement
+  ;  numbytes = number of bytes used in representation
+  (sig makeNum (num signed numbytes))
+  
+  ; Parses a number given in a non-standard type.
+  ;  bytes = number to be parsed
+  ;  signed = true means make it two's complement
+  ;  numbytes = number of bytes used in representation
+  (sig parseNum (bytes signed numbytes))
+  
   ; After being given a lot of PNG image data, blowChunks processes this
   ; data on a chunk by chunk basis and subsequently returns the list of
   ; list pairs of chunk type and chunk data.
@@ -31,24 +60,6 @@
   ;  chunkdata = raw data portion of the chunk to be created
   (sig makeChunk (chunktype chunkdata))
   
-  ; Converts the given number into an unsigned int or other options to be
-  ; used in chunk processing / creating.
-  ;  num = number to be converted 
-  ;  signed = true means make it two's complement
-  ;  numbytes = number of bytes used in representation
-  (sig makeNum (num signed numbytes))
-  
-  ; Parses a number given in a non-standard type.
-  ;  bytes = number to be parsed
-  ;  signed = true means make it two's complement
-  ;  numbytes = number of bytes used in representation
-  (sig parseNum (string signed numbytes))
-  
-  ; Given raw data bytes, such as that found in the data portion of a
-  ; PNG Image chunk, returns the calculated CRC.
-  ;  bytes = raw data from PNG Image or other source
-  (sig calcCRC32 (string))
-
   
   (con makeNum-inverts-parseNum
        (implies 
