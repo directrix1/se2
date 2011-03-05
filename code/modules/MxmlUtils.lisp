@@ -29,7 +29,7 @@
 	(let* ((nextFrame (car framelist))
 	       (src (xml-getattrvalue nextFrame "src"))
 	       (timelen (xml-getattrvalue nextFrame "length")))
-	   (cons (list src timelen) getFrames (cdr framelist))))
+	   (cons (list src timelen) (getFrames (cdr framelist)))))
 
    ;Delivers a string that is an XML document containing the information
    ;for an APNG file
