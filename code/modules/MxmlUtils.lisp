@@ -12,20 +12,30 @@
 (module MxmlUtils  
   (include-book "list-utilities" :dir :teachpacks)  
 
-   ;Parses XML data and delivers the number of frames, number of plays, and a list of filenames with their corresponding time length.
+   ;Parses XML data and delivers the number of frames, number of plays,
+   ;and a list of filenames with their corresponding time length.
    ;domXML = XML data as a document object model 
-   (defun parseXML (domXML))
+   (defun parseXML (domXML)
+	(let* ((pngaxml (xml-getnode domXML "pnga"))
+	       (numPlays (xml-getattrvalue pngaxml "plays"))
+	       (numFrames (xml-getattrvalue pngaxml"frames"))
+	       (frames (getFrames (xml-bfsfindnodes pngaxml "image"))))
+	      (list numPlays numFrames frames)))
+	
    
    ;Delivers frame data for the files included in framelist.
    ;framelist = list of the filenames from which data will be retrieved.
-   (defun getFrames (framelist))
+   (defun getFrames (framelist)
+	)
 
-   ;Delivers a string that is an XML document containing the information for an APNG file.
+   ;Delivers a string that is an XML document containing the information
+   ;for an APNG file
    ;numPlays = the number of times the animation will play.
    ;numFrames = the total number of frames that make up the animation.
-   ;framedata = a list of list (PNG filename (frame), corresponding time length). 
+   ;framedata = a list of list (PNG filename, framedata, time). 
    (defun writeXML (numPlays numFrames framedata))
 
-   ;Delivers a list of filenames with their time lengths for APNG frame data.
+   ;Delivers a list of filenames with their time lengths for APNG 
+   ;frame data.
    ;FrameData = APNG file data
    (defun writeFrames (frameData))
