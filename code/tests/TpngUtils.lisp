@@ -21,8 +21,16 @@
   (include-book "testing" :dir :teachpacks)
   (include-book "doublecheck" :dir :teachpacks)
   (include-book "audio" :dir :teachpacks)
+  
+  ;  (defun byte-bits (byte)
     
-)
+  
+  ;  (defun bytes-bits (bytes)
+  ;    (if (null bytes)
+  ;        nil
+  ;        (cons 
+
+  )
 
 (link Test
       (Mbasiclex MpngUtils TpngUtils))

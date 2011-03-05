@@ -43,7 +43,17 @@
   ;  num = number to be converted 
   ;  signed = true means make it two's complement
   ;  numbytes = number of bytes used in representation
-  (defun makeNum (num signed numbytes) nil)
+  (defun makeNum (num signed numbytes)
+    (if (zp numbytes)
+        nil
+        (let ((thenum
+               (if (and signed (< num 0))
+                   (+ (ash 1 (* 8 numbytes)) num)
+                   num)))
+          (cons 
+;           (code-char (ash num (* 8 (- 1 numbytes))))
+           (ash num (* 8 (- 1 numbytes)))
+           (makeNum (logand num (- (ash 1 (* 8 (- numbytes 1))) 1)) nil (- numbytes 1))))))
   
   ; Parses a number given in a non-standard type.
   ;  num = number to be parsed

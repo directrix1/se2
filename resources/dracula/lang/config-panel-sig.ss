@@ -1,0 +1,1 @@
+(module config-panel-sig (lib "a-signature.ss") attach-config-panel!)
