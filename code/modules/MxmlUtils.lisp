@@ -26,7 +26,10 @@
    ;Delivers frame data for the files included in framelist.
    ;framelist = list of the filenames from which data will be retrieved.
    (defun getFrames (framelist)
-	)
+	(let* ((nextFrame (car framelist))
+	       (src (xml-getattrvalue nextFrame "src"))
+	       (timelen (xml-getattrvalue nextFrame "length")))
+	   (cons (list src timelen) getFrames (cdr framelist))))
 
    ;Delivers a string that is an XML document containing the information
    ;for an APNG file

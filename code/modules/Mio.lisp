@@ -11,12 +11,32 @@
 
 (module Mio  
   (include-book "list-utilities" :dir :teachpacks)
+  (include-book "binary-io-utilities" :dir :teachpacks)
 
-  
-  ;Writes an animated portable network graphic file to disk. 
-  ;xmlfilename = (string) the name of the XML document containing information on number of frames, number of plays, PNG filenames, 
-  ;and the length of time each frame is displayed.
-  (defun animate (xmlfilename, state)
+  ; Helper function for animate, calls binary-file->byte-list on a
+  ; filename frame
+  ; frame = filename of the png frame to open 
+  (defun openFile (frame state)
+	(mv-let (bytes status state)
+		(binary-file->byte-list frame state)
+		(if status
+			(mv status state)
+			bytes)))
+
+  ; Helper function for animate, calls openFile on the framelist returning
+  ; the byte-lists of each function
+  ; framelist = list of frame file names
+  (defun openFiles (framelist state)
+	(let* ((nextFrame (caar framelist))
+	       (nextLen (cdar framelist)))
+		(cons (list (openFile nextFrame state) nextLen 
+		(openFiles (cdr framelist) state)))))
+	 
+  ; Writes an animated portable network graphic file to disk. 
+  ; xmlfilename = (string) the name of the XML document containing
+  ; information on number of frames, number of plays, PNG filenames, 
+  ; and the length of time each frame is displayed.
+  (defun animate (xmlfilename state)
 	(mv-let (xmlcontents status state)
 		(file->string (string-append xmlfilename ".xml") state)
 		(if status
@@ -25,7 +45,8 @@
 			       (xmlprocessed (parseXML xmlraw))) 
 			       (numplays (first xmlprocessed))
 			       (numframes (second xmlprocessed))
-			       (framedata (third xmlprocessed))
+			       (framelist (third xmlprocessed))
+			       (framedata (openFiles framelist state))
 			   (mv-let (status-close state)
 			   (string-list->file (string-append xmlfilename
 			       ".apng") (buildAPNG numplays numframes
@@ -36,7 +57,6 @@
 				    xmlfilename ".xml]" "and wrote ["
 				    xmlfilename ".apng]")
 				    state)))))))
-			(mv 'error state)
 
   ;Writes a series of portable network graphic files to disk, along with an XML document. These image files are the individual frames 
   ;of the APNG file in the parameter, and the XML document contains information on the number of frames, number of plays, PNG filenames, 
