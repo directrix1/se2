@@ -29,8 +29,8 @@
   (defun openFiles (framelist state)
 	(let* ((nextFrame (caar framelist))
 	       (nextLen (cdar framelist)))
-		(cons (list (openFile nextFrame state) nextLen 
-		(openFiles (cdr framelist) state)))))
+		(cons (list (openFile nextFrame state) nextLen) 
+		(openFiles (cdr framelist) state))))
 	 
   ; Writes an animated portable network graphic file to disk. 
   ; xmlfilename = (string) the name of the XML document containing
