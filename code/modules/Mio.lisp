@@ -11,6 +11,7 @@
 
 (module Mio  
   (include-book "list-utilities" :dir :teachpacks)
+  (include-book "binary-io-utilities" :dir :teachpacks)
 
   
   ;Writes an animated portable network graphic file to disk. 
@@ -51,7 +52,7 @@
         (let ((filename (car (car filelist)))
               (filedata (cadr (car filelist))))
                  (mv-let (error state)
-                         (string-list->file filename (list filedata) state)
+                         (byte-list->binary-file filename filedata state)
                          (if error
                              (mv error state)
                              (writeFiles (cdr filelist) state))))))
