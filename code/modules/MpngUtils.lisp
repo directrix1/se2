@@ -14,6 +14,7 @@
 (require "../interfaces/Ibasiclex.lisp")
 
 (module MpngUtils
+  (include-book "binary-io-utilities" :dir :teachpacks)
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "avl-rational-keys" :dir :teachpacks)
   
@@ -203,5 +204,16 @@
                  (makeNum
                   (calcCRC32 (concatenate 'list chunktypebytes chunkdata))
                   nil 4))))
-      
+
+  ; Given a PNG filename, opens the PNG and blows it's chunks.
+  ;  pngfilename = The name of the PNG file whose chunks will be blown.
+  (defun chunkifyPNGFile (pngfilename state)
+    (mv-let
+     (bytes error nextstate)
+     (binary-file->byte-list pngfilename state)
+     (if error
+         (mv nil nextstate)
+         (mv (blowChunks (nthcdr 8 bytes)) nextstate))))
+
+
 (export IpngUtils))

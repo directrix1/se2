@@ -47,3 +47,14 @@
       (Mbasiclex MpngUtils TpngUtils))
 
 (invoke Test)
+
+(set-state-ok t)
+
+(defun getChunkSummary (pngchunks)
+  (if (null pngchunks)
+      nil
+      (cons
+       (list (caar pngchunks) (len (cadar pngchunks)))
+       (getChunkSummary (cdr pngchunks)))))
+
+(getChunkSummary (mv-let (data state) (chunkifyPNGFile "../testfiles/rickroll.png" state) data))

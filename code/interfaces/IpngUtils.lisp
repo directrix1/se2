@@ -69,6 +69,10 @@
   ;  chunkdata = raw data portion of the chunk to be created as byte list
   (sig makeChunk (chunktype chunkdata))
   
+  ; Given a PNG filename, opens the PNG and blows it's chunks.
+  ;  pngfilename = The name of the PNG file whose chunks will be blown.
+  (sig chunkifyPNGFile (pngfilename state))
+  
   
   (con makeNum-inverts-parseNum
        (implies 
