@@ -40,24 +40,33 @@
   ;  numbytes = number of bytes used in representation
   (sig parseNum (bytes signed numbytes))
   
+  ; Turns an ascii string into it's equivalent in bytes.
+  ;  string = a string containing only ascii characters
+  (sig ascii->bytes (string))
+  
+  ; Turns ascii bytes into it's equivalent string.
+  ;  bytes = a list of bytes that represent only ascii characters
+  (sig bytes->ascii (bytes))  
+  
   ; After being given a lot of PNG image data, blowChunks processes this
   ; data on a chunk by chunk basis and subsequently returns the list of
-  ; list pairs of chunk type and chunk data.
+  ; list pairs of chunk type (ascii string) and chunk data (byte list).
+  ; This function drops any chunk with an invalid crc32.
   ;	For example:
   ;	*PNG Image → 	(  (list IHDR ihdr_data) (list IDAT idat_data) 
-  ;					... 			... 	)
+  ;					... 			..	)
   ;	*APNG Image → 	(  (list IHDR ihdr_data) (list acTL actl_data) 
   ;			   	(list fcTL fctl_1)    (list fdAT fdat_1)
   ;				(list fcTL fctl_2)    (list fdAT fdat_2)
-  ;					...		        ... 	)
+  ;					...		        ..	)
   ;	pngdata = raw, unprocessed png data bytes
   (sig blowChunks (pngdata))
   
   ; Given a chunk type and correctly formatted chunkdata, makeChunk returns
   ; the correctly formatted chunk including the chunk length, type, data,
   ; and CRC (using calcCRC32).
-  ;  chunktype = type of the chunk to be created
-  ;  chunkdata = raw data portion of the chunk to be created
+  ;  chunktype = type of the chunk to be created, a length 4 ascii string
+  ;  chunkdata = raw data portion of the chunk to be created as byte list
   (sig makeChunk (chunktype chunkdata))
   
   

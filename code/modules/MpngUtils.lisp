@@ -130,9 +130,36 @@
               (- thenum (ash 1 (* 8 numbytes)))
               thenum))))
 
+  ; Helper function that turns a list of chars into a list of bytes.
+  ;  chars = the list of chars
+  (defun chars->bytes (chars)
+    (if (null chars)
+        nil
+        (cons (char-code (car chars))
+              (chars->bytes (cdr chars)))))
+
+  ; Helper function that turns a list of bytes into a list of chars.
+  ;  bytes = the list of bytes
+  (defun bytes->chars (bytes)
+    (if (null bytes)
+        nil
+        (cons (code-char (car bytes))
+              (bytes->chars (cdr bytes)))))
+
+  ; Turns an ascii string into it's equivalent in bytes.
+  ;  string = a string containing only ascii characters
+  (defun ascii->bytes (string)
+    (chars->bytes (coerce string 'list)))
+  
+  ; Turns ascii bytes into it's equivalent string.
+  ;  bytes = a list of bytes that represent only ascii characters
+  (defun bytes->ascii (bytes)
+    (coerce (bytes->chars bytes) 'string))
+
   ; After being given a lot of PNG image data, blowChunks processes this
   ; data on a chunk by chunk basis and subsequently returns the list of
-  ; list pairs of chunk type and chunk data.
+  ; list pairs of chunk type (ascii string) and chunk data (byte list).
+  ; This function drops any chunk with an invalid crc32.
   ;	For example:
   ;	*PNG Image → 	(  (list IHDR ihdr_data) (list IDAT idat_data) 
   ;					... 			..	)
@@ -141,13 +168,40 @@
   ;				(list fcTL fctl_2)    (list fdAT fdat_2)
   ;					...		        ..	)
   ;	pngdata = raw, unprocessed png data bytes
-  (defun blowChunks (pngdata) pngdata)
+  (defun blowChunks (pngdata)
+    (if (< (len pngdata) 12)        ; Enough for length, type, and crc
+        nil
+        (let*
+            (
+             (chunklen (parseNum (take 4 pngdata) nil 4))
+             (rem1 (nthcdr 4 pngdata))
+             (chunktype (take 4 rem1))
+             (rem2 (nthcdr 4 rem1))
+             (chunkdata (take chunklen rem2))
+             (rem3 (nthcdr chunklen rem2))
+             (crc (parseNum (take 4 rem3) nil 4))
+             (remainder (nthcdr 4 rem3))
+             )
+          ; If the CRC is not equal then we drop the chunk
+          (if (= (calcCRC32 (concatenate 'list chunktype chunkdata)) crc)
+              (cons (list (bytes->ascii chunktype) chunkdata)
+                    (blowChunks remainder))
+              (blowChunks remainder)))))
+         
   
   ; Given a chunk type and correctly formatted chunkdata, makeChunk returns
   ; the correctly formatted chunk including the chunk length, type, data,
   ; and CRC (using calcCRC32).
-  ;  chunktype = type of the chunk to be created
-  ;  chunkdata = raw data portion of the chunk to be created
-  (defun makeChunk (chunktype chunkdata) (list chunktype chunkdata))
-  
+  ;  chunktype = type of the chunk to be created, a length 4 ascii string
+  ;  chunkdata = raw data portion of the chunk to be created as byte list
+  (defun makeChunk (chunktype chunkdata)
+    (let ((chunktypebytes (ascii->bytes chunktype)))
+    (concatenate 'list
+                 (makeNum (len chunkdata) nil 4)
+                 chunktypebytes
+                 chunkdata
+                 (makeNum
+                  (calcCRC32 (concatenate 'list chunktypebytes chunkdata))
+                  nil 4))))
+      
 (export IpngUtils))

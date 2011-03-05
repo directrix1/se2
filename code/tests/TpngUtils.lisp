@@ -22,15 +22,6 @@
   (include-book "doublecheck" :dir :teachpacks)
   (include-book "audio" :dir :teachpacks)
   
-  (defun chars->bytes (chars)
-    (if (null chars)
-        nil
-        (cons (char-code (car chars))
-              (chars->bytes (cdr chars)))))
-
-  (defun string->bytes (string)
-    (chars->bytes (coerce string 'list)))
-  
   ; Values pulled from C reference implementation
   (defconst *crc32Tests* '(
     ("Fuck the police!" . 3609580151)
@@ -39,25 +30,17 @@
     ))
   (check-expect
    (calcCRC32
-    (string->bytes (car (nth 0 *crc32Tests*))))
+    (ascii->bytes (car (nth 0 *crc32Tests*))))
    (cdr (nth 0 *crc32Tests*)))
   (check-expect
    (calcCRC32
-    (string->bytes (car (nth 1 *crc32Tests*))))
+    (ascii->bytes (car (nth 1 *crc32Tests*))))
    (cdr (nth 1 *crc32Tests*)))
   (check-expect
    (calcCRC32
-    (string->bytes (car (nth 2 *crc32Tests*))))
+    (ascii->bytes (car (nth 2 *crc32Tests*))))
    (cdr (nth 2 *crc32Tests*)))
   
-  ;  (defun byte-bits (byte)
-    
-  
-  ;  (defun bytes-bits (bytes)
-  ;    (if (null bytes)
-  ;        nil
-  ;        (cons 
-
   )
 
 (link Test
