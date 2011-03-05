@@ -14,8 +14,6 @@
 (require "../interfaces/Ibasiclex.lisp")
 
 (module MpngUtils
-  (import Ibasiclex)
-
   (include-book "list-utilities" :dir :teachpacks)
   
   ; After being given a lot of PNG image data, blowChunks processes this
@@ -23,20 +21,20 @@
   ; list pairs of chunk type and chunk data.
   ;	For example:
   ;	*PNG Image → 	(  (list IHDR ihdr_data) (list IDAT idat_data) 
-  ;					... 			 . 	)
+  ;					... 			..	)
   ;	*APNG Image → 	(  (list IHDR ihdr_data) (list acTL actl_data) 
   ;			   	(list fcTL fctl_1)    (list fdAT fdat_1)
   ;				(list fcTL fctl_2)    (list fdAT fdat_2)
-  ;					.		        ..	)
-  ;	pngdata = raw, unprocessed png data string
-  (defun blowChunks (pngdata) nil)
+  ;					...		        ..	)
+  ;	pngdata = raw, unprocessed png data bytes
+  (defun blowChunks (pngdata) pngdata)
   
   ; Given a chunk type and correctly formatted chunkdata, makeChunk returns
   ; the correctly formatted chunk including the chunk length, type, data,
   ; and CRC (using calcCRC32).
   ;  chunktype = type of the chunk to be created
   ;  chunkdata = raw data portion of the chunk to be created
-  (defun makeChunk (chunktype chunkdata) nil)
+  (defun makeChunk (chunktype chunkdata) (list chunktype chunkdata))
   
   ; Converts the given number into an unsigned int or other options to be
   ; used in chunk processing / creating.
@@ -51,19 +49,26 @@
                    (+ (ash 1 (* 8 numbytes)) num)
                    num)))
           (cons 
-;           (code-char (ash num (* 8 (- 1 numbytes))))
-           (ash num (* 8 (- 1 numbytes)))
+           (ash thenum (* 8 (- 1 numbytes)))
            (makeNum (logand num (- (ash 1 (* 8 (- numbytes 1))) 1)) nil (- numbytes 1))))))
   
   ; Parses a number given in a non-standard type.
-  ;  num = number to be parsed
+  ;  bytes = number to be parsed
   ;  signed = true means make it two's complement
   ;  numbytes = number of bytes used in representation
-  (defun parseNum (string signed numbytes) nil)
+  (defun parseNum (bytes signed numbytes)
+    (if (zp numbytes)
+        0
+        (let ((thenum (+ 
+                       (ash (car bytes) (* 8 (- numbytes 1)))
+                       (parseNum (cdr bytes) nil (- numbytes 1)))))
+          (if (and signed (> (car bytes) 127))
+              (- thenum (ash 1 (* 8 numbytes)))
+              thenum))))
   
-  ; Given a raw data string, such as that found in the data portion of a
+  ; Given raw data bytes, such as that found in the data portion of a
   ; PNG Image chunk, returns the calculated CRC.
-  ;  string = raw data from PNG Image or other source
-  (defun calcCRC32 (string) nil)
+  ;  bytes = raw data from PNG Image or other source
+  (defun calcCRC32 (bytes) bytes)
   
 (export IpngUtils))

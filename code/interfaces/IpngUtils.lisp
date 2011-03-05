@@ -16,12 +16,12 @@
   ; list pairs of chunk type and chunk data.
   ;	For example:
   ;	*PNG Image → 	(  (list IHDR ihdr_data) (list IDAT idat_data) 
-  ;					... 			 … 	)
+  ;					... 			... 	)
   ;	*APNG Image → 	(  (list IHDR ihdr_data) (list acTL actl_data) 
   ;			   	(list fcTL fctl_1)    (list fdAT fdat_1)
   ;				(list fcTL fctl_2)    (list fdAT fdat_2)
-  ;					…		        … 	)
-  ;	pngdata = raw, unprocessed png data string
+  ;					...		        ... 	)
+  ;	pngdata = raw, unprocessed png data bytes
   (sig blowChunks (pngdata))
   
   ; Given a chunk type and correctly formatted chunkdata, makeChunk returns
@@ -39,16 +39,29 @@
   (sig makeNum (num signed numbytes))
   
   ; Parses a number given in a non-standard type.
-  ;  num = number to be parsed
+  ;  bytes = number to be parsed
   ;  signed = true means make it two's complement
   ;  numbytes = number of bytes used in representation
   (sig parseNum (string signed numbytes))
   
-  ; Given a raw data string, such as that found in the data portion of a
+  ; Given raw data bytes, such as that found in the data portion of a
   ; PNG Image chunk, returns the calculated CRC.
-  ;  string = raw data from PNG Image or other source
+  ;  bytes = raw data from PNG Image or other source
   (sig calcCRC32 (string))
 
+  
+  (con makeNum-inverts-parseNum
+       (implies 
+        (and
+         (natp numbytes)
+         (natp number)
+         (< number (ash 1 (* 8 numbytes)))
+         )
+        (let 
+            ((signednumber (- number (ash 1 (- (* 8 numbytes) 1)))))
+          (and
+           (= (parseNum (makeNum signednumber t numbytes) t numbytes) signednumber)
+           (= (parseNum (makeNum number nil numbytes) nil numbytes) number)))))
   #|
   (con blowChunks-returns-at-least-IHDR-IDAT
 	(implies (stringp pngdat)
