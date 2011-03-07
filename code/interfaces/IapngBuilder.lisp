@@ -74,7 +74,17 @@
   (con buildACTL-returns-valid-chunk
 	(implies (and (stringp numPlays)
 		      (stringp numFrames))
-		 (and (string-equal ((str->chrs (blowChunks((buildACTL 
-			            (numPlays numFrames))))))
-				    (numPlays)))))
+		 (equal (buildACTL numPlays numFrames) (makeChunk "acTL"
+                         (ascii->byte (concatenate numPlays numFrames))))))
+
+  (con buildFCTL-returns-valid-chunk
+       (implies (and (stringp seqNum) (stringp width) (stringp height)
+		     (stringp xOff) (stringp yOff) (stringp delay)
+		     (stringp dispOp) (stringp blendOp)
+		(equal (buildFCTL seqNum width height xOff yOff delay 
+				  dispOp blendOp)
+		       (makeChunk "fcTL" (ascii->byte (concatenate seqNum
+			width height xOff yOff delay dispOp blendOp)))))))
+
+
 )
