@@ -70,12 +70,16 @@
   (sig buildFCTL (sequenceNum width height xOffset yOffset delayTime
                   disposeOp blendOp))
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;; Contracts
+  (con buildFrames-returns-string
+	(implies (stringp prepd)
+		(strip (buildFrames prepd 0))))
 
   (con buildACTL-returns-valid-chunk
 	(implies (and (stringp numPlays)
 		      (stringp numFrames))
 		 (equal (buildACTL numPlays numFrames) (makeChunk "acTL"
-                         (ascii->byte (concatenate numPlays numFrames))))))
+                        (ascii->byte (concatenate numPlays numFrames))))))
 
   (con buildFCTL-returns-valid-chunk
        (implies (and (stringp seqNum) (stringp width) (stringp height)
