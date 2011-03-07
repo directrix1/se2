@@ -11,13 +11,55 @@
 (in-package "ACL2")
 
 (require "../interfaces/IpngUtils.lisp")
-(require "../interfaces/Ibasiclex.lisp")
 
 (module MpngUtils
   (include-book "binary-io-utilities" :dir :teachpacks)
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "avl-rational-keys" :dir :teachpacks)
+
+  ; Returns true if x is a byte value
+  ;  x = what to check
+  (defun bytep (x)
+    (and
+     (natp x)
+     (< x 256)))
+
+  ; Returns true if x is a list of byte values
+  ;  x = what to check
+  (defun byte-listp (x)
+    (if (null x)
+        t
+        (and
+         (true-listp x)
+         (bytep (car x))
+         (byte-listp (cdr x)))))
   
+  ; Returns true if x is a 4 character string representing a chunk type
+  ;  x = what to check
+  (defun chunktypep (x)
+    (and
+     (stringp x)
+     (length x)))
+  
+  ; Returns true if x is a chunk (list chunktypep byte-listp)
+  ;  x = what to check
+  (defun chunkp (x)
+    (and
+     (true-listp x)
+     (= (len x) 2)
+     (chunktypep (car x))
+     (byte-listp (cdr x))))
+  
+  ; Returns true if x is a list of chunks
+  ;  x = what to check
+  (defun chunk-listp (x)
+    (if (null x)
+        t
+        (and
+         (true-listp x)
+         (chunkp (car x))
+         (chunk-listp (cdr x)))))
+    
   ; Helper function to convert the crc32 lookup table to an avl-tree with
   ; the key being it's index-based position in the list.
   ;  index = the current key

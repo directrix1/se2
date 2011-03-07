@@ -11,6 +11,26 @@
 (in-package "ACL2")
 
 (interface IpngUtils
+  ; Returns true if x is a byte value
+  ;  x = what to check
+  (sig bytep (x))
+  
+  ; Returns true if x is a list of byte values
+  ;  x = what to check
+  (sig byte-listp (x))
+
+  ; Returns true if x is a 4 character string representing a chunk type
+  ;  x = what to check
+  (sig chunktypep (x))
+  
+  ; Returns true if x is a chunk (list chunktypep byte-listp)
+  ;  x = what to check
+  (sig chunkp (x))
+  
+  ; Returns true if x is a list of chunks
+  ;  x = what to check
+  (sig chunk-listp (x))
+  
   ; Returns the crc32 lookup table value for a given index.
   ;  index = the key for the value to lookup
   (sig crc32Lookup (index))
@@ -73,6 +93,34 @@
   ;  pngfilename = The name of the PNG file whose chunks will be blown.
   (sig chunkifyPNGFile (pngfilename state))
   
+  ; Contracts =============================================================
+  (con crc32Lookup-returns-32bitnum
+       (implies
+        (bytep a)
+        (let ((b (crc32Lookup a)))
+          (and
+           (natp b)
+           (< b (ash 1 32))))))
+
+  (con updatecrc32-returns-32bitnum
+       (implies
+        (and
+         (natp a)
+         (< a (ash 1 32))
+         (byte-listp b)
+         )
+        (let ((c (updateCRC32 a b)))
+          (and
+           (natp c)
+           (< c (ash 1 32))))))
+  
+  (con calccrc32-returns-32bitnum
+       (implies
+        (byte-listp a)
+        (let ((b (calcCRC32 a)))
+          (and
+           (natp b)
+           (< b (ash 1 32))))))
   
   (con makeNum-inverts-parseNum
        (implies 
@@ -86,25 +134,17 @@
           (and
            (= (parseNum (makeNum signednumber t numbytes) t numbytes) signednumber)
            (= (parseNum (makeNum number nil numbytes) nil numbytes) number)))))
-  #|
-  (con blowChunks-returns-at-least-IHDR-IDAT
-	(implies (stringp pngdat)
-		 (let ((chunksBlown (blowChunks pngdat)))
-		 	(and (eql (caar chunksBlown) "IHDR")
-			   (or (eql (second (car chunksBlown) "IDAT"))
-			      (eql (fourth (car chunksblown) "IDAT")))))))
+  
+  (con blowchunks-returns-chunk-list
+       (implies
+        (byte-listp a)
+        (chunk-listp (blowChunks a))))
 
- (con makeChunk-returns-string
-	(implies (and (stringp chunktype)
-		      (stringp chunkdat)
-		(let ((chunked (makeChunk (chunktype chunkdat))))
-		     (stringp chunked)))))
-
- (con makeNum-returns-unsigned-int
-	(implies (acl2-numberp number)
-		 (acl2-numberp flag)
-		(let ((uns-int (makeNum number flag)))
-		     ;something here to test - no idea
-		)))
- |#
+  (con makechunk-returns-byte-list
+       (implies
+        (and
+         (chunktypep a)
+         (byte-listp b))
+        (byte-listp (makeChunk a b))))
+  
 )
