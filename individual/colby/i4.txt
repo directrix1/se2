@@ -1,0 +1,12 @@
+name: Colby Russell
+date: Mar 9, 2011
+program: i4
+instructor: Dr. Page
+
+time log:
+-date: Mar 7, 2011
+start time: 4:30PM
+end time: 4:31PM
+phase: plan
+comment: Fix Brett and Kye's screwups in defectDBdesign.odt
+
