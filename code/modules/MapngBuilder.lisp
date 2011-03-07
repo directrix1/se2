@@ -17,7 +17,8 @@
   (include-book "list-utilities" :dir :teachpacks)
 
   ; Returns an APNG as a string that has the following playtime properties:
-  ;  * contains in order the frames and amount of time to display each frame from framedata
+  ;  * contains in order the frames and amount of time to display each 
+  ;     frame from framedata
   ;  * loops the frames  numPlays times
   ;  * contains the number of frames as specified in numFrames
   ; numPlays = number of times to loop the animation
@@ -49,7 +50,8 @@
   ; satisfy this property in relation to baseIHDR. If baseIHDR is null
   ; then the IHDR is extracted from the first PNG in the list and the
   ; function is recalled passing in this IHDR.
-  ; prepdPNGs = prepared list of PNGs in the form described as the output of preparePNGs
+  ; prepdPNGs = prepared list of PNGs in the form described as the output
+  ;    of preparePNGs
   ; baseIHDR = the reference IHDR or if null the IHDR of the first PNG
   ; in the list to which all comparisons of consistency are made.
   (defun validateIHDR (prepdPNGs baseIHDR))
@@ -59,7 +61,7 @@
   ; prepdPNGs as a source for the framedata. This does not include the 
   ; file signature, IHDR or acTL chunk.
   ; prepdPNGs = prepared list of PNGs in the form described as the output
-  ; of preparePNGs
+  ;    of preparePNGs
   ; frameNum = if 0 then the image data of the first PNG of the list will
   ; be output as an IDAT chunk all other frames are fdAT chunks
   (defun buildFrames (prepdPNGs frameNum))
@@ -69,6 +71,7 @@
   ; numPlays = number of times the animation is intended to be played
   ; numFrames = the number of frames in the animation
   (defun buildACTL (numPlays numFrames))
+
   ; Returns a string representing the fcTL chunk described by the
   ; parameters.
   ; sequenceNum = the sequence number in the animation
@@ -76,9 +79,12 @@
   ; height = height of the frame
   ; xOffset = xOffset of the frame
   ; yOffset = yOffset of the frame
-  ; delayTime = frame delay string in the form of a rational number (i.e. 100/2997) in seconds
-  ; disposeOp = after display do 0 = nothing, 1 = transparent black, 2 = revert to previous frame
-  ; blendOp = 0 = overwrite all color components including alpha, 1 = blend over
+  ; delayTime = frame delay string in the form of a rational number
+  ;    (i.e. 100/2997) in seconds
+  ; disposeOp = after display do 0 = nothing, 1 = transparent black,
+  ;     2 = revert to previous frame
+  ; blendOp = 0 = overwrite all color components including alpha,
+  ;     1 = blend over
   (defun buildFCTL (sequenceNum width height xOffset yOffset delayTime
                   disposeOp blendOp))
 )
