@@ -35,3 +35,7 @@ type: logic
 fix time: 1
 comment: Fix chunktype to do what it says
 
+-date: Mar 9, 2011
+type: logic
+fix time: 1
+comment: Update t19 log for today's meeting.
