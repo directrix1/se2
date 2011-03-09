@@ -62,7 +62,7 @@
   ;of the APNG file in the parameter, and the XML document contains information on the number of frames, number of plays, PNG filenames, 
   ;and length of time each frame is displayed.
   ;apngfilename = (string) the name of the animated portable network graphic to be broken into individual frames.
-  (defun suspend (apngfilename, state) nil)
+  (defun suspend (apngfilename state) nil)
 
   ;Helper function for suspend. Writes PNG files to disk.
   ;filelist = list of list (filename filedata).
