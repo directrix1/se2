@@ -27,3 +27,10 @@ start time: 3:05PM
 end time: 3:06PM
 phase: plan
 comment: Turn in t19 meeting logs for March 7 meeting.
+
+defect log:
+
+-date: Mar 9, 2011
+type: logic
+fix time: 1
+comment: Fix chunktype to do what it says
