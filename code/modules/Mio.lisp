@@ -43,9 +43,9 @@
 			(mv status state)
 			(let* ((xmlraw (xml-readnode contents))
 			       (xmlprocessed (parseXML xmlraw))) 
-			       (numplays (first xmlprocessed))
-			       (numframes (second xmlprocessed))
-			       (framelist (third xmlprocessed))
+			       (numplays (numplays xmlprocessed))
+			       (numframes (numframes xmlprocessed))
+			       (framelist (framelist xmlprocessed))
 			       (framedata (openFiles framelist state))
 			   (mv-let (status-close state)
 			   (string-list->file (string-append xmlfilename
