@@ -1,7 +1,8 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+
 (require "../interfaces/Ibasiclex.lisp")
 (require "../interfaces/IxmlUtils.lisp")
 (require "../interfaces/IminidomSerializer.lisp")
@@ -21,10 +22,11 @@
    ;displayed.
    ;framelist = list of minidom "image" nodes
    (defun getFrames (framelist)
+     (if (null framelist) nil
 	(let* ((nextFrame (car framelist))
 	       (src (xml-getattribute nextFrame "src"))
 	       (timelen (xml-getattribute nextFrame "length")))
-	   (cons (list src timelen) (getFrames (cdr framelist)))))
+	   (cons (list src timelen) (getFrames (cdr framelist))))))
 
    ;Parses XML data and delivers the number of frames, number of plays,
    ;and a list of filenames with their corresponding time length.
