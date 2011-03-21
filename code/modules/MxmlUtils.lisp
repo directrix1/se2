@@ -3,21 +3,26 @@
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
 (require "../interfaces/Ibasiclex.lisp")
-(require "../interfaces/IapngBuilder.lisp")
-(require "../interfaces/IapngExploder.lisp")
 (require "../interfaces/IxmlUtils.lisp")
 (require "../interfaces/IminidomSerializer.lisp")
+(require "../interfaces/IminidomParser.lisp")
 
 
 (module MxmlUtils  
+  (import IminidomParser)
+  (import IminidomSerializer)
+  (import Ibasiclex)
   (include-book "list-utilities" :dir :teachpacks)  
 
-   ;Delivers frame data for the files included in framelist.
-   ;framelist = list of the filenames from which data will be retrieved.
+   ;Delivers a list, where each item corresponds to the metadata for each
+   ;image element specified in the xml config.  An item consists of two
+   ;elements: the file name and the length of time the frame should be
+   ;displayed.
+   ;framelist = list of minidom "image" nodes
    (defun getFrames (framelist)
 	(let* ((nextFrame (car framelist))
-	       (src (xml-getattrvalue nextFrame "src"))
-	       (timelen (xml-getattrvalue nextFrame "length")))
+	       (src (xml-getattribute nextFrame "src"))
+	       (timelen (xml-getattribute nextFrame "length")))
 	   (cons (list src timelen) (getFrames (cdr framelist)))))
 
    ;Parses XML data and delivers the number of frames, number of plays,
@@ -44,9 +49,15 @@
    ;numPlays = the number of times the animation will play.
    ;numFrames = the total number of frames that make up the animation.
    ;framedata = a list of list (PNG filename, time). 
-   (defun writeXML (numPlays numFrames framedata))
+   (defun writeXML (numPlays numFrames framedata)nil)
 
    ;Delivers a list of filenames with their time lengths for APNG 
    ;frame data.
    ;FrameData = APNG file data
+<<<<<<< HEAD
+   (defun writeFrames (frameData)nil)
+  )
+=======
    (defun writeFrames (frameData))
+)
+>>>>>>> 98e73b35eb41d5a11dfaaa0f7392cd7bfa133929
