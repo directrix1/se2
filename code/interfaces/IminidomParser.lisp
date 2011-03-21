@@ -125,7 +125,7 @@
        (implies (xml-isnode x))
                 (stringp (xml-gettext x)))
   
-  (con xml-readnode-serialize-dom-invertible
+  (con xml-readnode-serialize-dom-invertible-parser
        (implies (xml-isnode x)
                 (equal x (xml-readnode (xml-serialize-dom x)))))
 )

@@ -17,46 +17,44 @@
   ; filename frame
   ; frame = filename of the png frame to open 
   (defun openFile (frame state)
-	(mv-let (bytes status state)
-		(binary-file->byte-list frame state)
-		(if status
-			(mv status state)
-			bytes)))
+    (mv-let (bytes status state)
+      (binary-file->byte-list frame state)
+      (if status (mv status state) bytes)))
 
   ; Helper function for animate, calls openFile on the framelist returning
   ; the byte-lists of each function
   ; framelist = list of frame file names
   (defun openFiles (framelist state)
-	(let* ((nextFrame (caar framelist))
-	       (nextLen (cdar framelist)))
-		(cons (list (openFile nextFrame state) nextLen) 
-		(openFiles (cdr framelist) state))))
-	 
+    (let* ((nextFrame (caar framelist))
+           (nextLen (cdar framelist)))
+      (cons (list (openFile nextFrame state) nextLen) 
+      (openFiles (cdr framelist) state))))
+         
   ; Writes an animated portable network graphic file to disk. 
   ; xmlfilename = (string) the name of the XML document containing
   ; information on number of frames, number of plays, PNG filenames, 
   ; and the length of time each frame is displayed.
   (defun animate (xmlfilename state)
-	(mv-let (xmlcontents status state)
-		(file->string (string-append xmlfilename ".xml") state)
-		(if status
-			(mv status state)
-			(let* ((xmlraw (xml-readnode contents))
-			       (xmlprocessed (parseXML xmlraw))) 
-			       (numplays (numplays xmlprocessed))
-			       (numframes (numframes xmlprocessed))
-			       (framelist (framelist xmlprocessed))
-			       (framedata (openFiles framelist state))
-			   (mv-let (status-close state)
-			   (string-list->file (string-append xmlfilename
-			       ".apng") (buildAPNG numplays numframes
-			       framedata) state)
-			   (if status-close 
-				(mv status-close state)
-				(mv (concatenate "Read png files from ["
-				    xmlfilename ".xml]" "and wrote ["
-				    xmlfilename ".apng]")
-				    state)))))))
+    (mv-let (xmlcontents status state)
+      (file->string (string-append xmlfilename ".xml") state)
+      (if status
+        (mv status state)
+        (let* ((xmlraw (xml-readnode contents))
+               (xmlprocessed (parseXML xmlraw))) 
+               (numplays (numplays xmlprocessed))
+               (numframes (numframes xmlprocessed))
+               (framelist (framelist xmlprocessed))
+               (framedata (openFiles framelist state))
+           (mv-let (status-close state)
+           (string-list->file (string-append xmlfilename
+               ".apng") (buildAPNG numplays numframes
+               framedata) state)
+           (if status-close 
+             (mv status-close state)
+             (mv (concatenate "Read png files from ["
+                 xmlfilename ".xml]" "and wrote ["
+                 xmlfilename ".apng]")
+                 state)))))))
 
   ;Writes a series of portable network graphic files to disk, along with an XML document. These image files are the individual frames 
   ;of the APNG file in the parameter, and the XML document contains information on the number of frames, number of plays, PNG filenames, 
@@ -70,10 +68,10 @@
     (if (endp filelist) (mv "OK" state)
         (let ((filename (car (car filelist)))
               (filedata (cadr (car filelist))))
-                 (mv-let (error state)
-                         (byte-list->binary-file filename filedata state)
-                         (if error
-                             (mv error state)
-                             (writeFiles (cdr filelist) state))))))
+          (mv-let (error state)
+            (byte-list->binary-file filename filedata state)
+            (if error
+              (mv error state)
+              (writeFiles (cdr filelist) state))))))
   
   (export Iio))
