@@ -1,3 +1,5 @@
+(in-package "ACL2")
+
 (interface IapngBuilder
   ; Returns an APNG as a string that has the following playtime properties:
   ;  * contains in order the frames and amount of time to display each 
