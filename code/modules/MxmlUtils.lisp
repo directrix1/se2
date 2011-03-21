@@ -9,9 +9,10 @@
 
 
 (module MxmlUtils  
+  
+  (import Ibasiclex)
   (import IminidomParser)
   (import IminidomSerializer)
-  (import Ibasiclex)
   (include-book "list-utilities" :dir :teachpacks)  
 
    ;Delivers a list, where each item corresponds to the metadata for each
@@ -30,8 +31,8 @@
    ;domXML = XML data as a document object model 
    (defun parseXML (domXML)
 	(let* ((pngaxml (xml-getnode domXML "pnga"))
-	       (numPlays (xml-getattrvalue pngaxml "plays"))
-	       (numFrames (xml-getattrvalue pngaxml"frames"))
+	       (numPlays (xml-getattribute pngaxml "plays"))
+	       (numFrames (xml-getattribute pngaxml"frames"))
 	       (frames (getFrames (xml-bfsfindnodes pngaxml "image"))))
 	      (list numPlays numFrames frames)))
 
@@ -54,10 +55,7 @@
    ;Delivers a list of filenames with their time lengths for APNG 
    ;frame data.
    ;FrameData = APNG file data
-<<<<<<< HEAD
-   (defun writeFrames (frameData)nil)
-  )
-=======
-   (defun writeFrames (frameData))
-)
->>>>>>> 98e73b35eb41d5a11dfaaa0f7392cd7bfa133929
+   (defun writeFrames (frameData) nil)
+  
+  
+(export IxmlUtils))

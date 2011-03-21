@@ -14,6 +14,8 @@
 (require "../modules/MxmlUtils.lisp")
 (require "../interfaces/IminidomSerializer.lisp")
 (require "../modules/MminidomSerializer.lisp")
+(require "../interfaces/Ibasiclex.lisp")
+(require "../modules/Mbasiclex.lisp")
 
 
 (module TxmlUtils
@@ -54,7 +56,7 @@
   )
 
 (link Test
-      (MminidomSerializer TxmlUtils))
+      (Mbasiclex MxmlUtils MminidomSerializer TxmlUtils))
 
 (invoke Test)
 
