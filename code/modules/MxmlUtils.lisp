@@ -55,7 +55,9 @@
    ;Delivers a list of filenames with their time lengths for APNG 
    ;frame data.
    ;FrameData = APNG file data
+
    (defun writeFrames (frameData) nil)
   
   
 (export IxmlUtils))
+
