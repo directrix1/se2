@@ -50,3 +50,4 @@
    ;frame data.
    ;FrameData = APNG file data
    (defun writeFrames (frameData))
+)
