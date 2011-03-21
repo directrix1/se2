@@ -67,6 +67,52 @@ time log:
 	end time: 6:00PM
 	comment: concatenated all group members work on t7 modules and Kye's diagrams into t7.odt, also worked on interface sigs and cons
 
+	-date: Feb 23, 2011
+	start time: 4:30PM
+	end time: 5:30PM
+	comment: worked on cons for buildACTL
+
+	-date: Feb 24, 2011
+	start time: 9:30PM
+	end time: 10:30PM
+	comment: worked on cons for IpngUtils, ran into some errors in comments and need to talk with group to clarify
+
+	-date: Mar 1, 2011
+	start time: 5:30PM
+	end time: 5:50PM
+	commment: imported comments for function descriptions and began work on IxmlUtils
+
+	-date: Mar 4, 2011
+	start time: 3:15PM
+	end time: 6:20PM
+	commment: worked on animate in Mio, completed implementation - updated stubs for MxmlUtils
+
+	-date: Mar 6, 2011
+	start time: 4:00PM
+	end time: 4:30PM
+	commment: worked on implementation of MxmlUtils, in particular parseXML and getFrames
+
+	-date: Mar 6, 2011
+	start time: 5:30PM
+	end time: 7:30PM
+	comment: worked on implementation of MxmlUtils and Mio, in particular reworked animate to adjust for the obtaining of PNG image data given filenames from parseXML
+
+	-date: Mar 7, 2011
+	start time: 4:00PM
+	end time: 4:20PM
+	comment: began MapngBuilder module, added comments to functions and initial requires/includes
+
+	-date: Mar 7, 2011
+	start time: 4:30PM
+	end time: 4:50PM 	
+	comment: added two cons to IapngBuilder for buildACTL and buildFCTL
+
+	-date: Mar 7, 2011
+	start time: 5:00PM
+	end time: 5:20PM
+	comment: updated contracts in IapngBuilder and IxmlUtils for parseXML and getFrames
+
+
 defect log:
 
 	-date: Feb 6, 2011
@@ -79,7 +125,19 @@ defect log:
 	fix time: 60
 	comment: Fixed the program flow for forward diagram, separated XMLUtils from IO and need to pass state.
 
-	-date Feb 17, 2011
+	-date: Feb 17, 2011
 	type: design
 	fix time: 45
 	comment: Fixed the program flow for the reverse diagram, combined unnecessary module into PNGUtils and reworked incorrect data flow in APNGExploder.
+
+	-date: Mar 4, 2011
+	type: code
+	fix time: 20
+	comment: reevaluated mv structure of animate to fix problems with returning png data
+
+	-date: Mar 7, 2011
+	type: code
+	fix time: 5
+	comment: fixed syntax problems in openFiles such that openFile was not being called correctly
+
+	

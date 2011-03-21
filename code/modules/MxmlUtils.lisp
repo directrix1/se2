@@ -29,7 +29,15 @@
 	       (numFrames (xml-getattrvalue pngaxml"frames"))
 	       (frames (getFrames (xml-bfsfindnodes pngaxml "image"))))
 	      (list numPlays numFrames frames)))
-	
+
+   (defun numplays (processedConfigDOM)
+     (first processedConfigDOM))
+
+   (defun numframes (processedConfigDOM)
+     (second processedConfigDOM))
+
+   (defun framelist (processedConfigDOM)
+     (third processedConfigDOM))
 
    ;Delivers a string that is an XML document containing the information
    ;for an APNG file
