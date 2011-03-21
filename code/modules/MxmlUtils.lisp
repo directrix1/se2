@@ -14,8 +14,11 @@
   (import Ibasiclex)
   (include-book "list-utilities" :dir :teachpacks)  
 
-   ;Delivers frame data for the files included in framelist.
-   ;framelist = list of the filenames from which data will be retrieved.
+   ;Delivers a list, where each item corresponds to the metadata for each
+   ;image element specified in the xml config.  An item consists of two
+   ;elements: the file name and the length of time the frame should be
+   ;displayed.
+   ;framelist = list of minidom "image" nodes
    (defun getFrames (framelist)
 	(let* ((nextFrame (car framelist))
 	       (src (xml-getattribute nextFrame "src"))
