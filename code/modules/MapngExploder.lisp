@@ -12,6 +12,7 @@
 (require "../interfaces/IminidomSerializer.lisp")
 (require "../interfaces/IminidomParser.lisp")
 (require "../interfaces/IapngExploder.lisp")
+(require "../interfaces/IpngUtils.lisp")
 
 #|
    Team Steele
@@ -38,19 +39,32 @@
   ; apngdata = raw apng data string given from the IO Module.
   ; Output is a list of lists: (file-data, file-name)
   (defun explodeAPNG (apngdata) 
-    nil)
+    (let* ((chunks (blowChunks apngdata))
+           (ihdr (getIHDR chunks))
+           (actl (getAcTL (cdr chunks)))
+           (fctl (if (equal (caaddr chunks) 'FCTL) 
+                     (caddr chunks)
+                     nil))
+           (frames (getFrames (cddr chunks) fctl ihdr)))
+      (append actl frames)))
 
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getIHDR (chunks) 
-    nil)
+    (if (and (eq (caar chunks) 'IHDR)
+             (chunkp (cadr (car chunks))))
+        (cadr (car chunks))
+        nil))
   
   ; Given APNG chunks, returns the numFrames and numPlays contained within
   ; the acTL chunk following the IHDR chunk. These two elements completely
   ;   comprise the acTL chunk.
   ; chunks = processed (or raw) data chunks contained within the input APNG
-  (defun getacTL (chunks) 
-    nil)
+  (defun getAcTL (chunks) 
+    (let* ((actl (findChunk 'ACTL chunks))
+           (numFrames (parseNum (take 4 actl) nil 4))
+           (numPlays (parseNum (take 4 (nthcdr 4 actl)) nil 4)))
+      (list numFrames numPlays)))
   
   ; Given the APNG chunks from input, the last found fcTL chunk, and the
   ; IHDR chunk for the APNG, constructs from the next fdAT chunk the PNG
