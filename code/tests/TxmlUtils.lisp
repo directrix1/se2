@@ -14,47 +14,55 @@
 (require "../modules/MxmlUtils.lisp")
 (require "../interfaces/IminidomSerializer.lisp")
 (require "../modules/MminidomSerializer.lisp")
+(require "../interfaces/Ibasiclex.lisp")
+(require "../modules/Mbasiclex.lisp")
+(require "../interfaces/IminidomParser.lisp")
+(require "../modules/MminidomParser.lisp")
 
 
 (module TxmlUtils
   (import IxmlUtils)
+  (import IminidomSerializer)
+  (import IminidomParser)
 
   (include-book "testing" :dir :teachpacks)
   (include-book "doublecheck" :dir :teachpacks)
 
-;  (defconst
-;    *sample*
-;    "<pnga frames=\"3\" plays=\"2\">
-;	<image src=\"bob0.png\" length=\"1/12\"></image>
-;	<image src="\bob1.png\" length=\"1/14\"></image>
-;	<image src="\bob2.png\" length=\"1/14\"></image>
-;     </pnga>")
-;
-;  (check-expect
-;    (getFrames nil)
-;	'(nil nil))
-;
-;  (check-expect
-;    (getFrames sample)
-;	'('(bob0.png 1/12) '(bob1.png 1/14) '(bob2.png 1/14)))
-;
+  (defconst
+    *sample*
+    (xml-readnode
+    "<pnga frames=\"3\" plays=\"2\">
+	<image src=\"bob0.png\" length=\"1/12\"></image>
+	<image src=\"bob1.png\" length=\"1/14\"></image>
+	<image src=\"bob2.png\" length=\"1/14\"></image>
+     </pnga>"))
+  
+
+  (check-expect
+    (getFrames nil)
+	nil)
+
+  (check-expect
+    (getFrames (xml-getchildren *sample*))
+	'(("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14")))
+
 ;  (check-expect
 ;   (parseXML nil)
 ;	'(nil nil nil))
 ;
 ;  (check-expect
-;   (parseXML sample)
+;   (parseXML *sample*)
 ;	'(2 3 '(bob0.png 1/12) '(bob1.png 1/14) '(bob2.png 1/14)))
 ;
 ;  (check-expect
 ;   (writeXML 1 1 '(bob4.png 1/10))
-;	'("<pnga frames=\"1\" plays="\1\"><image src=\"bob4.png\" length=\"1/10\"></image></pnga>"))
+;	'("<pnga frames=\"1\" plays=\"1\"><image src=\"bob4.png\" length=\"1/10\"></image></pnga>"))
 
   
   )
 
 (link Test
-      (MminidomSerializer TxmlUtils))
+      (Mbasiclex MminidomSerializer MminidomParser MxmlUtils TxmlUtils))
 
 (invoke Test)
 
