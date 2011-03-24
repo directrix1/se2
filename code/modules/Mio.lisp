@@ -39,14 +39,14 @@
       (file->string (string-append xmlfilename ".xml") state)
       (if status
         (mv status state)
-        (let* ((xmlraw (xml-readnode contents))
+        (let* ((xmlraw (xml-readnode xmlcontents))
                (xmlprocessed (parseXML xmlraw))) 
                (numplays (numplays xmlprocessed))
                (numframes (numframes xmlprocessed))
                (framelist (framelist xmlprocessed))
                (framedata (openFiles framelist state))
            (mv-let (status-close state)
-           (string-list->file (string-append xmlfilename
+           (byte-list->binary-file (string-append xmlfilename
                ".apng") (buildAPNG numplays numframes
                framedata) state)
            (if status-close 
@@ -56,11 +56,16 @@
                  xmlfilename ".apng]")
                  state)))))))
 
-  ;Writes a series of portable network graphic files to disk, along with an XML document. These image files are the individual frames 
-  ;of the APNG file in the parameter, and the XML document contains information on the number of frames, number of plays, PNG filenames, 
-  ;and length of time each frame is displayed.
-  ;apngfilename = (string) the name of the animated portable network graphic to be broken into individual frames.
-  (defun suspend (apngfilename state) nil)
+
+  (defun configFileName (apngfilename framelist fnum)
+	(if (null framelist)
+		nil
+		(let* ((next (car framelist))
+			   (pngdat (car next)))
+			(con (list (append (append apngfilename (rat-str framenum))
+					   ".png") pngdat)
+					   (configFileName 
+							apngfilename (cdr framelist) (fnum + 1))))))
 
   ;Helper function for suspend. Writes PNG files to disk.
   ;filelist = list of list (filename filedata).
@@ -73,5 +78,23 @@
             (if error
               (mv error state)
               (writeFiles (cdr filelist) state))))))
-  
+
+ ;Writes a series of portable network graphic files to disk, along with an XML document. These image files are the individual frames 
+ ;of the APNG file in the parameter, and the XML document contains information on the number of frames, number of plays, PNG filenames, 
+ ;and length of time each frame is displayed.
+ ;apngfilename = (string) the name of the animated portable network graphic to be broken into individual frames.
+ (defun suspend (apngfilename state) 
+	(mv-let (apngcontents status state)
+	  (binary-file->byte-list (string-append apngfilename ".apng") state)
+	  (if status
+		  (mv status state)
+		  (let* ((exploded (explodeAPNG apngcontents))
+				 (frames (first exploded))
+				 (plays (second exploded))
+				 (framedat (third exploded))
+				 (xml (writeXML frames plays framedat))
+				 (frames-with-names 
+					(configFileName apngfilename framedat 1))) 
+ 			(writeFiles frames-with-names state)))))
+ 
   (export Iio))
