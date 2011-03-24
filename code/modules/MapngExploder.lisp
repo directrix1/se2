@@ -23,8 +23,42 @@
 |#
 
 (module MapngExploder
+  (in-package "ACL2")
+  
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "io-utilities" :dir :teachpacks)
+  (import IpngUtils)
+  
+  
+  ; Finds the first data chunk in a ((name chunkdata) (name chunkdata))
+  ; list that matches the given name
+  (defun findChunk (name chunklist)
+    (if (null chunklist)
+        nil
+        (if (equal (caar chunklist) name)
+            (cadar chunklist)
+            (findChunk name (cdr chunklist)))))
+  
+  
+  ; Helps findConsecChunks by finding only the consecutive chunks after the
+  ; first one.
+  (defun findConsecRest (name chunklist)
+    (if (null chunklist)
+        nil
+        (if (equal (caar chunklist) name)
+            (append (cadar chunklist)
+                    (findConsecRest name (cdr chunklist))) 
+            nil)))
+  
+  ; Finds all consecutive data chunks in a list of (name chunkdata)'s
+  ; that match the given name
+  (defun findConsecChunks (name chunklist)
+    (if (null chunklist)
+        nil
+        (if (equal (caar chunklist) name)
+            (append (cadar chunklist)
+                    (findConsecRest name (cdr chunklist)))                    
+            (findConsecChunks name (cdr chunklist)))))
   
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
   ; This process involves looking at the acTL chunk to determine number of
@@ -33,20 +67,16 @@
   ; comprise the APNG input.
   ; Output is as follows:
   ;	APNG → (	numFrames numPlays 
-  ;			(framedata1 time_for_frame1)
-  ;			(framedata2 time_for_frame2)
-  ;			... 					)
+  ;			((framedata1 time_for_frame1)
+  ;			 (framedata2 time_for_frame2)
+  ;			... 					))
   ; apngdata = raw apng data string given from the IO Module.
-  ; Output is a list of lists: (file-data, file-name)
   (defun explodeAPNG (apngdata) 
     (let* ((chunks (blowChunks apngdata))
-           (ihdr (getIHDR chunks))
+           (ihdr (makeChunk "IHDR" (getIHDR chunks)))
            (actl (getAcTL (cdr chunks)))
-           (fctl (if (equal (caaddr chunks) 'FCTL) 
-                     (caddr chunks)
-                     nil))
-           (frames (getFrames (cddr chunks) fctl ihdr)))
-      (append actl frames)))
+           (frames (getFrames chunks 't ihdr)))
+      (append actl (list frames))))
 
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
@@ -75,7 +105,13 @@
   ;   chunk is defined
   ; ihdr = ihdr for entire APNG file, data contained herein will be used to
   ;   reconstruct all PNG files
-  (defun getFrames (chunks lastFCTL ihdr) 
-    nil)
+  (defun getFrames (chunks IDATflag ihdr) 
+    (list (concatenate 'list 
+                       (makeChunk "IHDR" ihdr)
+                       (if (null IDATflag)
+                           nil
+                           nil)
+                       (makeChunk "IEND" nil))
+          (parsenum (take 2 (nthcdr 20 fctl)) nil 2)))
   
  (export IapngExploder))
