@@ -13,6 +13,12 @@
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "binary-io-utilities" :dir :teachpacks)
 
+  (import Ibasiclex)
+  (import IapngBuilder)
+  (import IapngExploder)
+  (import IxmlUtils)
+  (import IminidomSerializer)
+
   ; Helper function for animate, calls binary-file->byte-list on a
   ; filename frame
   ; frame = filename of the png frame to open 
@@ -45,16 +51,18 @@
                (numframes (numframes xmlprocessed))
                (framelist (framelist xmlprocessed))
                (framedata (openFiles framelist state))
-           (mv-let (status-close state)
-           (byte-list->binary-file (string-append xmlfilename
-               ".apng") (buildAPNG numplays numframes
-               framedata) state)
-           (if status-close 
-             (mv status-close state)
-             (mv (concatenate "Read png files from ["
-                 xmlfilename ".xml]" "and wrote ["
-                 xmlfilename ".apng]")
-                 state)))))))
+	           (rawapng (buildAPNG numplays numframes framedata))
+			(if (stringp rawapng)
+				(mv rawapng state)	
+           		(mv-let (status-close state)
+            		(byte-list->binary-file (string-append xmlfilename
+               			".apng") rawapng state)
+            		(if status-close 
+              			(mv status-close state)
+              			(mv (concatenate "Read png files from ["
+                  			xmlfilename ".xml]" "and wrote ["
+                  			xmlfilename ".apng]")
+                  			state))))))))
 
 
   (defun configFileName (apngfilename framelist fnum)
