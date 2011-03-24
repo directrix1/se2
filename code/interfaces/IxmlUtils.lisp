@@ -17,7 +17,6 @@
   ; into DOM structure.
   (sig prepFrameData (framedata))
 
-
   ; Delivers a string that is an XML document containing the information
   ; for an APNG file
   ; numPlays = the number of times the animation will play.

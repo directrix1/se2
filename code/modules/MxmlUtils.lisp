@@ -32,11 +32,12 @@
    ;and a list of filenames with their corresponding time length.
    ;domXML = XML data as a document object model 
    (defun parseXML (domXML)
+     (if (null domXML) '(nil nil nil)
 	(let* ((pngaxml (xml-getnode domXML "pnga"))
 	       (numPlays (xml-getattribute pngaxml "plays"))
 	       (numFrames (xml-getattribute pngaxml"frames"))
 	       (frames (getFrames (xml-bfsfindnodes pngaxml "image"))))
-	      (list numPlays numFrames frames)))
+	      (list numPlays numFrames frames))))
 
    (defun numplays (processedConfigDOM)
      (first processedConfigDOM))
@@ -61,7 +62,10 @@
    ;numPlays = the number of times the animation will play.
    ;numFrames = the total number of frames that make up the animation.
    ;framedata = a list of list (PNG filename, time). 
-   (defun writeXML (numPlays numFrames framedata)nil)
+   (defun writeXML (numPlays numFrames framedata)
+     (xml-serialize-dom (list "pnga" (list (list "frames" numFrames)
+                                           (list "plays" numPlays))
+                                     (prepFrameData framedata))))
 
    ;Delivers a list of filenames with their time lengths for APNG 
    ;frame data.
