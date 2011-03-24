@@ -46,7 +46,16 @@
 
    (defun framelist (processedConfigDOM)
      (third processedConfigDOM))
-
+    
+   ; Helper function for writeXML. Transforms the list of images and lengths
+   ; into DOM structure.
+   (defun prepFrameData (framedata)
+     (if (endp framedata) nil
+          (append(list (list "image" (list (list "src" (car (car framedata)))
+                             (list "length" (cadr (car framedata))))nil))
+               (prepFrameData(cdr framedata)))))
+  
+  
    ;Delivers a string that is an XML document containing the information
    ;for an APNG file
    ;numPlays = the number of times the animation will play.
