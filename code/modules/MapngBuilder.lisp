@@ -18,31 +18,31 @@
   (include-book "io-utilities" :dir :teachpacks)
   
   (import IpngUtils)
-
-  ; Returns an APNG as a byte list that has the following playtime
-  ; properties:
-  ;  * contains in order the frames and amount of time to display each 
-  ;     frame from framedata
-  ;  * loops the frames  numPlays times
-  ;  * contains the number of frames as specified in numFrames
-  ; numPlays = number of times to loop the animation
-  ; numFrames = number of frames in the animation
-  ; framedata = frame and time display information of the type 
-  ;   (list (list frame displaytime)... ) where frame is a byte list 
-  ;   representing a PNG's contents and displaytime is a string 
-  ;   representing the amount of time in seconds to display that frame
-  ;   as a rational number (i.e. 100/2997 for NTSC standard)
-  (defun buildAPNG (numPlays numFrames framedata)
-	(let* ((frames (preparePNGs framedata))
-              (valid (validateIHDR frames)))
-          (if (stringp valid)          ; Returns error message when needed
-              valid
-              (concatenate 'list
-                           (makeChunk "IHDR" (car (car frames)))
-                           (buildACTL numFrames numPlays)
-                           (buildFrames frames 0)
-                           (makeChunk "IEND" nil)
-              ))))
+  
+  ; This function formats the raw PNG file data into more conveniently 
+  ; utilized chunks, and returns (list IHDR IDAT) where IHDR is the IHDR
+  ; chunk IDAT is all IDAT chunks concatenated into one chunk.
+  ; ihdr = ihdr chunk data, pass in nil initially
+  ; idat = idat chunk data, pass in nil initially
+  ; framedata = a list of blown chunks
+  (defun preparePNG (ihdr idat chunks)
+    (if (null chunks)
+        (list ihdr idat)
+        (let* ((curchunk (car chunks))
+               (rest (cdr chunks))
+               (chunkname (car curchunk))
+               (chunkbytes (cdr curchunk)))
+          (cond
+            ((equal chunkname "IHDR") (preparePNG
+                                       (concatenate 'list ihdr chunkbytes)
+                                       idat
+                                       rest))
+            ((equal chunkname "IDAT") (preparePNG
+                                       ihdr
+                                       (concatenate 'list idat chunkbytes)
+                                       rest))
+            ('t (preparePNG ihdr idat rest))
+            ))))
 
   ; This function formats the raw PNG file data into more conveniently 
   ; utilized chunks, and returns a list of (list IHDR IDAT displaytime)
@@ -58,38 +58,12 @@
         nil
         (let* ((cur (car framedata))
                (rest (cdr framedata))
-               (frame (preparePNG (car cur)))
+               (frame (preparePNG nil nil (car cur)))
                (time (cdr cur)))
-          (con
+          (cons
            (concatenate 'list frame (list time))
            (preparePNGs rest)))))
-  
-  ; This function formats the raw PNG file data into more conveniently 
-  ; utilized chunks, and returns (list IHDR IDAT) where IHDR is the IHDR
-  ; chunk IDAT is all IDAT chunks concatenated into one chunk.
-  ; ihdr = ihdr chunk data, pass in nil initially
-  ; idat = idat chunk data, pass in nil initially
-  ; framedata = a list of blown chunks
-  (defun preparePNG (ihdr idat chunks)
-    (if (null chunks)
-        (list ihdr idat)
-        (let* ((curchunk (car chunks))
-               (rest (cdr chunks))
-               (chunkname (car chunk))
-               (chunkbytes (cdr chunk)))
-          (cond
-            ((equal chunkname "IHDR") (preparePNG
-                                       (concatenate 'list ihdr chunkbytes)
-                                       idat
-                                       rest))
-            ((equal chunkname "IDAT") (preparePNG
-                                       ihdr
-                                       (concatenate 'list idat chunkbytes)
-                                       rest))
-            ('t (preparePNG ihdr idat rest))
-            ))))
     
-
   ; Scan the list returned from preparePNGs for inconsistencies
   ; between PNG files' IHDR and the first frame's IHDR. APNG requires
   ; all frames to have the same compression, filter method, and bit depth,
@@ -103,45 +77,56 @@
   ; baseIHDR = the reference IHDR or if null the IHDR of the first PNG
   ;    in the list to which all comparisons of consistency are made.
   (defun validateIHDR (prepdPNGs baseIHDR)
-    nil)
-
-  ; Convert the prepdPNGs parameter into a byte list representation of the
-  ; APNG frames with their associated fcTL, IDAT and fdAT chunks using 
-  ; prepdPNGs as a source for the framedata. This does not include the 
-  ; file signature, IHDR or acTL chunk.
-  ; prepdPNGs = prepared list of PNGs in the form described as the output
-  ;    of preparePNGs
-  ; frameNum = if 0 then the image data of the first PNG of the list will
-  ;    be output as an IDAT chunk all other frames are fdAT chunks
-  (defun buildFrames (prepdPNGs frameNum)
     (if (null prepdPNGs)
         nil
         (let* ((cur (car prepdPNGs))
-               (rest (cdr prepdPNGs))
-               (IHDR (car cur))
-               (width (parseNum (nthcdr 4 IHDR) nil 4))
-               (height (parseNum (nthcdr 8 IHDR) nil 4))
-               (IDAT (cadr cur))
-               (time (caddr cur)))
-          (concatenate 'list
-                       (buildFCTL
-                        frameNum
-                        width
-                        height
-                        0         ; xOff
-                        0         ; yOff
-                        time
-                        0         ; disposeOp
-                        0         ; blendOp
-                        )
-                       (if (= framenum 0)
-                           (makeChunk "IDAT" IDAT)
-                           (makeChunk "fcTL" (concatenate 'list
-                                                          (makeNum frameNum nil 4)
-                                                          IDAT)))
-                       (buildFrames rest (1+ frameNum))
-                       ))))
-  
+              (rest (cdr prepdPNGs))
+              (curIHDR (car cur)))
+          (if (null baseIHDR)
+              (validateIHDR rest curIHDR)
+              (let* ((bWidth (parseNum baseIHDR nil 4))
+                     (cWidth (parseNum curIHDR nil 4)))
+                (if (not (= bWidth cWidth))
+                    "Widths do not match"
+              (let* ((b1 (nthcdr 4 baseIHDR))
+                     (c1 (nthcdr 4 curIHDR))
+                     (bHeight (parseNum b1 nil 4))
+                     (cHeight (parseNum c1 nil 4)))
+                (if (not (= bHeight cHeight))
+                    "Heights do not match"
+              (let* ((b2 (nthcdr 4 b1))
+                     (c2 (nthcdr 4 c1))
+                     (bBitDepth (parseNum b2 nil 1))
+                     (cBitDepth (parseNum c2 nil 1)))
+                (if (not (= bBitDepth cBitDepth))
+                    "Bit depths do not match"
+              (let* ((b3 (nthcdr 1 b2))
+                     (c3 (nthcdr 1 c2))
+                     (bColorType (parseNum b3 nil 1))
+                     (cColorType (parseNum c3 nil 1)))
+                (if (not (= bColorType cColorType))
+                    "Color types do not match"
+              (let* ((b4 (nthcdr 1 b3))
+                     (c4 (nthcdr 1 c3))
+                     (bCompression (parseNum b4 nil 1))
+                     (cCompression (parseNum c4 nil 1)))
+                (if (not (= bCompression cCompression))
+                    "Compression methods do not match"
+              (let* ((b5 (nthcdr 1 b4))
+                     (c5 (nthcdr 1 c4))
+                     (bFilter (parseNum b5 nil 1))
+                     (cFilter (parseNum c5 nil 1)))
+                (if (not (= bFilter cFilter))
+                    "Filter methods do not match"
+              (let* ((b6 (nthcdr 1 b5))
+                     (c6 (nthcdr 1 c5))
+                     (bInterlace (parseNum b6 nil 1))
+                     (cInterlace (parseNum c6 nil 1)))
+                (if (not (= bInterlace cInterlace))
+                    "Interlace methods do not match"
+                    nil
+                    ))))))))))))))))))
+
   ; Returns a byte list representing the acTL chunk described by the
   ; parameters.
   ; numPlays = number of times the animation is intended to be played
@@ -186,5 +171,67 @@
                   (makeNum disposeOp nil 1)                
                   (makeNum blendOp nil 1)                
                   ))))
+
+  ; Convert the prepdPNGs parameter into a byte list representation of the
+  ; APNG frames with their associated fcTL, IDAT and fdAT chunks using 
+  ; prepdPNGs as a source for the framedata. This does not include the 
+  ; file signature, IHDR or acTL chunk.
+  ; prepdPNGs = prepared list of PNGs in the form described as the output
+  ;    of preparePNGs
+  ; frameNum = if 0 then the image data of the first PNG of the list will
+  ;    be output as an IDAT chunk all other frames are fdAT chunks
+  (defun buildFrames (prepdPNGs frameNum)
+    (if (null prepdPNGs)
+        nil
+        (let* ((cur (car prepdPNGs))
+               (rest (cdr prepdPNGs))
+               (IHDR (car cur))
+               (width (parseNum (nthcdr 4 IHDR) nil 4))
+               (height (parseNum (nthcdr 8 IHDR) nil 4))
+               (IDAT (cadr cur))
+               (time (caddr cur)))
+          (concatenate 'list
+                       (buildFCTL
+                        frameNum
+                        width
+                        height
+                        0         ; xOff
+                        0         ; yOff
+                        time
+                        0         ; disposeOp
+                        0         ; blendOp
+                        )
+                       (if (= framenum 0)
+                           (makeChunk "IDAT" IDAT)
+                           (makeChunk "fcTL" (concatenate 'list
+                                                          (makeNum frameNum nil 4)
+                                                          IDAT)))
+                       (buildFrames rest (1+ frameNum))
+                       ))))
+  
+  ; Returns an APNG as a byte list that has the following playtime
+  ; properties:
+  ;  * contains in order the frames and amount of time to display each 
+  ;     frame from framedata
+  ;  * loops the frames  numPlays times
+  ;  * contains the number of frames as specified in numFrames
+  ; numPlays = number of times to loop the animation
+  ; numFrames = number of frames in the animation
+  ; framedata = frame and time display information of the type 
+  ;   (list (list frame displaytime)... ) where frame is a byte list 
+  ;   representing a PNG's contents and displaytime is a string 
+  ;   representing the amount of time in seconds to display that frame
+  ;   as a rational number (i.e. 100/2997 for NTSC standard)
+  (defun buildAPNG (numPlays numFrames framedata)
+	(let* ((frames (preparePNGs framedata))
+              (valid (validateIHDR frames nil)))
+          (if (stringp valid)          ; Returns error message when needed
+              valid
+              (concatenate 'list
+                           (makeChunk "IHDR" (car (car frames)))
+                           (buildACTL numFrames numPlays)
+                           (buildFrames frames 0)
+                           (makeChunk "IEND" nil)
+              ))))
   
   (export IapngBuilder))
