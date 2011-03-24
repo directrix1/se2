@@ -1,7 +1,8 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+
 (interface IxmlUtils
   ; Delivers frame data for the files included in framelist.
   ; framelist = list of the filenames from which data will be retrieved.
@@ -11,6 +12,10 @@
   ; and a list of filenames with their corresponding time length.
   ; domXML = XML data as a document object model 
   (sig getFrames (framelist))
+  
+  ; Helper function for writeXML. Transforms the list of images and lengths
+  ; into DOM structure.
+  (sig prepFrameData (framedata))
 
 
   ; Delivers a string that is an XML document containing the information

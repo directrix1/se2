@@ -45,7 +45,13 @@
   (check-expect
     (getFrames (xml-getchildren *sample*))
 	'(("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14")))
-
+  
+  (check-expect
+   (prepFrameData '(("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14")))
+   (list (list "image" (list (list "src" "bob0.png") (list "length" "1/12"))nil) 
+    (list"image" (list (list "src" "bob1.png") (list "length" "1/14"))nil)
+     (list "image" (list (list "src" "bob2.png") (list "length" "1/14"))nil)))
+ 
 ;  (check-expect
 ;   (parseXML nil)
 ;	'(nil nil nil))
