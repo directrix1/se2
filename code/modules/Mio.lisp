@@ -100,9 +100,9 @@
 				 (frames (first exploded))
 				 (plays (second exploded))
 				 (framedat (third exploded))
-				 (xml (writeXML frames plays framedat))
+				 (xml (writeXML frames plays (writeFrames framedat apngfilename))
 				 (frames-with-names 
-					(configFileName apngfilename framedat 1))) 
+					(cons '("Config.xml" xml) (configFileName apngfilename framedat 1))))
  			(writeFiles frames-with-names state)))))
  
   (export Iio))

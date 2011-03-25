@@ -27,7 +27,8 @@
   ; Delivers a list of filenames with their time lengths for APNG 
   ; frame data.
   ; FrameData = APNG file data
-  (sig writeFrames (frameData))
+  ; apngFileName = name of the apng file
+  (sig writeFrames (frameData apngFileName))
 
   (con parseXML-returns-three
 	(implies (true-listp domXML)

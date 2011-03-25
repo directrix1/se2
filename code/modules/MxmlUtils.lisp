@@ -77,11 +77,28 @@
                                            (list "plays" numPlays))
                                      (prepFrameData framedata)))))))
 
+   ;Helper function for writeFrames
+   ;FrameData = APNG file data in the form: ((framedata1 time_for_frame1)
+   ;			                     (framedata2 time_for_frame2)...
+   ;apngFileName = name of the apng file
+   ;Delivers a list of generic file names for framedata along with the
+   ;time lengths. The order of the files are reversed.
+   (defun nameFrames (frameData apngFileName)
+     (if (endp frameData) nil (if (null apngFileName) nil
+         (cons (list (string-append apngFileName (string-append
+                                   (string (car
+                                    (explode-nonnegative-integer
+                                     (len frameData) 10 nil))) ".png"))
+               (cadr (car (reverse frameData))))
+               (nameFrames (reverse (cdr (reverse frameData))) apngFileName)))))
+  
    ;Delivers a list of filenames with their time lengths for APNG 
    ;frame data.
-   ;FrameData = APNG file data
-
-   (defun writeFrames (frameData) nil)
+   ;frameData = APNG file data in the form: ((framedata1 time_for_frame1)
+   ;			                     (framedata2 time_for_frame2)...
+   ;apngFileName = name of the apng file
+  (defun writeFrames (frameData apngFileName)
+    (reverse (nameFrames frameData apngFileName)))
   
   
 (export IxmlUtils))
