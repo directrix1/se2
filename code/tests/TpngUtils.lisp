@@ -28,6 +28,51 @@
     ("The census taker once tried to test me." . 2741736571)
     ("I sell sea shells, but no really I sell crack." . 2584678438)                           
     ))
+  
+  (check-expect
+   (bytep nil)
+   nil)
+  
+  (check-expect
+   (bytep 128)
+   t)
+  
+  (check-expect
+   (bytep 512)
+   nil)
+  
+  (check-expect
+   (byte-listp nil)
+   t)
+  
+  (check-expect
+   (byte-listp '(128 512))
+   nil)
+  
+  (check-expect
+   (byte-listp '(128 255))
+   t)
+  
+  (check-expect
+   (chunktypep nil)
+   nil)
+  
+  (check-expect
+   (chunktypep "IHDR")
+   t)
+  
+  (check-expect
+   (chunktypep "IHEADER")
+   nil)
+  
+  (check-expect
+   (chunkp '("IDAT" 128))
+   t)
+  
+  (check-expect
+   (chunkp 'nil)
+   nil)
+  
   (check-expect
    (calcCRC32
     (ascii->bytes (car (nth 0 *crc32Tests*))))

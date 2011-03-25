@@ -39,7 +39,7 @@
   (defun chunktypep (x)
     (and
      (stringp x)
-     (eq (length x) 4)))
+     (eql (length x) 4)))
   
   ; Returns true if x is a chunk (list chunktypep byte-listp)
   ;  x = what to check
