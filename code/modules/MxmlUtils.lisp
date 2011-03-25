@@ -32,11 +32,11 @@
    ;and a list of filenames with their corresponding time length.
    ;domXML = XML data as a document object model 
    (defun parseXML (domXML)
-     (if (null domXML) '(nil nil nil)
-	(let* ((pngaxml (xml-getnode domXML "pnga"))
+     (if (null domXML) nil
+	(let* ((pngaxml domXML)
 	       (numPlays (xml-getattribute pngaxml "plays"))
 	       (numFrames (xml-getattribute pngaxml"frames"))
-	       (frames (getFrames (xml-bfsfindnodes pngaxml "image"))))
+	       (frames (getFrames (xml-getchildren pngaxml))))
 	      (list numPlays numFrames frames))))
 
    (defun numplays (processedConfigDOM)

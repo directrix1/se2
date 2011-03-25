@@ -58,11 +58,11 @@
  
   (check-expect
    (parseXML nil)
-	'(nil nil nil))
+	nil)
 
-;  (check-expect
-;   (parseXML *sample*)
-;	'(2 3 (bob0.png 1/12) (bob1.png 1/14) (bob2.png 1/14)))
+  (check-expect
+   (parseXML *sample*)
+	'("2" "3" (("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14"))))
 
   (check-expect
    (writeXML "1" "1" '(("bob4.png" "1/10")))
