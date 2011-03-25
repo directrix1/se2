@@ -2,6 +2,13 @@
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+#| Team Steele
+   Software Engineering II
+   TxmlUtils
+
+   Functions to assist with parsing and constructing XML files.
+|#
+
 
 (require "../interfaces/Ibasiclex.lisp")
 (require "../interfaces/IxmlUtils.lisp")
@@ -63,9 +70,12 @@
    ;numFrames = the total number of frames that make up the animation.
    ;framedata = a list of list (PNG filename, time). 
    (defun writeXML (numPlays numFrames framedata)
+     (if (not numPlays) "Invalid data"
+         (if (not numFrames) "Invalid data"
+             (if (not framedata) "Invalid data"
      (xml-serialize-dom (list "pnga" (list (list "frames" numFrames)
                                            (list "plays" numPlays))
-                                     (prepFrameData framedata))))
+                                     (prepFrameData framedata)))))))
 
    ;Delivers a list of filenames with their time lengths for APNG 
    ;frame data.

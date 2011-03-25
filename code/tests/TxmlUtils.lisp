@@ -63,6 +63,22 @@
   (check-expect
    (parseXML *sample*)
 	'("2" "3" (("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14"))))
+  
+  (check-expect
+   (writeXML nil nil nil)
+   "Invalid data")
+  
+  (check-expect
+   (writeXML nil "1" '(("bob4.png" "1/10")))
+   "Invalid data")
+  
+  (check-expect
+   (writeXML "1" nil '(("bob4.png" "1/10")))
+   "Invalid data")
+  
+  (check-expect
+   (writeXML "1" "1" nil)
+   "Invalid data")
 
   (check-expect
    (writeXML "1" "1" '(("bob4.png" "1/10")))
