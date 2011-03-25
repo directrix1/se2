@@ -228,6 +228,7 @@
           (if (stringp valid)          ; Returns error message when needed
               valid
               (concatenate 'list
+                           (list 137 80 78 71 13 10 26 10) ; PNG signature
                            (makeChunk "IHDR" (car (car frames)))
                            (buildACTL numFrames numPlays)
                            (buildFrames frames 0)
