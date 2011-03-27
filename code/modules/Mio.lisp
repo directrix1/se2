@@ -79,12 +79,12 @@
 		(let* ((next (car framelist))
 			   (pngdat (car next)))
 			(cons (list (append (append apngfilename 
-                                                    (rat->str framenum))
+                                                    (rat->str fnum 0))
 					   ".png") pngdat)
 					   (configFileName 
 							apngfilename 
                                                         (cdr framelist) 
-                                                        (fnum + 1))))))
+                                                        (+ fnum 1))))))
 
   ;Helper function for suspend. Writes PNG files to disk.
   ;filelist = list of list (filename filedata).
@@ -116,12 +116,12 @@
 				 (framedat (third exploded))
 				 (xml (writeXML frames plays 
                                                 (writeFrames 
-                                                 framedat apngfilename))
+                                                 framedat apngfilename)))
 				 (frames-with-names 
 					(cons '("Config.xml" xml) 
                                               (configFileName 
                                                apngfilename framedat 1))))
  			(writeFiles frames-with-names state)))))
-   )
+   
  
   (export Iio))
