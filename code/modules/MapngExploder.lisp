@@ -1,11 +1,8 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
-;; The first four lines of this file were added by Dracula.
-;; They tell DrScheme that this is a Dracula Modular ACL2 program.
-;; Leave these lines unchanged so that DrScheme can properly load this file.
-;; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+
 
 (require "../interfaces/Ibasiclex.lisp")
 (require "../interfaces/IxmlUtils.lisp")
@@ -60,24 +57,6 @@
                     (findConsecRest name (cdr chunklist)))                    
             (findConsecChunks name (cdr chunklist)))))
   
-  ; Given an APNG file, breaks the APNG into its constituent PNG Images.
-  ; This process involves looking at the acTL chunk to determine number of
-  ; frames and number of plays, as well as looking at the fcTL and fdAT
-  ; pairs to reconstruct the IHDR and IDAT chunks of the PNG Images that
-  ; comprise the APNG input.
-  ; Output is as follows:
-  ;	APNG → (	numFrames numPlays 
-  ;			((framedata1 time_for_frame1)
-  ;			 (framedata2 time_for_frame2)
-  ;			... 					))
-  ; apngdata = raw apng data string given from the IO Module.
-  (defun explodeAPNG (apngdata) 
-    (let* ((chunks (blowChunks apngdata))
-           (ihdr (makeChunk "IHDR" (getIHDR chunks)))
-           (actl (getAcTL (cdr chunks)))
-           (frames (getFrames chunks 't ihdr)))
-      (append actl (list frames))))
-
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getIHDR (chunks) 
@@ -113,5 +92,24 @@
                            nil)
                        (makeChunk "IEND" nil))
           (parsenum (take 2 (nthcdr 20 fctl)) nil 2)))
+  
+  ; Given an APNG file, breaks the APNG into its constituent PNG Images.
+  ; This process involves looking at the acTL chunk to determine number of
+  ; frames and number of plays, as well as looking at the fcTL and fdAT
+  ; pairs to reconstruct the IHDR and IDAT chunks of the PNG Images that
+  ; comprise the APNG input.
+  ; Output is as follows:
+  ;	APNG → (	numFrames numPlays 
+  ;			((framedata1 time_for_frame1)
+  ;			 (framedata2 time_for_frame2)
+  ;			... 					))
+  ; apngdata = raw apng data string given from the IO Module.
+  (defun explodeAPNG (apngdata) 
+    (let* ((chunks (blowChunks apngdata))
+           (ihdr (makeChunk "IHDR" (getIHDR chunks)))
+           (actl (getAcTL (cdr chunks)))
+           (frames (getFrames chunks 't ihdr)))
+      (append actl (list frames))))
+
   
  (export IapngExploder))
