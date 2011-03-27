@@ -7,11 +7,17 @@
   ; Delivers frame data for the files included in framelist.
   ; framelist = list of the filenames from which data will be retrieved.
   (sig parseXML (domXML))
+  
+  (sig numplays (processedConfigDOM))
+  
+  (sig numframes (processedConfigDOM))
+  
+  (sig framelist (processedConfigDOM))
 
   ; Parses XML data and delivers the number of frames, number of plays,
   ; and a list of filenames with their corresponding time length.
   ; domXML = XML data as a document object model 
-  (sig getFrames (framelist))
+  (sig grabFrames (framelist))
   
   ; Helper function for writeXML. Transforms the list of images and lengths
   ; into DOM structure.

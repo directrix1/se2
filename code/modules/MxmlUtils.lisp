@@ -28,12 +28,12 @@
    ;elements: the file name and the length of time the frame should be
    ;displayed.
    ;framelist = list of minidom "image" nodes
-   (defun getFrames (framelist)
+   (defun grabFrames (framelist)
      (if (null framelist) nil
 	(let* ((nextFrame (car framelist))
 	       (src (xml-getattribute nextFrame "src"))
 	       (timelen (xml-getattribute nextFrame "length")))
-	   (cons (list src timelen) (getFrames (cdr framelist))))))
+	   (cons (list src timelen) (grabFrames (cdr framelist))))))
 
    ;Parses XML data and delivers the number of frames, number of plays,
    ;and a list of filenames with their corresponding time length.
@@ -43,7 +43,7 @@
 	(let* ((pngaxml domXML)
 	       (numPlays (xml-getattribute pngaxml "plays"))
 	       (numFrames (xml-getattribute pngaxml"frames"))
-	       (frames (getFrames (xml-getchildren pngaxml))))
+	       (frames (grabFrames (xml-getchildren pngaxml))))
 	      (list numPlays numFrames frames))))
 
    (defun numplays (processedConfigDOM)

@@ -18,6 +18,7 @@
 
 (module Mio  
   (include-book "list-utilities" :dir :teachpacks)
+  (include-book "io-utilities" :dir :teachpacks)
   (include-book "binary-io-utilities" :dir :teachpacks)
 
   (import Ibasiclex)
@@ -52,13 +53,13 @@
       (file->string (string-append xmlfilename ".xml") state)
       (if status
         (mv status state)
-        (let* ((xmlraw (xml-readnode xmlcontents))
-               (xmlprocessed (parseXML xmlraw))) 
+        (let* ((xmlraw (xml-readnode xmlcontents)) 
+               (xmlprocessed (parseXML xmlraw)) 
                (numplays (numplays xmlprocessed))
                (numframes (numframes xmlprocessed))
                (framelist (framelist xmlprocessed))
                (framedata (openFiles framelist state))
-	           (rawapng (buildAPNG numplays numframes framedata))
+	           (rawapng (buildAPNG numplays numframes framedata)))
 			(if (stringp rawapng)
 				(mv rawapng state)	
            		(mv-let (status-close state)
@@ -77,10 +78,13 @@
 		nil
 		(let* ((next (car framelist))
 			   (pngdat (car next)))
-			(con (list (append (append apngfilename (rat-str framenum))
+			(cons (list (append (append apngfilename 
+                                                    (rat->str framenum))
 					   ".png") pngdat)
 					   (configFileName 
-							apngfilename (cdr framelist) (fnum + 1))))))
+							apngfilename 
+                                                        (cdr framelist) 
+                                                        (fnum + 1))))))
 
   ;Helper function for suspend. Writes PNG files to disk.
   ;filelist = list of list (filename filedata).
@@ -94,10 +98,13 @@
               (mv error state)
               (writeFiles (cdr filelist) state))))))
 
- ;Writes a series of portable network graphic files to disk, along with an XML document. These image files are the individual frames 
- ;of the APNG file in the parameter, and the XML document contains information on the number of frames, number of plays, PNG filenames, 
+ ;Writes a series of portable network graphic files to disk, 
+ ;along with an XML document. These image files are the individual frames 
+ ;of the APNG file in the parameter, and the XML document contains 
+ ;information on the number of frames, number of plays, PNG filenames, 
  ;and length of time each frame is displayed.
- ;apngfilename = (string) the name of the animated portable network graphic to be broken into individual frames.
+ ;apngfilename = (string) the name of the animated portable network graphic 
+ ;to be broken into individual frames.
  (defun suspend (apngfilename state) 
 	(mv-let (apngcontents status state)
 	  (binary-file->byte-list (string-append apngfilename ".apng") state)
@@ -107,9 +114,13 @@
 				 (frames (first exploded))
 				 (plays (second exploded))
 				 (framedat (third exploded))
-				 (xml (writeXML frames plays (writeFrames framedat apngfilename))
+				 (xml (writeXML frames plays 
+                                                (writeFrames 
+                                                 framedat apngfilename))
 				 (frames-with-names 
-					(cons '("Config.xml" xml) (configFileName apngfilename framedat 1))))
+					(cons '("Config.xml" xml) 
+                                              (configFileName 
+                                               apngfilename framedat 1))))
  			(writeFiles frames-with-names state)))))
    )
  
