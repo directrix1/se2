@@ -1,7 +1,11 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
+;; The first four lines of this file were added by Dracula.
+;; They tell DrScheme that this is a Dracula Modular ACL2 program.
+;; Leave these lines unchanged so that DrScheme can properly load this file.
+;; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 
 
 (require "../interfaces/Ibasiclex.lisp")
@@ -28,13 +32,16 @@
   
   
   ; Finds the first data chunk in a ((name chunkdata) (name chunkdata))
-  ; list that matches the given name
-  (defun findChunk (name chunklist)
+  ; list that matches the given name and pulls it out of the chunklist
+  (defun findChunk (name chunklist checkedchunks)
     (if (null chunklist)
         nil
         (if (equal (caar chunklist) name)
-            (cadar chunklist)
-            (findChunk name (cdr chunklist)))))
+            (list (append checkedchunks (cdr chunklist))
+                  (cadar chunklist))
+            (findChunk name 
+                       (cdr chunklist)
+                       (append checkedchunks (car chunklist))))))
   
   
   ; Helps findConsecChunks by finding only the consecutive chunks after the
@@ -70,7 +77,7 @@
   ;   comprise the acTL chunk.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getAcTL (chunks) 
-    (let* ((actl (findChunk 'ACTL chunks))
+    (let* ((actl (findChunk 'ACTL chunks nil))
            (numFrames (parseNum (take 4 actl) nil 4))
            (numPlays (parseNum (take 4 (nthcdr 4 actl)) nil 4)))
       (list numFrames numPlays)))
@@ -85,13 +92,25 @@
   ; ihdr = ihdr for entire APNG file, data contained herein will be used to
   ;   reconstruct all PNG files
   (defun getFrames (chunks IDATflag ihdr) 
-    (list (concatenate 'list 
-                       (makeChunk "IHDR" ihdr)
-                       (if (null IDATflag)
+    (let* ((split (splitChunks chunks))
+           (cleanchunks (cadr split))
+           (extrachunks (makeChunks (car split)))
+           (prechunks (concatenate 'list  )))
+     list (concatenate 'list
+                       ihdr ;IHDR
+                       ;Other Chunks before fcTL
+                       (if (null IDATflag) ;Actual Frame
                            nil
                            nil)
-                       (makeChunk "IEND" nil))
-          (parsenum (take 2 (nthcdr 20 fctl)) nil 2)))
+                       ;Other Chunks after fcTL
+                       (makeChunk "IEND" nil)) ;IEND
+          ;Frame Delay
+          (concat 'string 
+                  (rat->str (parsenum (take 2 (nthcdr 20 (findChunk 'fcTL 
+                                                                    chunks
+                                                                    nil)))
+                                       nil 2) 0)
+          (parsenum (take 2 (nthcdr 22 (findChunk 'fcTL chunks nil))) nil 2))))
   
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
   ; This process involves looking at the acTL chunk to determine number of
