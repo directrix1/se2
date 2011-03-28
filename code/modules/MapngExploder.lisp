@@ -82,23 +82,40 @@
            (numPlays (parseNum (take 4 (nthcdr 4 actl)) nil 4)))
       (list numFrames numPlays)))
   
+  ; Splits off the chunks that come before the first IDAT or fcTL
+  (defun splitChunks (pre post)
+    (if (or (null post)
+            (equal (caar post) 'IDAT)
+            (equal (caar post) 'fcTL))
+        (list pre post)
+        (splitChunks (append pre (car post))
+                     (cdr post))))
+   
+  ; Makes all the chunks in the list of chunks and concatenates them
+  (defun makeChunks (chunks)
+    (if (null chunks)
+        nil
+        (
+        ))
+  
   ; Given the APNG chunks from input, the last found fcTL chunk, and the
   ; IHDR chunk for the APNG, constructs from the next fdAT chunk the PNG
   ; Signature, IHDR, IDAT, and IEND chunks necessary to create a complete
   ; PNG file. 
   ; chunks = processed (or raw) data chunks contained within the input APNG
-  ; lastFCTL = last found fcTL chunk, or the fcTL for which the next fdAT
-  ;   chunk is defined
+  ; IDATflag = Defines whether or not the IDAT chunks have been pulled yet  
   ; ihdr = ihdr for entire APNG file, data contained herein will be used to
   ;   reconstruct all PNG files
   (defun getFrames (chunks IDATflag ihdr) 
-    (let* ((split (splitChunks chunks))
+    (let* ((split (splitChunks nil chunks))
            (cleanchunks (cadr split))
            (extrachunks (makeChunks (car split)))
-           (prechunks (concatenate 'list  )))
-     list (concatenate 'list
-                       ihdr ;IHDR
-                       ;Other Chunks before fcTL
+           (prechunks (append ihdr extrachunks)))
+      ()))
+     
+   (defun getFrame (chunks IDATflag prefix)
+     (list (concatenate 'list
+                       prefix ;IHDR and other chunks before fcTL
                        (if (null IDATflag) ;Actual Frame
                            nil
                            nil)
