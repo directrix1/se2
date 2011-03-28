@@ -53,11 +53,10 @@
   ; Signature, IHDR, IDAT, and IEND chunks necessary to create a complete
   ; PNG file. 
   ; chunks = processed (or raw) data chunks contained within the input APNG
-  ; lastFCTL = last found fcTL chunk, or the fcTL for which the next fdAT
-  ;   chunk is defined
+  ; IDATflag = Defines whether or not the IDAT chunks have been pulled yet
   ; ihdr = ihdr for entire APNG file, data contained herein will be used to
   ;   reconstruct all PNG files
-  (sig getFrames (chunks lastFCTL ihdr))
+  (sig getFrames (chunks IDATflag ihdr))
   
   
   
