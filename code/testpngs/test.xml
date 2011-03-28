@@ -1,0 +1,8 @@
+<pnga frames="6" plays="10">
+	<image src="test1.png" length="1/12"></image>
+	<image src="test2.png" length="1/12"></image>
+	<image src="test3.png" length="1/12"></image>
+	<image src="test4.png" length="1/12"></image>
+	<image src="test5.png" length="1/12"></image>
+	<image src="test6.png" length="1/12"></image>
+</pnga>
