@@ -1,7 +1,7 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 #|
    Team Steele
    Software Engineering II
@@ -105,23 +105,23 @@
  ;and length of time each frame is displayed.
  ;apngfilename = (string) the name of the animated portable network graphic 
  ;to be broken into individual frames.
- (defun suspend (apngfilename state) 
-	(mv-let (apngcontents status state)
-	  (binary-file->byte-list (string-append apngfilename ".apng") state)
-	  (if status
-		  (mv status state)
-		  (let* ((exploded (explodeAPNG apngcontents))
-				 (frames (first exploded))
-				 (plays (second exploded))
-				 (framedat (third exploded))
-				 (xml (writeXML frames plays 
-                                                (writeFrames 
-                                                 framedat apngfilename)))
-				 (frames-with-names 
-					(cons '("Config.xml" xml) 
-                                              (configFileName 
-                                               apngfilename framedat 1))))
- 			(writeFiles frames-with-names state)))))
+ (defun suspend (apngfilename state) nil)
+;	(mv-let (apngcontents status state)
+;	  (binary-file->byte-list (string-append apngfilename ".apng") state)
+;	  (if status
+;		  (mv status state)
+;		  (let* ((exploded (explodeAPNG apngcontents))
+;				 (frames (first exploded))
+;				 (plays (second exploded))
+;				 (framedat (third exploded))
+;				 (xml (writeXML frames plays 
+;                                                (writeFrames 
+;                                                 framedat apngfilename)))
+;				 (frames-with-names 
+;					(cons (list "Config.xml" xml) 
+;                                              (configFileName 
+;                                               apngfilename framedat 1))))
+; 			(writeFiles frames-with-names state)))))
    
  
   (export Iio))
