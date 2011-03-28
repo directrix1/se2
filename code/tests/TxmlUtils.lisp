@@ -30,7 +30,7 @@
   
   (include-book "audio" :dir :teachpacks)
   
-  (play-wav "../testfiles/rickroll.wav" t)
+  ;(play-wav "../testfiles/rickroll.wav" t)
 
   (defconst
     *sample*
@@ -44,11 +44,11 @@
   
 
   (check-expect
-    (getFrames nil)
+    (grabFrames nil)
 	nil)
 
   (check-expect
-    (getFrames (xml-getchildren *sample*))
+    (grabFrames (xml-getchildren *sample*))
 	'(("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14")))
   
   (check-expect

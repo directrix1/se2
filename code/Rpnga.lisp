@@ -15,13 +15,13 @@
 (require "modules/MapngExploder.lisp")
 (require "modules/MminidomParser.lisp")
 (require "modules/Mio.lisp")
-(require "modules/MinidomSerializer.lisp")
+(require "modules/MminidomSerializer.lisp")
 (require "modules/MxmlUtils.lisp")
 (require "modules/MpngUtils.lisp")
 
-(link Rbridge 
-      (Mbasiclex MapngBuilder MapngExploder MminidomParser MminidomSerializer
-                 Mio MxmlUtils MpngUtils))
+(link Rpnga 
+      (Mbasiclex MminidomParser MminidomSerializer MpngUtils MxmlUtils
+                 MapngExploder MapngBuilder Mio))
 
 (invoke Rpnga)
 
