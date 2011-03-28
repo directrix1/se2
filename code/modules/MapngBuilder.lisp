@@ -224,9 +224,9 @@
   ;   as a rational number (i.e. 100/2997 for NTSC standard)
   (defun buildAPNG (numPlays numFrames framedata)
 	(let* ((frames (preparePNGs framedata))
-              (valid (validateIHDR frames nil)))
-          (if (stringp valid)          ; Returns error message when needed
-              valid
+              (errorMessage (validateIHDR frames nil))) ; Returns error message when needed
+          (if (stringp errorMessage)
+              errorMessage
               (concatenate 'list
                            (list 137 80 78 71 13 10 26 10) ; PNG signature
                            (makeChunk "IHDR" (car (car frames)))
