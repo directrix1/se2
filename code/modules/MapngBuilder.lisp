@@ -124,7 +124,7 @@
                      (cInterlace (parseNum c6 nil 1)))
                 (if (not (= bInterlace cInterlace))
                     "Interlace methods do not match"
-                    nil
+                    (validateIHDR rest curIHDR)
                     ))))))))))))))))))
 
   ; Returns a byte list representing the acTL chunk described by the
