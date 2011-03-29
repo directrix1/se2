@@ -19,6 +19,7 @@
 (require "modules/MxmlUtils.lisp")
 (require "modules/MpngUtils.lisp")
 
+
 (link Rpnga 
       (Mbasiclex MminidomParser MminidomSerializer MpngUtils MxmlUtils
                  MapngExploder MapngBuilder Mio))
@@ -27,3 +28,4 @@
 
 (set-state-ok t)
 
+(animate "../resources/rickrollan/astley" state) 

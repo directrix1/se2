@@ -39,10 +39,11 @@
   ; the byte-lists of each function
   ; framelist = list of frame file names
   (defun openFiles (framelist state)
+    (if (endp framelist) ""
     (let* ((nextFrame (caar framelist))
-           (nextLen (cdar framelist)))
+           (nextLen (car (cdar framelist))))
       (cons (list (openFile nextFrame state) nextLen) 
-      (openFiles (cdr framelist) state))))
+      (openFiles (cdr framelist) state)))))
          
   ; Writes an animated portable network graphic file to disk. 
   ; xmlfilename = (string) the name of the XML document containing

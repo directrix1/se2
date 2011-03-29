@@ -1,4 +1,5 @@
 <pnga frames="181" plays="1">
+  <image src="frame-0.png" length="40/100"></image>
   <image src="frame-1.png" length="40/100"></image>
   <image src="frame-2.png" length="40/100"></image>
   <image src="frame-3.png" length="40/100"></image>
@@ -179,5 +180,4 @@
   <image src="frame-178.png" length="40/100"></image>
   <image src="frame-179.png" length="40/100"></image>
   <image src="frame-180.png" length="40/100"></image>
-  <image src="frame-181.png" length="40/100"></image>
 </pnga>
