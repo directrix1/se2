@@ -28,4 +28,4 @@
 
 (set-state-ok t)
 
-(animate "../resources/rickrollan/astley" state) 
+(animate "testpngs/test" state) 
