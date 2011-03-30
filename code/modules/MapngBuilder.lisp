@@ -24,14 +24,14 @@
   ; chunk IDAT is all IDAT chunks concatenated into one chunk.
   ; ihdr = ihdr chunk data, pass in nil initially
   ; idat = idat chunk data, pass in nil initially
-  ; framedata = a list of blown chunks
+  ; chunks = a list of blown chunks
   (defun preparePNG (ihdr idat chunks)
     (if (null chunks)
         (list ihdr idat)
         (let* ((curchunk (car chunks))
                (rest (cdr chunks))
                (chunkname (car curchunk))
-               (chunkbytes (cdr curchunk)))
+               (chunkbytes (cadr curchunk)))
           (cond
             ((equal chunkname "IHDR") (preparePNG
                                        (concatenate 'list ihdr chunkbytes)
@@ -57,9 +57,9 @@
     (if (null framedata)
         nil
         (let* ((cur (car framedata))
-               (rest (cdr framedata))
-               (frame (preparePNG nil nil (car cur)))
-               (time (cdr cur)))
+               (rest (cdr framedata))            ; 8 is the length of PNG sig
+               (frame (preparePNG nil nil (blowChunks (nthcdr 8 (car cur)))))
+               (time (cadr cur)))
           (cons
            (concatenate 'list frame (list time))
            (preparePNGs rest)))))
@@ -203,7 +203,7 @@
                         )
                        (if (= framenum 0)
                            (makeChunk "IDAT" IDAT)
-                           (makeChunk "fcTL" (concatenate 'list
+                           (makeChunk "fDAT" (concatenate 'list
                                                           (makeNum frameNum nil 4)
                                                           IDAT)))
                        (buildFrames rest (1+ frameNum))

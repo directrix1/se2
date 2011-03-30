@@ -39,7 +39,7 @@
   ; the byte-lists of each function
   ; framelist = list of frame file names
   (defun openFiles (framelist state)
-    (if (endp framelist) ""
+    (if (endp framelist) nil
     (let* ((nextFrame (caar framelist))
            (nextLen (car (cdar framelist))))
       (cons (list (openFile nextFrame state) nextLen) 
@@ -54,24 +54,24 @@
       (file->string (string-append xmlfilename ".xml") state)
       (if status
         (mv status state)
-        (let* ((xmlraw (xml-readnode xmlcontents)) 
+        (let* ((xmlraw (xml-readnode xmlcontents))
                (xmlprocessed (parseXML xmlraw)) 
                (numplays (numplays xmlprocessed))
                (numframes (numframes xmlprocessed))
                (framelist (framelist xmlprocessed))
                (framedata (openFiles framelist state))
-	           (rawapng (buildAPNG numplays numframes framedata)))
-			(if (stringp rawapng)
-				(mv rawapng state)	
-           		(mv-let (status-close state)
-            		(byte-list->binary-file (string-append xmlfilename
-               			".apng") rawapng state)
-            		(if status-close 
-              			(mv status-close state)
-              			(mv (concatenate "Read png files from ["
-                  			xmlfilename ".xml]" "and wrote ["
-                  			xmlfilename ".apng]")
-                  			state))))))))
+	       (rawapng (buildAPNG numplays numframes framedata)))
+          (if (stringp rawapng)
+              (mv rawapng state)	
+              (mv-let (status-close state)
+                      (byte-list->binary-file (string-append xmlfilename
+                                                             ".apng") rawapng state)
+                      (if status-close 
+                          (mv status-close state)
+                          (mv (concatenate "Read png files from ["
+                                           xmlfilename ".xml]" "and wrote ["
+                                           xmlfilename ".apng]")
+                              state))))))))
 
 
   (defun configFileName (apngfilename framelist fnum)
