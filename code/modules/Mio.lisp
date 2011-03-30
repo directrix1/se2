@@ -68,8 +68,9 @@
                                                              ".apng") rawapng state)
                       (if status-close 
                           (mv status-close state)
-                          (mv (concatenate "Read png files from ["
-                                           xmlfilename ".xml]" "and wrote ["
+                          (mv (concatenate 'string
+                                           "Read png files from ["
+                                           xmlfilename ".xml] and wrote ["
                                            xmlfilename ".apng]")
                               state))))))))
 
