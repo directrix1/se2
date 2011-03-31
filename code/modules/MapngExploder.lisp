@@ -56,7 +56,7 @@
       ; the form delivered by blowChunks.
       (list nil nil)
       (let* ((currentname (caar chunkstocheck))
-             (result (getChunksWithName (cdr chunkstocheck)))
+             (result (getChunksWithName name (cdr chunkstocheck)))
              (matches (car result))
              (nonmatches (cadr result)))
         (if (equal currentname name)
