@@ -1,4 +1,4 @@
-<pnga frames="6" plays="10">
+<pnga frames="6" plays="2">
 	<image src="testpngs/test1.png" length="1/2"></image>
 	<image src="testpngs/test2.png" length="2/2"></image>
 	<image src="testpngs/test3.png" length="3/2"></image>
