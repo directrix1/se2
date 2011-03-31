@@ -23,6 +23,7 @@
    Takes an APNG file and explodes it into PNG files.
 |#
 
+
 (module MapngExploder
   (in-package "ACL2")
   
@@ -30,39 +31,21 @@
   (include-book "io-utilities" :dir :teachpacks)
   (import IpngUtils)
   
-  
+  ; The signature that goes at the beginning of every png file
+  (defconst *pngsig*
+    (list 137 80 78 71 13 10 26 10))
+
   ; Finds the first data chunk in a ((name chunkdata) (name chunkdata))
   ; list that matches the given name and pulls it out of the chunklist
   (defun takeChunk (name chunklist checkedchunks)
     (if (null chunklist)
         nil
         (if (equal (caar chunklist) name)
-            (list (append checkedchunks (cdr chunklist))
-                  (cadar chunklist))
+            (list (cadar chunklist)
+                  (append checkedchunks (cdr chunklist)))
             (takeChunk name 
                        (cdr chunklist)
                        (append checkedchunks (car chunklist))))))
-  
-  
-  ; Helps takeConsecChunks by finding only the consecutive chunks after the
-  ; first one.
-  (defun takeConsecRest (name chunklist)
-    (if (null chunklist)
-        nil
-        (if (equal (caar chunklist) name)
-            (append (cadar chunklist)
-                    (takeConsecRest name (cdr chunklist))) 
-            nil)))
-  
-  ; Finds all consecutive data chunks in a list of (name chunkdata)'s
-  ; that match the given name
-  (defun takeConsecChunks (name chunklist)
-    (if (null chunklist)
-        nil
-        (if (equal (caar chunklist) name)
-            (append (cadar chunklist)
-                    (takeConsecRest name (cdr chunklist)))                    
-            (takeConsecChunks name (cdr chunklist)))))
   
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
@@ -77,7 +60,7 @@
   ;   comprise the acTL chunk.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getAcTL (chunks) 
-    (let* ((actl (cadr (takeChunk "acTL" chunks nil)))
+    (let* ((actl (car (takeChunk "acTL" chunks nil)))
            (numFrames (parseNum (take 4 actl) nil 4))
            (numPlays (parseNum (take 4 (nthcdr 4 actl)) nil 4)))
       (list numFrames numPlays)))
@@ -91,7 +74,9 @@
             (equal (caar post) "IEND")
             (and IDATflag (equal (caar post) "IDAT")))
             (list pre post)
-        (splitAtFirstFrameChunk IDATflag (append pre (car post)) (cdr post))))
+        (splitAtFirstFrameChunk IDATflag
+                                (append pre (car post))
+                                (cdr post))))
    
   ; Makes all the chunks in the list of chunks and concatenates them
   (defun makeChunks (chunklist)
@@ -120,25 +105,48 @@
   ; herein will be used to reconstruct all PNG files.
   ; ihdr = the IHDR chunk not passed through makeChunk
   (defun getFrame (chunks IDATflag prefix ihdr)
-     (let* ((seperate (splitAtFirstFrameChunk nil nil chunks))
-            (extrachunks (makeChunks (car seperate)))
-            (clean (cadr seperate))
-            (imgdata nil) ;Compiled Image Data
+     (let* ((seperate (if IDATflag
+                          (getChunksWithName "IDAT" chunks)
+                          (getChunksWithName "fdAT" chunks)))
+            (extrachunks (makeChunks (cadr seperate)))
+            (clean (car seperate))
+            (imgdata (if IDATflag
+                         ()
+                         ()) ;Compiled Image Data
             (IDAT (makeChunk "IDAT" imgdata)) ;IDAT
             ;Other Chunks after the DAT
             (IEND (makeChunk "IEND" nil)) ;IEND
             ;Frame Delay
-            (fctl (cadr (takeChunk "fcTL" chunks nil)))
-            (fdnum (parsenum (take 2 (nthcdr 20 fctl)) nil 2))
-            (fddenom (parsenum (take 2 (nthcdr 22 fctl)) nil 2))
-            (framedelay (concatenate 'string 
-                                     (rat->str fdnum 0) "/"
-                                     (rat->str fddenom 0))))
-       (list (concatenate 'list
-                       prefix ;IHDR and other chunks before fcTL/DATs
-                       IDAT   ;IDAT for this frame
-                       IEND)  ;IEND
-             framedelay))) 
+            (fctl (car (takeChunk "fcTL" chunks nil))))
+       (if (null fctl)
+           (list (concatenate 'list
+                               *pngsig*
+                               (makeChunk ihdr) ;IHDR
+                               prefix ;other chunks
+                               IDAT   ;IDAT for this frame
+                               extrachunks ;more other chunks
+                               IEND);IEND
+                   "-1/1")
+           
+           (let* ((width   (parsenum (nthcdr 4 fctl)  nil 4))
+                  (height  (parsenum (nthcdr 8 fctl)  nil 4))
+                  (fdnum   (parsenum (nthcdr 20 fctl) nil 2))
+                  (fddenom (parsenum (nthcdr 22 fctl) nil 2))
+                  (framedelay (concatenate 'string 
+                                (rat->str fdnum 0) "/"
+                                (rat->str fddenom 0))))
+             
+             (list (concatenate 'list
+                                *pngsig*
+                                (makeChunk "IHDR" (concatenate 'list
+                                                   (makeNum width nil 4)
+                                                   (makeNum height nil 4)
+                                                   (nthcdr 8 ihdr)))
+                                prefix ;other chunks
+                                IDAT   ;IDAT for this frame
+                                extrachunks
+                                IEND)  ;IEND
+                   framedelay))) 
 
   (defun getFrames (chunks IDATflag prefix ihdr) 
     (if (or (null chunks)
