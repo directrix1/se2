@@ -67,7 +67,7 @@
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getIHDR (chunks) 
-    (if (and (eq (caar chunks) "IHDR")
+    (if (and (equal (caar chunks) "IHDR")
              (chunkp (cadr (car chunks))))
         (cadr (car chunks))
         nil))
@@ -101,14 +101,14 @@
                 (makeChunks (cdr chunklist)))))
   
   ; Splits the chunklist on the next fcTL
-  (defun splitbyfcTL (chunklist)
+  (defun splitByFcTL (chunklist)
     (if (null chunklist)
         nil       
         (if (or (equal 1 (len chunklist))
                 (equal "fcTL" (caadr chunklist)))
             (caar chunklist)
             (append (list (car chunklist)) 
-                    (splitChunks (cdr chunklist))))))
+                    (splitByFcTL (cdr chunklist))))))
   
   ; Given the APNG chunks from input, the last found fcTL chunk, and the
   ; IHDR chunk for the APNG, constructs from the next fdAT chunk the PNG
@@ -118,12 +118,8 @@
   ; IDATflag = Defines whether or not the IDAT chunks have been pulled yet  
   ; prefix = ihdr and other chunks for entire APNG file, data contained 
   ; herein will be used to reconstruct all PNG files.
-  (defun getFrames (chunks IDATflag prefix) 
-    (if (null prefix)
-        nil
-        (append (list (getFrame chunks IDAT prefix))
-                (getFrames chunks IDAT prefix))))     
-  (defun getFrame (chunks IDATflag prefix)
+  ; ihdr = the IHDR chunk not passed through makeChunk
+  (defun getFrame (chunks IDATflag prefix ihdr)
      (let* ((seperate (cleanChunks nil nil chunks))
             (extrachunks (makeChunks (car seperate)))
             (clean (cadr seperate))
@@ -144,6 +140,13 @@
                        IEND)  ;IEND
              framedelay))) 
 
+  (defun getFrames (chunks IDATflag prefix ihdr) 
+    (if (or (null chunks)
+            (equal "IEND" (caar chunks))
+        nil
+        (let ((split (splitbyfcTL chunks)))
+          (append (list (getFrame (car split) IDATflag prefix ihdr))
+                (getFrames (cdr split) IDATflag prefix ihdr))))))     
                        
           
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
@@ -159,13 +162,12 @@
   ; apngdata = raw apng data string given from the IO Module.
   (defun explodeAPNG (apngdata) 
     (let* ((chunks (blowChunks apngdata))
-           (ihdr (makeChunk "IHDR" (getIHDR chunks)))
+           (ihdr (getIHDR chunks))
            (actl (getAcTL (cdr chunks)))
            (seperate (cleanChunks 't nil chunks))
-           (extra (makeChunks (car seperate)))
-           (prefix (append ihdr extra))
+           (prefix (makeChunks (car seperate)))
            (clean (cadr seperate))
-           (frames (getFrames clean 't prefix)))
+           (frames (getFrames clean 't prefix ihdr)))
       (append actl frames)))
 
   
