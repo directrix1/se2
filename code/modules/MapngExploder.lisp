@@ -6,7 +6,7 @@
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 ;; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
-
+(in-package "ACL2")
 
 (require "../interfaces/Ibasiclex.lisp")
 (require "../interfaces/IxmlUtils.lisp")
@@ -25,7 +25,7 @@
 
 
 (module MapngExploder
-  (in-package "ACL2")
+  
   
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "io-utilities" :dir :teachpacks)
@@ -64,8 +64,8 @@
              (matches (car result))
              (nonmatches (cadr result)))
         (if (equal currentname name)
-            (list (append (list currentname) matches) nonmatches)
-            (list matches (append (list currentname) nonmatches))))))
+            (list (append (list (car chunkstocheck)) matches) nonmatches)
+            (list matches (append (list (car chunkstocheck)) nonmatches))))))
   
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
@@ -95,7 +95,7 @@
             (and IDATflag (equal (caar post) "IDAT")))
             (list pre post)
         (splitAtFirstFrameChunk IDATflag
-                                (append pre (car post))
+                                (append pre (list (car post)))
                                 (cdr post))))
    
   ; Makes all the chunks in the list of chunks and concatenates them
@@ -114,13 +114,38 @@
             (caar chunklist)
             (append (list (car chunklist)) 
                     (splitByFcTL (cdr chunklist))))))
+    ; This function formats the raw PNG file data into more conveniently 
+  ; utilized chunks, and returns (list fdat IDAT) where IHDR is the IHDR
+  ; chunk IDAT is all IDAT chunks concatenated into one chunk.
+  ; fdat = fdat chunk data, pass in nil initially
+  ; idat = idat chunk data, pass in nil initially
+  ; chunks = a list of blown chunks
+  (defun buildDataChunk (fdat idat chunks)
+    (if (null chunks)
+        (list fdat idat)
+        (let* ((curchunk (car chunks))
+               (rest (cdr chunks))
+               (chunkname (car curchunk))
+               (chunkbytes (cadr curchunk)))
+          (cond
+            ((equal chunkname "fdAT") (buildDataChunk
+                                       (concatenate 'list 
+                                                    fdat
+                                                    (nthcdr 4 chunkbytes))
+                                       idat
+                                       rest))
+            ((equal chunkname "IDAT") (buildDataChunk
+                                       fdat
+                                       (concatenate 'list idat chunkbytes)
+                                       rest))
+            ('t (buildDataChunk fdat idat rest))))))
   
   ; Given the APNG chunks from input, the last found fcTL chunk, and the
   ; IHDR chunk for the APNG, constructs from the next fdAT chunk the PNG
   ; Signature, IHDR, IDAT, and IEND chunks necessary to create a complete
   ; PNG file. 
   ; chunks = processed (or raw) data chunks contained within the input APNG
-  ; IDATflag = Defines whether or not the IDAT chunks have been pulled yet  
+  ; IDATflag = Defines whether or not the IDAT chunks have been pulled yet
   ; prefix = ihdr and other chunks for entire APNG file, data contained 
   ; herein will be used to reconstruct all PNG files.
   ; ihdr = the IHDR chunk not passed through makeChunk
@@ -130,9 +155,9 @@
                           (getChunksWithName "fdAT" chunks)))
             (extrachunks (makeChunks (cadr seperate)))
             (clean (car seperate))
-            (imgdata (if IDATflag
-                         ()
-                         ()) ;Compiled Image Data
+            (imgdata (if IDATflag  ; Compiled image data
+                         (cadr (buildDataChunk nil nil clean))
+                         (car (buildDataChunk nil nil clean))))
             (IDAT (makeChunk "IDAT" imgdata)) ;IDAT
             ;Other Chunks after the DAT
             (IEND (makeChunk "IEND" nil)) ;IEND
@@ -141,7 +166,7 @@
        (if (null fctl)
            (list (concatenate 'list
                                *pngsig*
-                               (makeChunk ihdr) ;IHDR
+                               (makeChunk "IHDR" ihdr) ;IHDR
                                prefix ;other chunks
                                IDAT   ;IDAT for this frame
                                extrachunks ;more other chunks
@@ -166,15 +191,15 @@
                                 IDAT   ;IDAT for this frame
                                 extrachunks
                                 IEND)  ;IEND
-                   framedelay))) 
+                   framedelay))))) 
 
   (defun getFrames (chunks IDATflag prefix ihdr) 
     (if (or (null chunks)
-            (equal "IEND" (caar chunks))
+            (equal "IEND" (caar chunks)))
         nil
         (let ((split (splitbyfcTL chunks)))
           (append (list (getFrame (car split) IDATflag prefix ihdr))
-                (getFrames (cdr split) IDATflag prefix ihdr))))))     
+                (getFrames (cdr split) IDATflag prefix ihdr)))))     
                        
           
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
@@ -193,6 +218,7 @@
            (ihdr (getIHDR chunks))
            (actl (getAcTL (cdr chunks)))
            (seperate (splitAtFirstFrameChunk 't nil chunks))
+           (test (caaaar (caaaar (car seperate))))
            (prefix (makeChunks (car seperate)))
            (clean (cadr seperate))
            (frames (getFrames clean 't prefix ihdr)))

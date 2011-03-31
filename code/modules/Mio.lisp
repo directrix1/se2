@@ -1,12 +1,17 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
+;; The first four lines of this file were added by Dracula.
+;; They tell DrScheme that this is a Dracula Modular ACL2 program.
+;; Leave these lines unchanged so that DrScheme can properly load this file.
+; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 #|
    Team Steele
    Software Engineering II
    Iio
 |#
+(in-package "ACL2")
 
 (require "../interfaces/Iio.lisp")
 (require "../interfaces/Ibasiclex.lisp")
@@ -15,8 +20,7 @@
 (require "../interfaces/IxmlUtils.lisp")
 (require "../interfaces/IminidomSerializer.lisp")
 
-
-(module Mio  
+(module Mio
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "io-utilities" :dir :teachpacks)
   (include-book "binary-io-utilities" :dir :teachpacks)
@@ -107,23 +111,23 @@
  ;and length of time each frame is displayed.
  ;apngfilename = (string) the name of the animated portable network graphic 
  ;to be broken into individual frames.
- (defun suspend (apngfilename state) nil)
-;	(mv-let (apngcontents status state)
-;	  (binary-file->byte-list (string-append apngfilename ".apng") state)
-;	  (if status
-;		  (mv status state)
-;		  (let* ((exploded (explodeAPNG apngcontents))
-;				 (frames (first exploded))
-;				 (plays (second exploded))
-;				 (framedat (third exploded))
-;				 (xml (writeXML frames plays 
-;                                                (writeFrames 
-;                                                 framedat apngfilename)))
-;				 (frames-with-names 
-;					(cons (list "Config.xml" xml) 
-;                                              (configFileName 
-;                                               apngfilename framedat 1))))
-; 			(writeFiles frames-with-names state)))))
-   
+ (defun suspend (apngfilename state)
+	(mv-let (apngcontents status state)
+	  (binary-file->byte-list (string-append apngfilename ".apng") state)
+	  (if status
+		  (mv status state)
+		  (let* ((exploded (explodeAPNG (nthcdr 8 apngcontents)))
+				 (frames (first exploded))
+				 (plays (second exploded))
+				 (framedat (third exploded))
+				 (xml (writeXML frames plays 
+                                              (writeFrames 
+                                                framedat apngfilename)))
+				 (frames-with-names 
+					(cons (list "Config.xml" xml) 
+                                            (configFileName 
+                                              apngfilename framedat 1))))
+			(writeFiles frames-with-names state)))))   
+
  
   (export Iio))
