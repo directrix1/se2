@@ -44,25 +44,25 @@
                        (append checkedchunks (car chunklist))))))
   
   
-  ; Helps findConsecChunks by finding only the consecutive chunks after the
+  ; Helps takeConsecChunks by finding only the consecutive chunks after the
   ; first one.
-  (defun findConsecRest (name chunklist)
+  (defun takeConsecRest (name chunklist)
     (if (null chunklist)
         nil
         (if (equal (caar chunklist) name)
             (append (cadar chunklist)
-                    (findConsecRest name (cdr chunklist))) 
+                    (takeConsecRest name (cdr chunklist))) 
             nil)))
   
   ; Finds all consecutive data chunks in a list of (name chunkdata)'s
   ; that match the given name
-  (defun findConsecChunks (name chunklist)
+  (defun takeConsecChunks (name chunklist)
     (if (null chunklist)
         nil
         (if (equal (caar chunklist) name)
             (append (cadar chunklist)
-                    (findConsecRest name (cdr chunklist)))                    
-            (findConsecChunks name (cdr chunklist)))))
+                    (takeConsecRest name (cdr chunklist)))                    
+            (takeConsecChunks name (cdr chunklist)))))
   
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
@@ -89,10 +89,8 @@
     (if (or (null post)
             (equal (caar post) "fcTL")
             (equal (caar post) "IEND")
-            (if IDATflag 
-                (equal (caar post) "IDAT")
-                nil))
-        (list pre post)
+            (and IDATflag (equal (caar post) "IDAT")))
+            (list pre post)
         (cleanChunks IDATflag (append pre (car post)) (cdr post))))
    
   ; Makes all the chunks in the list of chunks and concatenates them
@@ -101,6 +99,16 @@
         nil
         (append (makeChunk (caar chunklist) (cadar chunklist))
                 (makeChunks (cdr chunklist)))))
+  
+  ; Splits the chunklist on the next fcTL
+  (defun splitbyfcTL (chunklist)
+    (if (null chunklist)
+        nil       
+        (if (or (equal 1 (len chunklist))
+                (equal "fcTL" (caadr chunklist)))
+            (caar chunklist)
+            (append (list (car chunklist)) 
+                    (splitChunks (cdr chunklist))))))
   
   ; Given the APNG chunks from input, the last found fcTL chunk, and the
   ; IHDR chunk for the APNG, constructs from the next fdAT chunk the PNG
@@ -111,9 +119,10 @@
   ; prefix = ihdr and other chunks for entire APNG file, data contained 
   ; herein will be used to reconstruct all PNG files.
   (defun getFrames (chunks IDATflag prefix) 
-    (let* ()
-      ()))
-     
+    (if (null prefix)
+        nil
+        (append (list (getFrame chunks IDAT prefix))
+                (getFrames chunks IDAT prefix))))     
   (defun getFrame (chunks IDATflag prefix)
      (let* ((seperate (cleanChunks nil nil chunks))
             (extrachunks (makeChunks (car seperate)))
