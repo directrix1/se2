@@ -28,4 +28,7 @@
 
 (set-state-ok t)
 
-(animate "testpngs/test" state) 
+;(time$ (animate "testpngs/test" state)) 
+;(time$ (animate "rickrollframes/test" state)) 
+;  cpu time: 677650 real time: 678763 gc time: 17784
+;  for 212 frames
