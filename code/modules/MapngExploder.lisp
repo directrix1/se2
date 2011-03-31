@@ -46,6 +46,26 @@
             (takeChunk name 
                        (cdr chunklist)
                        (append checkedchunks (car chunklist))))))
+
+  ; Given a list of chunks (chunkstocheck), iterate through them and
+  ; build:
+  ;   a) a list of chunks that match name
+  ;   b) a a list of chunks that don't match name
+  ; The function delivers a two-element list where the first element is
+  ; the list described in (a) and the second is the list described in (b).
+  (defun getChunksWithName (name chunkstocheck)
+    (if (null chunkstocheck)
+      ; XXX Also need to check (specify in the contract?) that if
+      ; chunkstocheck *is* nonempty that it's also a list that matches
+      ; the form delivered by blowChunks.
+      (list nil nil)
+      (let* ((currentname (caar chunkstocheck))
+             (result (getChunksWithName name (cdr chunkstocheck)))
+             (matches (car result))
+             (nonmatches (cadr result)))
+        (if (equal currentname name)
+            (list (append (list currentname) matches) nonmatches)
+            (list matches (append (list currentname) nonmatches))))))
   
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
