@@ -77,7 +77,7 @@
   ;   comprise the acTL chunk.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getAcTL (chunks) 
-    (let* ((actl (takeChunk "acTL" chunks nil))
+    (let* ((actl (cadr (takeChunk "acTL" chunks nil)))
            (numFrames (parseNum (take 4 actl) nil 4))
            (numPlays (parseNum (take 4 (nthcdr 4 actl)) nil 4)))
       (list numFrames numPlays)))
@@ -128,7 +128,7 @@
             ;Other Chunks after the DAT
             (IEND (makeChunk "IEND" nil)) ;IEND
             ;Frame Delay
-            (fctl (takeChunk "fcTL" chunks nil))
+            (fctl (cadr (takeChunk "fcTL" chunks nil)))
             (fdnum (parsenum (take 2 (nthcdr 20 fctl)) nil 2))
             (fddenom (parsenum (take 2 (nthcdr 22 fctl)) nil 2))
             (framedelay (concatenate 'string 
