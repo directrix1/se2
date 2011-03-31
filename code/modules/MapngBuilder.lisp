@@ -205,7 +205,7 @@
                         )
                        (if (= framenum 0)
                            (makeChunk "IDAT" IDAT)
-                           (makeChunk "fDAT" (concatenate 'list
+                           (makeChunk "fdAT" (concatenate 'list
                                                           (makeNum (1+ frameNum) nil 4)
                                                           IDAT)))
                        (buildFrames rest (+ (if (= frameNum 0) 1 2) frameNum))
