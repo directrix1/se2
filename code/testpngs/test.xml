@@ -1,8 +1,8 @@
 <pnga frames="6" plays="10">
-	<image src="testpngs/test1.png" length="1/12"></image>
-	<image src="testpngs/test2.png" length="1/12"></image>
-	<image src="testpngs/test3.png" length="1/12"></image>
-	<image src="testpngs/test4.png" length="1/12"></image>
-	<image src="testpngs/test5.png" length="1/12"></image>
-	<image src="testpngs/test6.png" length="1/12"></image>
+	<image src="testpngs/test1.png" length="1/2"></image>
+	<image src="testpngs/test2.png" length="1/2"></image>
+	<image src="testpngs/test3.png" length="1/2"></image>
+	<image src="testpngs/test4.png" length="1/2"></image>
+	<image src="testpngs/test5.png" length="1/2"></image>
+	<image src="testpngs/test6.png" length="1/2"></image>
 </pnga>
