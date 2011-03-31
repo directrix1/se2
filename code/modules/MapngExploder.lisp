@@ -114,7 +114,7 @@
     (let* ()
       ()))
      
-   (defun getFrame (chunks IDATflag prefix)
+  (defun getFrame (chunks IDATflag prefix)
      (let* ((seperate (cleanChunks nil nil chunks))
             (extrachunks (makeChunks (car seperate)))
             (clean (cadr seperate))
