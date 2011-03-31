@@ -186,8 +186,8 @@
         (let* ((cur (car prepdPNGs))
                (rest (cdr prepdPNGs))
                (IHDR (car cur))
-               (width (parseNum (nthcdr 4 IHDR) nil 4))
-               (height (parseNum (nthcdr 8 IHDR) nil 4))
+               (width (parseNum IHDR nil 4))
+               (height (parseNum (nthcdr 4 IHDR) nil 4))
                (IDAT (cadr cur))
                (time (caddr cur)))
           (concatenate 'list
