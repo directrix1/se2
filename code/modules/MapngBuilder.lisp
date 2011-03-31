@@ -12,12 +12,14 @@
 
 (require "../interfaces/IapngBuilder.lisp")
 (require "../interfaces/IpngUtils.lisp")
+(require "../interfaces/Ibasiclex.lisp")
 
 (module MapngBuilder
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "io-utilities" :dir :teachpacks)
   
   (import IpngUtils)
+  (import Ibasiclex)
   
   ; This function formats the raw PNG file data into more conveniently 
   ; utilized chunks, and returns (list IHDR IDAT) where IHDR is the IHDR
@@ -155,9 +157,9 @@
   (defun buildFCTL (sequenceNum width height xOffset yOffset delayTime
                   disposeOp blendOp)
     (let*
-        ((delayT (str->rat delayTime))
-         (delayNum (numerator delayT))
-         (delayDen (denominator delayT)))
+        ((delayT (split-on-token "/" (str->chrs delayTime)))
+         (delayNum (str->rat (chrs->str (car delayT))))
+         (delayDen (str->rat (chrs->str (caddr delayT)))))
       (makeChunk "fcTL"
                  (concatenate 
                   'list
@@ -230,7 +232,7 @@
               (concatenate 'list
                            (list 137 80 78 71 13 10 26 10) ; PNG signature
                            (makeChunk "IHDR" (car (car frames)))
-                           (buildACTL numFrames numPlays)
+                           (buildACTL numPlays numFrames)
                            (buildFrames frames 0)
                            (makeChunk "IEND" nil)
               ))))
