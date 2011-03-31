@@ -226,7 +226,8 @@
              (remainder (nthcdr 4 rem3))
              )
           ; If the CRC is not equal then we drop the chunk
-          (if (= (calcCRC32 (concatenate 'list chunktype chunkdata)) crc)
+;          (if (= (calcCRC32 (concatenate 'list chunktype chunkdata)) crc)
+          (if 't
               (cons (list (bytes->ascii chunktype) chunkdata)
                     (blowChunks remainder))
               (blowChunks remainder)))))
