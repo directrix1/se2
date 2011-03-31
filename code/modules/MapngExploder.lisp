@@ -85,13 +85,13 @@
   ; Takes out the extra chunks that come before the next certain chunk
   ; If the IDATflag is true, it stops at IDAT, fcTL, and IEND chunks
   ; else it stops at only the fcTL or IEND chunks
-  (defun cleanChunks (IDATflag pre post)
+  (defun getExtraMetadata (IDATflag pre post)
     (if (or (null post)
             (equal (caar post) "fcTL")
             (equal (caar post) "IEND")
             (and IDATflag (equal (caar post) "IDAT")))
             (list pre post)
-        (cleanChunks IDATflag (append pre (car post)) (cdr post))))
+        (getExtraMetadata IDATflag (append pre (car post)) (cdr post))))
    
   ; Makes all the chunks in the list of chunks and concatenates them
   (defun makeChunks (chunklist)
@@ -120,7 +120,7 @@
   ; herein will be used to reconstruct all PNG files.
   ; ihdr = the IHDR chunk not passed through makeChunk
   (defun getFrame (chunks IDATflag prefix ihdr)
-     (let* ((seperate (cleanChunks nil nil chunks))
+     (let* ((seperate (getExtraMetadata nil nil chunks))
             (extrachunks (makeChunks (car seperate)))
             (clean (cadr seperate))
             (imgdata nil) ;Compiled Image Data
@@ -164,7 +164,7 @@
     (let* ((chunks (blowChunks apngdata))
            (ihdr (getIHDR chunks))
            (actl (getAcTL (cdr chunks)))
-           (seperate (cleanChunks 't nil chunks))
+           (seperate (getExtraMetadata 't nil chunks))
            (prefix (makeChunks (car seperate)))
            (clean (cadr seperate))
            (frames (getFrames clean 't prefix ihdr)))
