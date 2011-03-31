@@ -22,6 +22,7 @@
   (import IminidomParser)
   (import IminidomSerializer)
   (include-book "list-utilities" :dir :teachpacks)  
+  (include-book "io-utilities" :dir :teachpacks)
 
    ;Delivers a list, where each item corresponds to the metadata for each
    ;image element specified in the xml config.  An item consists of two
@@ -41,8 +42,8 @@
    (defun parseXML (domXML)
      (if (null domXML) nil
 	(let* ((pngaxml domXML)
-	       (numPlays (xml-getattribute pngaxml "plays"))
-	       (numFrames (xml-getattribute pngaxml"frames"))
+	       (numPlays (str->rat (xml-getattribute pngaxml "plays")))
+	       (numFrames (str->rat (xml-getattribute pngaxml"frames")))
 	       (frames (grabFrames (xml-getchildren pngaxml))))
 	      (list numPlays numFrames frames))))
 

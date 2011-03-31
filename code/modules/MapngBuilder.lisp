@@ -204,9 +204,9 @@
                        (if (= framenum 0)
                            (makeChunk "IDAT" IDAT)
                            (makeChunk "fDAT" (concatenate 'list
-                                                          (makeNum frameNum nil 4)
+                                                          (makeNum (1+ frameNum) nil 4)
                                                           IDAT)))
-                       (buildFrames rest (1+ frameNum))
+                       (buildFrames rest (+ (if (= frameNum 0) 1 2) frameNum))
                        ))))
   
   ; Returns an APNG as a byte list that has the following playtime
