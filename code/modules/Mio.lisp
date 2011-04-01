@@ -142,7 +142,7 @@
 				 (frames (first exploded))
 				 (plays (second exploded))
 				 (framedat (third exploded))
-				 (xml (writeXML frames plays 
+				 (xml (writeXML plays frames 
                                               (writeFrames 
                                                 framedat apngfilename)))
                                  (data-minus-time (stripTime framedat))
