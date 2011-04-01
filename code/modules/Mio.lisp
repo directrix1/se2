@@ -20,6 +20,8 @@
 (require "../interfaces/IxmlUtils.lisp")
 (require "../interfaces/IminidomSerializer.lisp")
 
+(require "../interfaces/IpngUtils.lisp")
+
 (module Mio
   (include-book "list-utilities" :dir :teachpacks)
   (include-book "io-utilities" :dir :teachpacks)
@@ -30,6 +32,7 @@
   (import IapngExploder)
   (import IxmlUtils)
   (import IminidomSerializer)
+  (import IpngUtils)
 
   ; Helper function for animate, calls binary-file->byte-list on a
   ; filename frame
@@ -129,16 +132,17 @@
                                               apngfilename framedat 1))))
 			(writeFiles frames-with-names state)))))   
 
- 
+  
   (defun suspendt (apngfilename state)
 	(mv-let (apngcontents status state)
 	  (binary-file->byte-list (string-append apngfilename ".apng") state)
           (if status
               (mv status state)
-              (let* ((exploded (explodeAPNG (nthcdr 8 apngcontents)))
-			 (frames (first exploded))
-			 (plays (second exploded))
-                         (framedat (third exploded)))
-                (frames plays framedat)))))
+              (explodeAPNG (nthcdr 8 apngcontents)))))
+;              (let* ((exploded (explodeAPNG (nthcdr 8 apngcontents)));
+;			 (frames (first exploded))
+;			 (plays (second exploded))
+;                        (framedat (third exploded)))
+;                (frames plays framedat)))))
   
   (export Iio))

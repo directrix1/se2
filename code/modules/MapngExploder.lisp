@@ -70,9 +70,8 @@
   ; Given APNG chunks, returns the IHDR chunk contained within.
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getIHDR (chunks) 
-    (if (and (equal (caar chunks) "IHDR")
-             (chunkp (cadr (car chunks))))
-        (cadr (car chunks))
+    (if (equal (caar chunks) "IHDR")
+        (cadar chunks)
         nil))
   
   ; Given APNG chunks, returns the numFrames and numPlays contained within
@@ -81,8 +80,8 @@
   ; chunks = processed (or raw) data chunks contained within the input APNG
   (defun getAcTL (chunks) 
     (let* ((actl (car (takeChunk "acTL" chunks nil)))
-           (numFrames (parseNum (take 4 actl) nil 4))
-           (numPlays (parseNum (take 4 (nthcdr 4 actl)) nil 4)))
+           (numFrames (rat->str (parseNum (take 4 actl) nil 4) 0))
+           (numPlays (rat->str (parseNum (take 4 (nthcdr 4 actl)) nil 4) 0)))
       (list numFrames numPlays)))
   
   ; Takes out the extra chunks that come before the next certain chunk
@@ -217,12 +216,12 @@
     (let* ((chunks (blowChunks apngdata))
            (ihdr (getIHDR chunks))
            (actl (getAcTL (cdr chunks)))
-           (seperate (splitAtFirstFrameChunk 't nil chunks))
-           (test (caaaar (caaaar (car seperate))))
-           (prefix (makeChunks (car seperate)))
-           (clean (cadr seperate))
-           (frames (getFrames clean 't prefix ihdr)))
-      (append actl frames)))
+           (seperate (splitAtFirstFrameChunk 't nil chunks)))
+      seperate))
+;           (prefix (makeChunks (car seperate)))
+;           (clean (cadr seperate))
+;           (frames (getFrames clean 't prefix ihdr)))
+;      (append actl frames)))
 
   
  (export IapngExploder))
