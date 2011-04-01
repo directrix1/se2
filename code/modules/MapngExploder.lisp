@@ -45,7 +45,7 @@
                   (append checkedchunks (cdr chunklist)))
             (takeChunk name 
                        (cdr chunklist)
-                       (append checkedchunks (car chunklist))))))
+                       (append checkedchunks (list (car chunklist)))))))
 
   ; Given a list of chunks (chunkstocheck), iterate through them and
   ; build:
@@ -105,15 +105,16 @@
                 (makeChunks (cdr chunklist)))))
   
   ; Splits the chunklist on the next fcTL
-  (defun splitByFcTL (chunklist)
-    (if (null chunklist)
-        nil       
-        (if (or (equal 1 (len chunklist))
-                (equal "fcTL" (caadr chunklist)))
-            (caar chunklist)
-            (append (list (car chunklist)) 
-                    (splitByFcTL (cdr chunklist))))))
-    ; This function formats the raw PNG file data into more conveniently 
+  (defun splitByFcTL (pre post)
+    (if (null post)
+        (list pre post)       
+        (if (or (equal 1 (len post))
+                (equal "IEND" (caadr post))
+                (equal "fcTL" (caadr post)))
+            (list (append pre (list (car post))) (cdr post))
+            (splitByFcTL (append pre (list (car post))) (cdr post)))))
+  
+  ; This function formats the raw PNG file data into more conveniently 
   ; utilized chunks, and returns (list fdat IDAT) where IHDR is the IHDR
   ; chunk IDAT is all IDAT chunks concatenated into one chunk.
   ; fdat = fdat chunk data, pass in nil initially
@@ -152,6 +153,9 @@
      (let* ((seperate (if IDATflag
                           (getChunksWithName "IDAT" chunks)
                           (getChunksWithName "fdAT" chunks)))
+            ;(test (if (not IDATflag)
+             ;         (coerce (list(car chunks)) 'string) ;:msg (msg "hi"))
+              ;        nil))
             (extrachunks (makeChunks (cadr seperate)))
             (clean (car seperate))
             (imgdata (if IDATflag  ; Compiled image data
@@ -190,15 +194,15 @@
                                 IDAT   ;IDAT for this frame
                                 extrachunks
                                 IEND)  ;IEND
-                   framedelay))))) 
+                   framedelay)))))
 
   (defun getFrames (chunks IDATflag prefix ihdr) 
     (if (or (null chunks)
             (equal "IEND" (caar chunks)))
         nil
-        (let ((split (splitbyfcTL chunks)))
+        (let ((split (splitbyfcTL nil chunks)))
           (append (list (getFrame (car split) IDATflag prefix ihdr))
-                (getFrames (cdr split) IDATflag prefix ihdr)))))     
+                (getFrames (cadr split) nil prefix ihdr)))))     
                        
           
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
@@ -216,12 +220,14 @@
     (let* ((chunks (blowChunks apngdata))
            (ihdr (getIHDR chunks))
            (actl (getAcTL (cdr chunks)))
-           (seperate (splitAtFirstFrameChunk 't nil chunks)))
-      seperate))
-;           (prefix (makeChunks (car seperate)))
-;           (clean (cadr seperate))
-;           (frames (getFrames clean 't prefix ihdr)))
-;      (append actl frames)))
+           (seperate (splitAtFirstFrameChunk 
+                      't nil (cadr (takechunk "acTL" (cdr chunks) nil))))
+           (prefix (makeChunks (car seperate)))
+           (clean (cadr seperate))
+           (frames (getFrames clean 't prefix ihdr)))
+           ;(frames (splitByFcTL nil clean)))
+           ;(frames (getFrame clean 't nil ihdr)))
+      (append actl (list frames))))
 
   
  (export IapngExploder))

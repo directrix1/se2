@@ -94,18 +94,42 @@
 							apngfilename 
                                                         (cdr framelist) 
                                                         (+ fnum 1))))))
+  
+   ;Helper function for writeFrames
+   ;FrameData = APNG file data in the form: ((framedata1 time_for_frame1)
+   ;			                     (framedata2 time_for_frame2)...
+   ;apngFileName = name of the apng file
+   ;Delivers a list of generic file names for framedata along with the
+   ;time lengths. The order of the files are reversed.
+   (defun nameTheseFrames (frameData apngFileName)
+     (if (endp frameData) nil (if (null apngFileName) nil
+         (cons (list (string-append apngFileName (string-append
+                                   (string (car
+                                    (explode-nonnegative-integer
+                                     (len frameData) 10 nil))) ".png"))
+               (cadr (car (reverse frameData))))
+               (nameTheseFrames (reverse (cdr (reverse frameData))) apngFileName)))))
 
   ;Helper function for suspend. Writes PNG files to disk.
   ;filelist = list of list (filename filedata).
   (defun writeFiles (filelist state)
     (if (endp filelist) (mv "OK" state)
-        (let ((filename (car (car filelist)))
-              (filedata (cadr (car filelist))))
+        (let ((filename (caar filelist))
+              (filedataxml (cadr (car filelist)))
+              (filedatabyt (cdar filelist)))
           (mv-let (error state)
-            (byte-list->binary-file filename filedata state)
+            (if (equal filename "Config.xml")
+                (string-list->file filename (list filedataxml) state)
+                (byte-list->binary-file filename filedatabyt state))
             (if error
-              (mv error state)
-              (writeFiles (cdr filelist) state))))))
+                (mv error state)
+                (writeFiles (cdr filelist) state))))))
+  
+  
+  (defun stripTime (data)
+    (if (null data)
+        nil
+        (cons (caar data) (stripTime (cdr data)))))
 
  ;Writes a series of portable network graphic files to disk, 
  ;along with an XML document. These image files are the individual frames 
@@ -126,10 +150,11 @@
 				 (xml (writeXML frames plays 
                                               (writeFrames 
                                                 framedat apngfilename)))
+                                 (data-minus-time (stripTime framedat))
 				 (frames-with-names 
 					(cons (list "Config.xml" xml) 
-                                            (configFileName 
-                                              apngfilename framedat 1))))
+                                            (nameTheseFrames
+                                              data-minus-time apngfilename))))
 			(writeFiles frames-with-names state)))))   
 
   
