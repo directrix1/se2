@@ -1,11 +1,7 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
-;; The first four lines of this file were added by Dracula.
-;; They tell DrScheme that this is a Dracula Modular ACL2 program.
-;; Leave these lines unchanged so that DrScheme can properly load this file.
-; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 #|
    Team Steele
    Software Engineering II
@@ -107,7 +103,7 @@
                                    (string (car
                                     (explode-nonnegative-integer
                                      (len frameData) 10 nil))) ".png"))
-               (cadr (car (reverse frameData))))
+               (car (reverse frameData)))
                (nameTheseFrames (reverse (cdr (reverse frameData))) apngFileName)))))
 
   ;Helper function for suspend. Writes PNG files to disk.
@@ -115,12 +111,11 @@
   (defun writeFiles (filelist state)
     (if (endp filelist) (mv "OK" state)
         (let ((filename (caar filelist))
-              (filedataxml (cadr (car filelist)))
-              (filedatabyt (cdar filelist)))
+              (filedata (cadar filelist)))
           (mv-let (error state)
             (if (equal filename "Config.xml")
-                (string-list->file filename (list filedataxml) state)
-                (byte-list->binary-file filename filedatabyt state))
+                (string-list->file filename (list filedata) state)
+                (byte-list->binary-file filename filedata state))
             (if error
                 (mv error state)
                 (writeFiles (cdr filelist) state))))))
