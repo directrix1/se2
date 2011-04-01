@@ -130,4 +130,15 @@
 			(writeFiles frames-with-names state)))))   
 
  
+  (defun suspendt (apngfilename state)
+	(mv-let (apngcontents status state)
+	  (binary-file->byte-list (string-append apngfilename ".apng") state)
+          (if status
+              (mv status state)
+              (let* ((exploded (explodeAPNG (nthcdr 8 apngcontents)))
+			 (frames (first exploded))
+			 (plays (second exploded))
+                         (framedat (third exploded)))
+                (frames plays framedat)))))
+  
   (export Iio))
