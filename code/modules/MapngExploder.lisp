@@ -150,14 +150,14 @@
   ; herein will be used to reconstruct all PNG files.
   ; ihdr = the IHDR chunk not passed through makeChunk
   (defun getFrame (chunks IDATflag prefix ihdr)
-     (let* ((seperate (if IDATflag
+     (let* ((separate (if IDATflag
                           (getChunksWithName "IDAT" chunks)
                           (getChunksWithName "fdAT" chunks)))
             ;(test (if (not IDATflag)
              ;         (coerce (list(car chunks)) 'string) ;:msg (msg "hi"))
               ;        nil))
-            (extrachunks (makeChunks (cadr seperate)))
-            (clean (car seperate))
+            (extrachunks (makeChunks (cadr separate)))
+            (clean (car separate))
             (imgdata (if IDATflag  ; Compiled image data
                          (cadr (buildDataChunk nil nil clean))
                          (car (buildDataChunk nil nil clean))))
@@ -220,10 +220,10 @@
     (let* ((chunks (blowChunks apngdata))
            (ihdr (getIHDR chunks))
            (actl (getAcTL (cdr chunks)))
-           (seperate (splitAtFirstFrameChunk 
+           (separate (splitAtFirstFrameChunk 
                       't nil (cadr (takechunk "acTL" (cdr chunks) nil))))
-           (prefix (makeChunks (car seperate)))
-           (clean (cadr seperate))
+           (prefix (makeChunks (car separate)))
+           (clean (cadr separate))
            (frames (getFrames clean 't prefix ihdr)))
            ;(frames (splitByFcTL nil clean)))
            ;(frames (getFrame clean 't nil ihdr)))
