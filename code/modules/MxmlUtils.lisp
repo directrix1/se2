@@ -89,7 +89,7 @@
          (cons (list (string-append apngFileName (string-append
                                    (rat->str
                                      (len frameData) 0) ".png"))
-               (car (reverse frameData)))
+               (cadr (car (reverse frameData))))
                (nameFrames (reverse (cdr (reverse frameData))) apngFileName)))))
   
    ;Delivers a list of filenames with their time lengths for APNG 
