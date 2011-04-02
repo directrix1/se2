@@ -87,10 +87,9 @@
    (defun nameFrames (frameData apngFileName)
      (if (endp frameData) nil (if (null apngFileName) nil
          (cons (list (string-append apngFileName (string-append
-                                   (string (car
-                                    (explode-nonnegative-integer
-                                     (len frameData) 10 nil))) ".png"))
-               (cadr (car (reverse frameData))))
+                                   (rat->str
+                                     (len frameData) 0) ".png"))
+               (car (reverse frameData)))
                (nameFrames (reverse (cdr (reverse frameData))) apngFileName)))))
   
    ;Delivers a list of filenames with their time lengths for APNG 

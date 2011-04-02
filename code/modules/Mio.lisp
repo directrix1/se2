@@ -100,9 +100,8 @@
    (defun nameTheseFrames (frameData apngFileName)
      (if (endp frameData) nil (if (null apngFileName) nil
          (cons (list (string-append apngFileName (string-append
-                                   (string (car
-                                    (explode-nonnegative-integer
-                                     (len frameData) 10 nil))) ".png"))
+                                   (rat->str
+                                     (len frameData) 0) ".png"))
                (car (reverse frameData)))
                (nameTheseFrames (reverse (cdr (reverse frameData))) apngFileName)))))
 
