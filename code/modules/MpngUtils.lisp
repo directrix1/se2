@@ -2,12 +2,14 @@
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+
 #| Team Steele
-   Software Engineering I
+   Software Engineering II
    Mpngutils
 
    Functions to assist with parsing and constructing PNG files.
 |#
+
 (in-package "ACL2")
 
 (require "../interfaces/IpngUtils.lisp")

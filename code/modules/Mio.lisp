@@ -5,7 +5,9 @@
 #|
    Team Steele
    Software Engineering II
-   Iio
+   Mio
+
+   Functions for I/O
 |#
 (in-package "ACL2")
 

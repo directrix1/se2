@@ -3,15 +3,26 @@
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 
+#|
+   Team Steele
+   Software Engineering II
+   IxmlUtils
+
+   Functions for parsing and building the PNGA XML file.
+|#
+
 (interface IxmlUtils
   ; Delivers frame data for the files included in framelist.
   ; framelist = list of the filenames from which data will be retrieved.
   (sig parseXML (domXML))
   
+  ; Devlivers the value for numplays
   (sig numplays (processedConfigDOM))
-  
+
+  ; Delivers the value for numframes
   (sig numframes (processedConfigDOM))
-  
+
+  ; Delivers the value for framelist  
   (sig framelist (processedConfigDOM))
 
   ; Parses XML data and delivers the number of frames, number of plays,

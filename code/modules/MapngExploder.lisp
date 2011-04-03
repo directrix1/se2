@@ -6,14 +6,6 @@
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 ;; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
-(in-package "ACL2")
-
-(require "../interfaces/Ibasiclex.lisp")
-(require "../interfaces/IxmlUtils.lisp")
-(require "../interfaces/IminidomSerializer.lisp")
-(require "../interfaces/IminidomParser.lisp")
-(require "../interfaces/IapngExploder.lisp")
-(require "../interfaces/IpngUtils.lisp")
 
 #|
    Team Steele
@@ -22,6 +14,19 @@
 
    Takes an APNG file and explodes it into PNG files.
 |#
+
+
+(in-package "ACL2")
+
+
+(require "../interfaces/Ibasiclex.lisp")
+(require "../interfaces/IxmlUtils.lisp")
+(require "../interfaces/IminidomSerializer.lisp")
+(require "../interfaces/IminidomParser.lisp")
+(require "../interfaces/IapngExploder.lisp")
+(require "../interfaces/IpngUtils.lisp")
+
+
 
 
 (module MapngExploder

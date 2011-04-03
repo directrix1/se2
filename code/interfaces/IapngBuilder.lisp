@@ -3,7 +3,7 @@
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 #| Team Steele
-   Software Engineering I
+   Software Engineering II
    IapngBuilder
 
    Interface for building APNG files from PNG IHDR and IDAT chunks

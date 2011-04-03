@@ -22,7 +22,6 @@
   (include-book "doublecheck" :dir :teachpacks)
   (include-book "audio" :dir :teachpacks)
   
-  (play-wav "../testfiles/rickroll.wav" t)
   
 )
 
