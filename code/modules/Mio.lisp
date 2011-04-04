@@ -81,7 +81,7 @@
 
 
   (defun configFileName (apngfilename framelist fnum)
-	(if (null framelist)
+	(if (endp framelist)
 		nil
 		(let* ((next (car framelist))
 			   (pngdat (car next)))
@@ -114,7 +114,8 @@
         (let ((filename (caar filelist))
               (filedata (cadar filelist)))
           (mv-let (error state)
-            (if (equal filename "Config.xml")
+            (if (equal (take 4 (reverse (coerce filename 'list)))
+                       (list #\l #\m #\x #\.)) ; It's the xml file
                 (string-list->file filename (list filedata) state)
                 (byte-list->binary-file filename filedata state))
             (if error
@@ -123,7 +124,7 @@
   
   
   (defun stripTime (data)
-    (if (null data)
+    (if (endp data)
         nil
         (cons (caar data) (stripTime (cdr data)))))
 
@@ -136,7 +137,8 @@
  ;to be broken into individual frames.
  (defun suspend (apngfilename state)
 	(mv-let (apngcontents status state)
-	  (binary-file->byte-list (string-append apngfilename ".apng") state)
+	  (binary-file->byte-list 
+           (string-append apngfilename ".apng") state)
 	  (if status
 		  (mv status state)
 		  (let* ((exploded (explodeAPNG (nthcdr 8 apngcontents)))
@@ -148,9 +150,12 @@
                                                 framedat apngfilename)))
                                  (data-minus-time (stripTime framedat))
 				 (frames-with-names 
-					(cons (list "Config.xml" xml) 
+					(cons (list (string-append 
+                                                     apngfilename 
+                                                     ".xml") xml) 
                                             (nameTheseFrames
-                                              data-minus-time apngfilename))))
+                                              data-minus-time
+                                              apngfilename))))
 			(writeFiles frames-with-names state)))))   
 
   

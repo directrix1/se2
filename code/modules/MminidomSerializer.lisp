@@ -27,7 +27,7 @@
   ;xml-escape (unescapedchars) → returns string with bad chars replaced
   ;    with entities
   (defun xml-escape (unescapedchars)
-    (if (null unescapedchars)
+    (if (endp unescapedchars)
         ""
         (let ((char (car unescapedchars))
               (rest (cdr unescapedchars)))
@@ -45,7 +45,7 @@
   ;xml-serialize-attributes (attributes) → Returns a string that is
   ;    xml that represents the passed in attribute list.
   (defun xml-serialize-attributes (attributes)
-    (if (null attributes)
+    (if (endp attributes)
         ""
         (let ((attribute (car attributes))
               (rest (cdr attributes)))
@@ -62,7 +62,7 @@
   ;xml-serizlize-nodes (xmlnodes) → Returns a string containing xml
   ;    nodes that represents the node list, xmlnodes.
   (defun xml-serialize-nodes (xmlnodes)
-    (if (null xmlnodes)
+    (if (endp xmlnodes)
         ""
         (let ((node (car xmlnodes))
               (rest (cdr xmlnodes)))

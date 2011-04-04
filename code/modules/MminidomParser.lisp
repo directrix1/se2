@@ -157,7 +157,7 @@
   ;  is nil or a list of attributes
   (defun xml-isattributelist (attributes)
     (or
-     (null attributes)
+     (endp attributes)
      (and
       (true-listp attributes)
       (xml-isattribute (car attributes))
@@ -184,7 +184,7 @@
      (and
       (true-listp nodes)
       (or
-       (null nodes)
+       (endp nodes)
        (and
         (xml-isnode (car nodes))
         (xml-isnodelist (cdr nodes))))))

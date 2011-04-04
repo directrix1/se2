@@ -31,7 +31,7 @@
    ;displayed.
    ;framelist = list of minidom "image" nodes
    (defun grabFrames (framelist)
-     (if (null framelist) nil
+     (if (endp framelist) nil
 	(let* ((nextFrame (car framelist))
 	       (src (xml-getattribute nextFrame "src"))
 	       (timelen (xml-getattribute nextFrame "length")))

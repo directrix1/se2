@@ -30,7 +30,7 @@
   ; idat = idat chunk data, pass in nil initially
   ; chunks = a list of blown chunks
   (defun preparePNG (ihdr idat chunks)
-    (if (null chunks)
+    (if (endp chunks)
         (list ihdr idat)
         (let* ((curchunk (car chunks))
                (rest (cdr chunks))
@@ -58,7 +58,7 @@
   ;   representing the amount of time in seconds to display that frame as
   ;   a rational number (i.e. 100/2997 for NTSC standard)
   (defun preparePNGs (framedata)
-    (if (null framedata)
+    (if (endp framedata)
         nil
         (let* ((cur (car framedata))
                (rest (cdr framedata))            ; 8 is the length of PNG sig
@@ -81,7 +81,7 @@
   ; baseIHDR = the reference IHDR or if null the IHDR of the first PNG
   ;    in the list to which all comparisons of consistency are made.
   (defun validateIHDR (prepdPNGs baseIHDR)
-    (if (null prepdPNGs)
+    (if (endp prepdPNGs)
         nil
         (let* ((cur (car prepdPNGs))
               (rest (cdr prepdPNGs))
@@ -185,7 +185,7 @@
   ; frameNum = if 0 then the image data of the first PNG of the list will
   ;    be output as an IDAT chunk all other frames are fdAT chunks
   (defun buildFrames (prepdPNGs frameNum)
-    (if (null prepdPNGs)
+    (if (endp prepdPNGs)
         nil
         (let* ((cur (car prepdPNGs))
                (rest (cdr prepdPNGs))

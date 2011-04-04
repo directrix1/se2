@@ -1,12 +1,7 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
-#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
-;; The first four lines of this file were added by Dracula.
-;; They tell DrScheme that this is a Dracula Modular ACL2 program.
-;; Leave these lines unchanged so that DrScheme can properly load this file.
-;; #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
-
+#reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 #|
    Team Steele
    Software Engineering II
@@ -43,7 +38,7 @@
   ; Finds the first data chunk in a ((name chunkdata) (name chunkdata))
   ; list that matches the given name and pulls it out of the chunklist
   (defun takeChunk (name chunklist checkedchunks)
-    (if (null chunklist)
+    (if (endp chunklist)
         nil
         (if (equal (caar chunklist) name)
             (list (cadar chunklist)
@@ -59,7 +54,7 @@
   ; The function delivers a two-element list where the first element is
   ; the list described in (a) and the second is the list described in (b).
   (defun getChunksWithName (name chunkstocheck)
-    (if (null chunkstocheck)
+    (if (endp chunkstocheck)
       ; XXX Also need to check (specify in the contract?) that if
       ; chunkstocheck *is* nonempty that it's also a list that matches
       ; the form delivered by blowChunks.
@@ -93,7 +88,7 @@
   ; If the IDATflag is true, it stops at IDAT, fcTL, and IEND chunks
   ; else it stops at only the fcTL or IEND chunks
   (defun splitAtFirstFrameChunk (IDATflag pre post)
-    (if (or (null post)
+    (if (or (endp post)
             (equal (caar post) "fcTL")
             (equal (caar post) "IEND")
             (and IDATflag (equal (caar post) "IDAT")))
@@ -104,14 +99,14 @@
    
   ; Makes all the chunks in the list of chunks and concatenates them
   (defun makeChunks (chunklist)
-    (if (null chunklist)
+    (if (endp chunklist)
         nil
         (append (makeChunk (caar chunklist) (cadar chunklist))
                 (makeChunks (cdr chunklist)))))
   
   ; Splits the chunklist on the next fcTL
   (defun splitByFcTL (pre post)
-    (if (null post)
+    (if (endp post)
         (list pre post)       
         (if (or (equal 1 (len post))
                 (equal "IEND" (caadr post))
@@ -126,7 +121,7 @@
   ; idat = idat chunk data, pass in nil initially
   ; chunks = a list of blown chunks
   (defun buildDataChunk (fdat idat chunks)
-    (if (null chunks)
+    (if (endp chunks)
         (list fdat idat)
         (let* ((curchunk (car chunks))
                (rest (cdr chunks))
@@ -202,7 +197,7 @@
                    framedelay)))))
 
   (defun getFrames (chunks IDATflag prefix ihdr) 
-    (if (or (null chunks)
+    (if (or (endp chunks)
             (equal "IEND" (caar chunks)))
         nil
         (let ((split (splitbyfcTL nil chunks)))

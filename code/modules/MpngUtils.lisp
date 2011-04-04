@@ -29,8 +29,7 @@
   ; Returns true if x is a list of byte values
   ;  x = what to check
   (defun byte-listp (x)
-    (if (null x)
-        t
+    (or (endp x)
         (and
          (true-listp x)
          (bytep (car x))
@@ -55,8 +54,7 @@
   ; Returns true if x is a list of chunks
   ;  x = what to check
   (defun chunk-listp (x)
-    (if (null x)
-        t
+    (or (endp x)
         (and
          (true-listp x)
          (chunkp (car x))
@@ -67,7 +65,7 @@
   ;  index = the current key
   ;  alist = the list of values to be associated with each key
   (defun list->avl (index alist)
-    (if (null alist)
+    (if (endp alist)
         (empty-tree)
         (avl-insert
          (list->avl (+ 1 index) (cdr alist))
@@ -131,7 +129,7 @@
   ;  crc32 = previously computed CRC32
   ;  bytes = raw data from PNG Image or other source
   (defun updateCRC32 (crc32 bytes)
-    (if (null bytes)
+    (if (endp bytes)
         crc32
         (updateCRC32
          (logxor
@@ -178,7 +176,7 @@
   ; Helper function that turns a list of chars into a list of bytes.
   ;  chars = the list of chars
   (defun chars->bytes (chars)
-    (if (null chars)
+    (if (endp chars)
         nil
         (cons (char-code (car chars))
               (chars->bytes (cdr chars)))))
@@ -186,7 +184,7 @@
   ; Helper function that turns a list of bytes into a list of chars.
   ;  bytes = the list of bytes
   (defun bytes->chars (bytes)
-    (if (null bytes)
+    (if (endp bytes)
         nil
         (cons (code-char (car bytes))
               (bytes->chars (cdr bytes)))))
