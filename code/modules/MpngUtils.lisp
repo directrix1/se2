@@ -123,19 +123,57 @@
   ; each position c when k equals 8.
   ;  c = the key for the value to calculate
   ;  k = bit iterator, set to 8
-  (defun crc32LookupCalc (c k)
-    (if (zp k)
-        c
-        (crc32LookupCalc
-         (if (oddp c)
-             (logxor #xedb88320 (ash c -1))
-             (ash c -1))
-         (1- k))))
+;  (defun crc32LookupCalc (c k)
+;    (if (zp k)
+;        c
+;        (crc32LookupCalc
+;         (if (oddp c)
+;             (logxor #xedb88320 (ash c -1))
+;             (ash c -1))
+;         (1- k))))
+; Unrolled below for performance
+  (defun crc32LookupCalc (c)
+    (let* (
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1)))
+           (c
+            (if (oddp c)
+                (logxor #xedb88320 (ash c -1))
+                (ash c -1))))
+      c))
+           
 
   ; Returns the crc32 lookup table value for a given index.
   ;  index = the key for the value to lookup
   (defun crc32Lookup (index)
-    (crc32LookupCalc index 8))
+    (crc32LookupCalc index))
+;    (crc32LookupCalc index 8))
   
 
   ; Given a previously calculated crc32 value and raw data bytes, such as
@@ -148,7 +186,7 @@
         crc32
         (updateCRC32
          (logxor
-          (crc32Lookup (logand (logxor crc32 (car bytes)) #xff))
+          (crc32LookupCalc (logand (logxor crc32 (car bytes)) #xff))
           (ash crc32 -8))
          (cdr bytes))))
   
@@ -227,25 +265,22 @@
   ;					...		        ..	)
   ;	pngdata = raw, unprocessed png data bytes
   (defun blowChunks (pngdata)
-    (if (< (len pngdata) 12)        ; Enough for length, type, and crc
+    (if (or
+         (endp pngdata)
+         (< (len pngdata) 12))        ; Enough for length, type, and crc
         nil
         (let*
             (
-             (chunklen (parseNum (take 4 pngdata) nil 4))
-             (rem1 (nthcdr 4 pngdata))
-             (chunktype (take 4 rem1))
-             (rem2 (nthcdr 4 rem1))
-             (chunkdata (take chunklen rem2))
-             (rem3 (nthcdr chunklen rem2))
-             (crc (parseNum (take 4 rem3) nil 4))
-             (remainder (nthcdr 4 rem3))
+             (chunklen (parseNum (subseq pngdata 0 4) nil 4))
+             (chunktype (subseq pngdata 4 8))
+             (chunkdata (subseq pngdata 8 (+ 8 chunklen)))
+;             (crc (parseNum (subseq pngdata (+ 8 chunklen) (+ 12 chunklen)) nil 4))
              )
           ; If the CRC is not equal then we drop the chunk
 ;          (if (= (calcCRC32 (concatenate 'list chunktype chunkdata)) crc)
-          (if 't
               (cons (list (bytes->ascii chunktype) chunkdata)
-                    (blowChunks remainder))
-              (blowChunks remainder)))))
+                    (blowChunks (nthcdr (+ 12 chunklen) pngdata))))))
+;              (blowChunks remainder)))))
          
   
   ; Given a chunk type and correctly formatted chunkdata, makeChunk returns
@@ -254,13 +289,13 @@
   ;  chunktype = type of the chunk to be created, a length 4 ascii string
   ;  chunkdata = raw data portion of the chunk to be created as byte list
   (defun makeChunk (chunktype chunkdata)
-    (let ((chunktypebytes (ascii->bytes chunktype)))
+    (let* ((chunktypebytes (ascii->bytes chunktype))
+           (chunktypedata (concatenate 'list chunktypebytes chunkdata)))
     (concatenate 'list
                  (makeNum (len chunkdata) nil 4)
-                 chunktypebytes
-                 chunkdata
+                 chunktypedata
                  (makeNum
-                  (calcCRC32 (concatenate 'list chunktypebytes chunkdata))
+                  (calcCRC32 chunktypedata)
                   nil 4))))
 
   ; Given a PNG filename, opens the PNG and blows it's chunks.

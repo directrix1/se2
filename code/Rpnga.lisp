@@ -31,6 +31,7 @@
 ;(time$ (animate "testpngs/test" state)) 
 ;(time$ (animate "rickrollframes/test" state)) 
 ;  cpu time: 677650 real time: 678763 gc time: 17784 (for avl-tree crc32)
-;  cpu time: 631743 real time: 632529 gc time: 39424 (for no precalc)
+;  cpu time: 631743 real time: 632529 gc time: 39424 (for no precalc crc32)
+;  cpu time: 562495 real time: 563357 gc time: 38701 (for unrolled crc32)
 ;  for 212 frames
 ;(suspend "testexplode/test" state)

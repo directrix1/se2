@@ -114,5 +114,5 @@
 
 ; This is so we can see how long to calculate a CRC32 for a file of size
 ; approximately equal to rickrollframes at 1 fps
-(let ((k (time$ (pseudorandombytes 783487 7368029))))
+(let* ((k (time$ (pseudorandombytes 783487 7368029))))
   (time$ (calccrc32 k)))
