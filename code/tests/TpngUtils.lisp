@@ -22,7 +22,7 @@
   (include-book "doublecheck" :dir :teachpacks)
   (include-book "audio" :dir :teachpacks)
   
-  (play-wav "../testfiles/rickroll.wav" t)
+  ;(play-wav "../testfiles/rickroll.wav" t)
   
   ; Values pulled from C reference implementation
   (defconst *crc32Tests* '(
@@ -105,3 +105,14 @@
        (getChunkSummary (cdr pngchunks)))))
 
 (getChunkSummary (mv-let (data state) (chunkifyPNGFile "../testfiles/rickroll.png" state) data))
+
+(defun pseudorandombytes (seed count)
+  (if (zp count)
+      nil
+      (let ((r (mod (+ (* 437 seed) 91) 256)))
+        (cons r (pseudorandombytes r (- count 1))))))
+
+; This is so we can see how long to calculate a CRC32 for a file of size
+; approximately equal to rickrollframes at 1 fps
+(let ((k (time$ (pseudorandombytes 783487 7368029))))
+  (time$ (calccrc32 k)))

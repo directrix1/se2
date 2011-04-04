@@ -62,6 +62,7 @@
     
   ; Helper function to convert the crc32 lookup table to an avl-tree with
   ; the key being it's index-based position in the list.
+  ; (deprecated, nth works faster in this case)
   ;  index = the current key
   ;  alist = the list of values to be associated with each key
   (defun list->avl (index alist)
@@ -73,7 +74,7 @@
          (car alist))))
   
   (defconst
-    *crc32Lookup* (list->avl 0
+    *crc32Lookup* 
     '(#x00000000 #x77073096 #xee0e612c #x990951ba #x076dc419 #x706af48f 
       #xe963a535 #x9e6495a3 #x0edb8832 #x79dcb8a4 #xe0d5e91e #x97d2d988 
       #x09b64c2b #x7eb17cbd #xe7b82d07 #x90bf1d91 #x1db71064 #x6ab020f2 
@@ -116,12 +117,26 @@
       #x40df0b66 #x37d83bf0 #xa9bcae53 #xdebb9ec5 #x47b2cf7f #x30b5ffe9 
       #xbdbdf21c #xcabac28a #x53b39330 #x24b4a3a6 #xbad03605 #xcdd70693 
       #x54de5729 #x23d967bf #xb3667a2e #xc4614ab8 #x5d681b02 #x2a6f2b94 
-      #xb40bbe37 #xc30c8ea1 #x5a05df1b #x2d02ef8d)))
-    
+      #xb40bbe37 #xc30c8ea1 #x5a05df1b #x2d02ef8d))
+
+  ; This helper function should hopefully calculate the table above for
+  ; each position c when k equals 8.
+  ;  c = the key for the value to calculate
+  ;  k = bit iterator, set to 8
+  (defun crc32LookupCalc (c k)
+    (if (zp k)
+        c
+        (crc32LookupCalc
+         (if (oddp c)
+             (logxor #xedb88320 (ash c -1))
+             (ash c -1))
+         (1- k))))
+
   ; Returns the crc32 lookup table value for a given index.
   ;  index = the key for the value to lookup
   (defun crc32Lookup (index)
-    (cdr (avl-retrieve *crc32Lookup* index)))
+    (crc32LookupCalc index 8))
+  
 
   ; Given a previously calculated crc32 value and raw data bytes, such as
   ; that found in the data portion of a PNG Image chunk, returns an updated
