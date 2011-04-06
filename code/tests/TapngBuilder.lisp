@@ -14,6 +14,7 @@
 (require "../interfaces/IpngUtils.lisp")
 (require "../modules/MapngBuilder.lisp")
 (require "../modules/MpngUtils.lisp")
+(require "../modules/Mbasiclex.lisp")
 
 (module TapngBuilder
   (import IapngBuilder)
@@ -26,6 +27,6 @@
 )
 
 (link Test
-      (MpngUtils MapngBuilder))
+      (Mbasiclex MpngUtils MapngBuilder))
 
 (invoke Test)

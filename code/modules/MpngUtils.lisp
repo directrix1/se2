@@ -217,14 +217,15 @@
   ;  signed = true means make it two's complement
   ;  numbytes = number of bytes used in representation
   (defun parseNum (bytes signed numbytes)
+    guard
     (if (zp numbytes)
         0
         (let ((thenum (+ 
-                       (ash (car bytes) (* 8 (- numbytes 1)))
-                       (parseNum (cdr bytes) nil (- numbytes 1)))))
+                       (ash (car bytes) (* 8 (1- numbytes)))
+                       (parseNum (cdr bytes) nil (1- numbytes)))))
           (if (and signed (> (car bytes) 127))
               (- thenum (ash 1 (* 8 numbytes)))
-              thenum))))
+              thenum))))     
 
   ; Helper function that turns a list of chars into a list of bytes.
   ;  chars = the list of chars
