@@ -77,20 +77,20 @@
                         (xml-escape (str->chrs nodename))
                         (xml-serialize-attributes attributes)
                         (if (null children)
-                            "/>"
+                            "/>\n"
                             (concatenate 'string
-                             ">"
+                             ">\n"
                              (xml-serialize-nodes children)
                              "</"
                              (xml-escape (str->chrs nodename))
-                             ">"))))
+                             ">\n"))))
                    (xml-serialize-nodes rest))))))
 
   ;xml-serizlize-dom (xmlnode) → Returns a string containing an xml
   ;    document that represents the dom passed in through xmlnode.
   (defun xml-serialize-dom (xmlnode)
         (string-append
-         "<?xml version=\"1.0\"?>"
+         "<?xml version=\"1.0\"?>\n"
          (xml-serialize-nodes (list xmlnode)))
     )
 
