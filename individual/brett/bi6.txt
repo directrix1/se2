@@ -126,6 +126,12 @@ time log:
 	  phase: misc
 	  comment: We looked over all of the slides today, finalizing the content I will be speaking about. We also helped Colby finish the defect section and decided on a coherent ordering of our presentation.
 
+	- date: Apr 9, 2011
+	  start time: 1:00PM
+	  end time: 1:45PM
+	  phase: misc
+	  comment: Update PSP log file and look over presentation. Emailed team about restructuring our presentation and suggestion to cut down the number of slides.
+
 
 defect log:
 
