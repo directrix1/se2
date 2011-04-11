@@ -7,7 +7,7 @@ To create an animation, we need to provide the software with several pieces of i
 For this we decided to use an XML structure, because it is very effective at organizing data in a human accessable format. It's also easy to interpret and manipulate as a document object model on the software side.
 
 The information required to build a png is:
-	The number of images, or frames
+	The number of frames
 	The number of times the animation will loop.
 	and a list of PNG filenames to be used with their associated time as a fraction of a second.
 
