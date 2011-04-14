@@ -47,6 +47,16 @@
   ; apngFileName = name of the apng file
   (sig writeFrames (frameData apngFileName))
 
+;-------------------------------CONTRACTS---------------------------------;
+  (con grabFrames-preserves-correct-nodes
+	(implies (true-listp flist)
+		(let ((children (xml-getchildren flist)))
+			(= (len children) (len (grabFrames children))))))
+
+  (con writeFrames-len-preserved
+	(implies (and (true-listp flist) (stringp apngFileName))
+		(= (len (writeFrames flist apngFileName)) (len (flist)))))
+
   (con parseXML-returns-three
 	(implies (true-listp domXML)
 		 (= (len (parseXML domXML)) 3)))
@@ -54,5 +64,18 @@
   (con writeXML-delivers-string
 	(implies (and (and (stringp numPlays) (stringp numFrames))
 		(true-lisp framedata)
-			(stringp (writeXML numPlays numFrames framedata)))))
-)
+			(stringp (writeXML 
+				numPlays numFrames framedata)))))
+
+  (con writeXML-reverses-parseXML
+	(implies (true-listp domXML)
+		(let ((parsed (parseXML domXML)))
+			(equal domXML (writeXML (car parsed) (cadr parsed)
+				 (caddr parsed))))))
+
+  (con parseXML-reverses-writeXML
+	(implies (and (natp frames) (natp plays) (true-listp flist))
+		(let ((written (writeXML plays frames flist)))
+			(and (equal plays (car written)) (equal frames (cadr written))
+			     (equal flist (caddr written))))))
+
