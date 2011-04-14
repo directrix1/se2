@@ -24,6 +24,19 @@
   
 
 (interface IapngExploder
+
+  ; Finds the first data chunk in a ((name chunkdata) (name chunkdata))
+  ; list that matches the given name and pulls it out of the chunklist
+  (sig takeChunk (name chunklist checkedchunks))
+
+  ; Given a list of chunks (chunkstocheck), iterate through them and
+  ; build:
+  ;   a) a list of chunks that match name
+  ;   b) a a list of chunks that don't match name
+  ; The function delivers a two-element list where the first element is
+  ; the list described in (a) and the second is the list described in (b).
+  (sig getChunksWithName (name chunkstocheck))
+
   ; Given an APNG file, breaks the APNG into its constituent PNG Images.
   ; This process involves looking at the acTL chunk to determine number of
   ; frames and number of plays, as well as looking at the fcTL and fdAT
@@ -56,11 +69,30 @@
   ; IDATflag = Defines whether or not the IDAT chunks have been pulled yet
   ; ihdr = ihdr for entire APNG file, data contained herein will be used to
   ;   reconstruct all PNG files
-  (sig getFrames (chunks IDATflag ihdr))
+  (sig getFrames (chunks IDATflag prefix ihdr))
   
   
   
   ;;;;;;;;;;;;;;;;;;;;;;;; Contracts
+  (con takeChunk-always-finds-first
+       (implies (and (stringp name) (stringp data1) (stringp data2) 
+		     (stringp data3))
+	(let* ((onel (list name data1))
+	       (twol (list name data2))
+	       (threel (list name data3))
+	       (chunkl (list onel twol threel)))
+			(equal (car (takeChunk name chunkl nil)) onel))))
+
+  (con getChunksWithName-always-finds-all
+       (implies (and (stringp name) (stringp data1) (stringp data2)
+	             (stringp data3)) 
+	(let* ((onel (list name data1))
+	       (twol (list name data2))
+	       (threel (list name data3))
+	       (chunkl (list onel twol threel)))
+			(equal chunkl (car 
+				(getChunksWithName name chunkl))))))
+
   (con explodeAPNG-returns-null-or-mvs
        (implies (stringp input)
                 (let ((output (explodeAPNG input)))
