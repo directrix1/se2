@@ -23,6 +23,8 @@
   (import IpngUtils)
   (import Ibasiclex)
   
+  (defconst *pngSig* (list 137 80 78 71 13 10 26 10))
+  
   ; This function formats the raw PNG file data into more conveniently 
   ; utilized chunks, and returns (list IHDR IDAT) where IHDR is the IHDR
   ; chunk IDAT is all IDAT chunks concatenated into one chunk.
@@ -213,6 +215,19 @@
                        (buildFrames rest (+ (if (= frameNum 0) 1 2) frameNum))
                        ))))
   
+  ; Returns a string if the frames in framedata do not have valid PNG sigs.
+  ; framedata = frame and time display information of the type 
+  ;   (list (list frame displaytime)... ) where frame is a byte list 
+  ;   representing a PNG's contents and displaytime is a string 
+  ;   representing the amount of time in seconds to display that frame
+  ;   as a rational number (i.e. 100/2997 for NTSC standard)  
+  (defun verifyPNGSig (framedata)
+    (if (endp framedata)
+        nil
+        (if (equal (take (len *pngSig*) (caar framedata)) *pngSig*)
+            (verifyPNGSig (cdr framedata))
+            "Input file is not a valid PNG.")))
+  
   ; Returns an APNG as a byte list that has the following playtime
   ; properties:
   ;  * contains in order the frames and amount of time to display each 
@@ -227,16 +242,18 @@
   ;   representing the amount of time in seconds to display that frame
   ;   as a rational number (i.e. 100/2997 for NTSC standard)
   (defun buildAPNG (numPlays numFrames framedata)
-	(let* ((frames (preparePNGs framedata))
-              (errorMessage (validateIHDR frames nil))) ; Returns error message when needed
+    (let ((errorMessage (verifyPNGSig framedata)))
+      (if (stringp errorMessage)
+          errorMessage ; Returns error message if no PNG sig
+          (let* ((frames (preparePNGs framedata))
+              (errorMessage (validateIHDR frames nil)))
           (if (stringp errorMessage)
-              errorMessage
+              errorMessage ; Returns error message for bad header fields
               (concatenate 'list
-                           (list 137 80 78 71 13 10 26 10) ; PNG signature
+                           *pngSig*
                            (makeChunk "IHDR" (car (car frames)))
                            (buildACTL numPlays numFrames)
                            (buildFrames frames 0)
-                           (makeChunk "IEND" nil)
-              ))))
+                           (makeChunk "IEND" nil)))))))
   
   (export IapngBuilder))
