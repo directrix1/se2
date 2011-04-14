@@ -66,7 +66,7 @@
 
   (check-expect
    (parseXML *sample*)
-	'("2" "3" (("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14"))))
+	'(2 3 (("bob0.png" "1/12") ("bob1.png" "1/14") ("bob2.png" "1/14"))))
   
   (check-expect
    (writeXML nil nil nil)
@@ -86,7 +86,7 @@
 
   (check-expect
    (writeXML "1" "1" '(("bob4.png" "1/10")))
-	"<?xml version=\"1.0\"?><pnga frames=\"1\" plays=\"1\"><image src=\"bob4.png\" length=\"1/10\"/></pnga>")
+	"<?xml version=\"1.0\"?>\n<pnga frames=\"1\" plays=\"1\">\n<image src=\"bob4.png\" length=\"1/10\"/>\n</pnga>\n")
   
   (check-expect
    (writeFrames '((1101010 "1/4") (10101 "1/8") (1010001 "1/16")) nil)
@@ -97,12 +97,7 @@
    nil)
   
   (check-expect
-   (writeFrames '((1101010 "1/4") (10101 "1/8") (1010001 "1/16")
-                                  (1010001 "1/16")(1010001 "1/16")
-                                  (1010001 "1/16")(1010001 "1/16")
-                                  (1010001 "1/16")(1010001 "1/16")
-                                  (1010001 "1/16")(1010001 "1/16")
-                                  (1010001 "1/16")) "rickroll")
+   (writeFrames '((1101010 "1/4") (10101 "1/8") (1010001 "1/16")) "rickroll")
    '(("rickroll1.png" "1/4") ("rickroll2.png" "1/8") ("rickroll3.png" "1/16")))
 
   
