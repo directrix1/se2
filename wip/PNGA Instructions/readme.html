@@ -93,7 +93,7 @@ The APNG file will be in the same directory as the XML file and can be viewed wi
 <i>The animate function requires all of the PNG's to have the same width, height, bit depth, color type, compression method, filter method, and interlace method. If this is not the case, an error will be printed to the screen indicating that one of them did not match. Animate will also display an error message if it encounters an invalid PNG. </i>
 
 <center><h3>The Suspend Function</h3></center>
-The suspend command will take an existing APNG, and output each individual frame of the animation as PNG images. It will also ouput the XML document that contains the information about the animation. This is useful in case you want to make changes to an APNG and reanimate it. The suspend command takes the path to the APNG file <b>relative to Rpnga.lisp</b>, and "state" as parameters. Here's what it looks like when we run it on <span class="filename">example.apng</span> that's located in the example folder:
+The suspend command will take an existing APNG, and output each individual frame of the animation as a PNG image. It will also ouput the XML document that contains the information about the animation. This is useful in case you want to make changes to a APNG and reanimate it. The suspend command takes the path to the APNG file <b>relative to Rpnga.lisp</b>, and "state" as parameters. Here's what it looks like when we run it on <span class="filename">example.apng</span> that's located in the example folder:
 <br />
 <br />
 <pre>(suspend "example/example" state)</pre>
