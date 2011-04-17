@@ -132,6 +132,24 @@ time log:
 	  phase: misc
 	  comment: Update PSP log file and look over presentation. Emailed team about restructuring our presentation and suggestion to cut down the number of slides.
 
+	- date: Apr 10, 2011
+	  start time: 5:30PM
+	  end time: 8:00PM
+	  phase: misc
+	  comment: Prepared for class presentation. Not everyone was prepared, so took much time dividing time up between people instead of practicing parts.
+	
+	- date: Apr 11, 2011
+	  start time:3:30PM
+	  end time: 4:10PM
+	  phase: misc
+	  comment: Meet before class to finalize our presentation. Make a few run throughs.
+	
+	- date: Apr 14, 2011
+	  start time: 1:00PM
+	  end time: 4:00PM
+	  phase: misc
+	  comment: Attempt to finish up the last team assignments for our product: including installation manual, psp, design, and defect database.
+
 
 defect log:
 

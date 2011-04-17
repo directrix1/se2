@@ -172,17 +172,17 @@ time log:
 	end time: 6:30PM
 	comment: Worked on slides for the Architecture section of the presentation. Added several images explaining the structure and purpose of the modules. Reviewed old modular design diagram and determined work to be done here.
 
-	-date Apr 7, 2011
+	-date: Apr 7, 2011
 	start time: 12:30PM
 	end time: 6:30PM
 	comment: Reworked many slides with group and determined where weak areas were and what still needed work. Group reviewed both the content of the slides and wording of the notes that members had prepared. Preparing for Sunday/Monday dry runs of presentation.
 
-	-date Apr 10, 2011
+	-date: Apr 10, 2011
 	start time: 5:30PM
 	end time: 8:30PM
 	comment: Met with group and performed a few rough run throughs of the presentation. Several changed slides and removed slides to ensure effective and timely presentation.
 
-	-date Apr 11, 2011
+	-date: Apr 11, 2011
 	start time: 3:00PM
 	end time: 4:10PM
 	comment: Ran through presentation with team several times to ensure proper flow of each subject. Made several small changes and presented to class and "suits".

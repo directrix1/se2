@@ -40,7 +40,7 @@ time log:
 	  phase: plan
 	  comment: Revised Design/Probe, Progress Report, IapngExploder contracts
 
-	- date: Febuary 28, 2011
+	- date: Feb 28, 2011
 	  start time: 4:30PM
 	  end time: 6:00PM
 	  phase: Coding
@@ -50,7 +50,7 @@ time log:
 	  start time: 7:00PM
 	  end time: 8:00PM
 	  phase: Coding
-	  comments: Began coding IapngExploder functions
+	  comment: Began coding IapngExploder functions
 
 	- date: March 9, 2011
 	  start time: 4:00PM
