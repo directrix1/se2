@@ -1,0 +1,184 @@
+name: Micah Morgan
+date: April 17, 2011
+program: se2
+instructor: Dr. Page
+
+time log:
+	- date: Jan 19, 2011
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: Research concerning project, pngs mainly
+
+	- date: Jan 26, 2011
+	  start time: 3:00PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: More format research, Project Proposal work
+
+	- date: Feb 2, 2011
+	  start time: 4:00PM
+	  end time: 5:30PM
+	  phase: plan
+	  comment: Engineering Standards Deliverable Preperation / Research 
+
+	- date: Feb 9, 2011
+	  start time: 3:30PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Preperation for Progress Report. Work on Design and Probe 
+
+	- date: Feb 16, 2011
+	  start time: 3:00PM
+	  end time: 5:30PM
+	  phase: plan
+	  comment: Peer reviews, Continued working on multi-level design and probe
+
+	- date: Feb 23, 2011
+	  start time: 4:30PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Revised Design/Probe, Progress Report, IapngExploder contracts
+
+	- date: Febuary 28, 2011
+	  start time: 4:30PM
+	  end time: 6:00PM
+	  phase: Coding
+	  comment: More IapngExploder Contracts 
+
+	- date: March 7, 2011
+	  start time: 7:00PM
+	  end time: 8:00PM
+	  phase: Coding
+	  comments: Began coding IapngExploder functions
+
+	- date: March 9, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: Coding
+	  comment: Progress Report, Writing IapngExploder functions
+
+	- date: March 14, 2011
+	  start time: 8:00PM
+	  end time: 10:00PM
+	  phase: Coding
+	  comment: Coding just a few exploder functions and contracts
+
+	- date: March 21, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: Coding
+	  comment: More work on Exploder; getFrames, as well as general troubleshooting
+
+	- date: March 24, 2011
+	  start time: 3:00PM
+	  end time: 7:00PM
+	  phase: Coding
+	  comment: Continuing on Exploder and general code reviews
+
+	- date: March 28, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: Coding
+	  comment: Finishing up initial exploder functions
+
+	- date: March 30, 2011
+	  start time: 3:00PM
+	  end time: 11:30PM
+	  phase: Coding
+	  comment: Heavy code review and rewriting for exploder, debugging across the board.
+
+	- date: March 31, 2011
+	  start time: 1:00PM
+	  end time: 11:00PM
+	  phase: Review
+	  comment: Even more debugging on exploder, as well as debugging on XML and IO modules.
+
+	- date: April 4, 2011
+	  start time: 3:00PM
+	  end time: 6:00PM
+	  phase: Review
+	  comment: Code Finalisation, design revision, and presentation work
+
+	- date: April 6, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: Review
+	  comment: Design revision and presentation writing plus practice
+
+
+	- date: April 10, 2011
+	  start time: 5:30PM
+	  end time: 9:00PM
+	  phase: Review
+	  comment: Presentation finalization and practice
+
+	- date: April 11, 2011
+	  start time: 3:00PM
+	  end time: 4:15PM
+	  phase: Review
+	  comment: Final presentation practice
+
+
+
+defect log:
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 240
+	  comment: Reworked the whole design of the modules to improve flow.
+
+	- date: March 7, 2011
+	  type: design
+	  fix time: 20
+	  comment: IapngExploder contract helper function returned true always
+
+	- date: March 14, 2011
+	  type: design
+	  fix time: 30
+	  comment: Changed an input value to a flag to improve code simplicity
+
+	- date: March 21, 2011
+	  type: design
+	  fix time: 35
+	  comment: Completely replaced one helper function; changed to 'find and pull out' style instead of just 'find and return' style search.
+
+	- date: March 21, 2011
+	  type: code
+	  fix time: 10
+	  comment: makeChunks improperly nested its lists
+
+	- date: March 24, 2011
+	  type: design
+	  fix time: 50
+	  comment: Again replaced a few helper functions and shuffled around some minor code.
+
+	- date: March 28, 2011
+	  type: code
+	  fix time: 20
+	  comment: Another list manipulation issue, this time in getFrames with the acTL
+
+	- date: March 30, 2011
+	  type: code
+	  fix time: 25
+	  comment: Improperly dealt with the frame delays in several areas
+
+	- date: March 30, 2011
+	  type: code
+	  fix time: 20
+	  comment: Mixed up a few pieces of data in the IDAT and fctl
+
+	- date: March 30, 2011
+	  type: design
+	  fix time: 70
+	  comment: fDAT should have a lower case 'd'
+
+	- date: March 31, 2011
+	  type: code
+	  fix time: 270
+	  comment: A whole number of issues with APNGexploder, mainly related to list manipulation
+
+	- date: March 31, 2011
+	  type: code
+	  fix time: 20
+	  comment: Issue in XML function going one too deep with a car into a bytelist
+
