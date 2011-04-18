@@ -23,7 +23,38 @@
   (include-book "doublecheck" :dir :teachpacks)
   (include-book "audio" :dir :teachpacks)
   
+  (check-expect 
+    	(verifyPNGSig (list (list *pngSig* 1/2)))
+	nil)
+
+  (check-expect
+    	(verifyPNGSig nil)
+	"Input file is not a valid PNG.")
+
+  (check-expect
+    	(buildFrames nil '0)
+	nil)
+
+  (check-expect
+    	(buildACTL nil nil)
+	(makeChunk "acTL" nil))
+
+  (check-expect
+    	(buildFCTL nil nil nil nil nil nil nil nil)
+	(makeChunk "fcTL" nil))
+
+  (check-expect
+    	(validateIHDR nil nil)
+	nil)
   
+  (check-expect
+    	(preparePNGs (list (list *pngSig* 1/2) (list *pngSig* 1/2)))
+	(list (list nil nil) (list nil nil)))
+
+  (check-expect
+    	(preparePNG nil nil nil)
+	(list nil nil))
+
 )
 
 (link Test
