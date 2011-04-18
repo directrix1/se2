@@ -143,6 +143,24 @@ end time: 4:20PM
 phase: code
 comment: Piece together time and defect logs from commit history.
 
+-date: Mar 30, 2011
+start time: 4:20PM
+end time: 4:25PM
+phase: plan
+comment: t19 for last meeting.
+
+-date: Mar 31, 2011
+start time: 3:45PM
+end time: 4:15PM
+phase: code
+comment: Write getChunksWithName (formerly known as takeChunks)
+
+-date: Mar 31, 2011
+start time: 6:15PM
+end time: 6:45PM
+phase: code
+comment: More exploder stuff.
+
 defect log:
 
 -date: Mar 9, 2011
@@ -164,3 +182,83 @@ comment: Remove a comma that someone snuck into Mio suspend parameter list.
 type: logic
 fix time: 20
 comment: Investigate what getFrame is actually doing in order to better write a comment that actually means something.
+
+-date: Mar 30, 2011
+type: logic
+fix time: 30
+comment: Forgot to call blow chunks.
+
+-date: Mar 30, 2011
+type: logic
+fix time: 90
+comment: Build frames builds fcTL instead of fDAT.
+
+-date: Mar 30, 2011
+type: logic
+fix time: 20
+comment: numFarmes and numPlays not converted into rationals
+
+-date: Mar 30, 2011
+type: logic
+fix time: 20
+comment: APNG output is corrupted
+
+-date: Mar 30, 2011
+type: logic
+fix time: 15
+comment: APNG output is better but still corrupted
+
+-date: Mar 30, 2011
+type: logic
+fix time: 15
+comment: fDAT is not fdAT.
+
+-date: Mar 31, 2011
+type: design
+fix time: 5
+comment: Rename cleanChunks to splitAtFirstFrameChunk.
+
+-date: Mar 31, 2011
+type: logic
+fix time: 20
+comment: Bad cdring.
+
+-date: Mar 31, 2011
+type: code
+fix time: 50
+comment: Suspend works.  Also, another nested list problem.
+
+-date: Apr 1, 2011
+type: misc
+fix time: 1
+comment: "separate" is spelled "separate"
+
+-date: Apr 6, 2011
+type: misc
+fix time: 1
+comment: Remove unnecessary apostrophes.
+
+-date: Apr 6, 2011
+type: misc
+fix time: 60
+comment: Work on presentation.
+
+-date: Apr 6, 2011
+type: misc
+fix time: 10
+comment: More work on presentation.
+
+-date: Apr 7, 2011
+type: misc
+fix time: 15
+comment: Talk about defect prevention stuff in the presentation.
+
+-date: Apr 10, 2011
+type: misc
+fix time: 5
+comment: Merge Micah's stuff into the presentation by hand.
+
+-date: Apr 11, 2011
+type: misc
+fix time: 15
+comment: Find and cite sources for the images we use in the presentation.

@@ -86,52 +86,51 @@
     (if (endp prepdPNGs)
         nil
         (let* ((cur (car prepdPNGs))
-              (rest (cdr prepdPNGs))
-              (curIHDR (car cur)))
+               (rest (cdr prepdPNGs))
+               (curIHDR (car cur)))
           (if (null baseIHDR)
               (validateIHDR rest curIHDR)
               (let* ((bWidth (parseNum baseIHDR nil 4))
                      (cWidth (parseNum curIHDR nil 4)))
                 (if (not (= bWidth cWidth))
                     "Widths do not match"
-              (let* ((b1 (nthcdr 4 baseIHDR))
-                     (c1 (nthcdr 4 curIHDR))
-                     (bHeight (parseNum b1 nil 4))
-                     (cHeight (parseNum c1 nil 4)))
-                (if (not (= bHeight cHeight))
-                    "Heights do not match"
-              (let* ((b2 (nthcdr 4 b1))
-                     (c2 (nthcdr 4 c1))
-                     (bBitDepth (parseNum b2 nil 1))
-                     (cBitDepth (parseNum c2 nil 1)))
-                (if (not (= bBitDepth cBitDepth))
-                    "Bit depths do not match"
-              (let* ((b3 (nthcdr 1 b2))
-                     (c3 (nthcdr 1 c2))
-                     (bColorType (parseNum b3 nil 1))
-                     (cColorType (parseNum c3 nil 1)))
-                (if (not (= bColorType cColorType))
-                    "Color types do not match"
-              (let* ((b4 (nthcdr 1 b3))
-                     (c4 (nthcdr 1 c3))
-                     (bCompression (parseNum b4 nil 1))
-                     (cCompression (parseNum c4 nil 1)))
-                (if (not (= bCompression cCompression))
-                    "Compression methods do not match"
-              (let* ((b5 (nthcdr 1 b4))
-                     (c5 (nthcdr 1 c4))
-                     (bFilter (parseNum b5 nil 1))
-                     (cFilter (parseNum c5 nil 1)))
-                (if (not (= bFilter cFilter))
-                    "Filter methods do not match"
-              (let* ((b6 (nthcdr 1 b5))
-                     (c6 (nthcdr 1 c5))
-                     (bInterlace (parseNum b6 nil 1))
-                     (cInterlace (parseNum c6 nil 1)))
-                (if (not (= bInterlace cInterlace))
-                    "Interlace methods do not match"
-                    (validateIHDR rest curIHDR)
-                    ))))))))))))))))))
+                    (let* ((b1 (nthcdr 4 baseIHDR))
+                           (c1 (nthcdr 4 curIHDR))
+                           (bHeight (parseNum b1 nil 4))
+                           (cHeight (parseNum c1 nil 4)))
+                      (if (not (= bHeight cHeight))
+                          "Heights do not match"
+                          (let* ((b2 (nthcdr 4 b1))
+                                 (c2 (nthcdr 4 c1))
+                                 (bBitDepth (parseNum b2 nil 1))
+                                 (cBitDepth (parseNum c2 nil 1)))
+                            (if (not (= bBitDepth cBitDepth))
+                                "Bit depths do not match"
+                          (let* ((b3 (nthcdr 1 b2))
+                                 (c3 (nthcdr 1 c2))
+                                 (bColorType (parseNum b3 nil 1))
+                                 (cColorType (parseNum c3 nil 1)))
+                            (if (not (= bColorType cColorType))
+                                "Color types do not match"
+                                (let* ((b4 (nthcdr 1 b3))
+                                       (c4 (nthcdr 1 c3))
+                                       (bCompression (parseNum b4 nil 1))
+                                       (cCompression (parseNum c4 nil 1)))
+                                  (if (not (= bCompression cCompression))
+                                      "Compression methods do not match"
+                                      (let* ((b5 (nthcdr 1 b4))
+                                             (c5 (nthcdr 1 c4))
+                                             (bFilter (parseNum b5 nil 1))
+                                             (cFilter (parseNum c5 nil 1)))
+                                        (if (not (= bFilter cFilter))
+                                            "Filter methods do not match"
+                                            (let* ((b6 (nthcdr 1 b5))
+                                                   (c6 (nthcdr 1 c5))
+                                                   (bInterlace (parseNum b6 nil 1))
+                                                   (cInterlace (parseNum c6 nil 1)))
+                                              (if (not (= bInterlace cInterlace))
+                                                  "Interlace methods do not match"
+                                                  (validateIHDR rest curIHDR)))))))))))))))))))
 
   ; Returns a byte list representing the acTL chunk described by the
   ; parameters.
@@ -246,7 +245,7 @@
       (if (stringp errorMessage)
           errorMessage ; Returns error message if no PNG sig
           (let* ((frames (preparePNGs framedata))
-              (errorMessage (validateIHDR frames nil)))
+                 (errorMessage (validateIHDR frames nil)))
           (if (stringp errorMessage)
               errorMessage ; Returns error message for bad header fields
               (concatenate 'list
