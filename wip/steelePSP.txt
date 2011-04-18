@@ -4,6 +4,150 @@ program: PNGA
 instructor: Dr. Page
 language: ACL2
 
+actual added lines: 848
+actual base lines: 596
+
+new objects:
+
+	- name: animate
+	  estimated lines: 43
+	  type: IO
+	
+	- name: suspend
+	  estimated lines: 43
+	  type: IO
+
+	- name: writeFiles
+	  estimated lines: 18
+	  type: IO
+
+	- name: parseXML
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: getFrames
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: writeXML
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: writeFrames
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: buildAPNG
+	  estimated lines: 43
+	  type: Calculation
+
+	- name: preparePNGs
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: validateIHDR
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: buildFrames
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: buildACTL
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: buildFCTL
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: blowChunks
+	  estimated lines: 43
+	  type: Calculation
+
+	- name: makeChunk
+	  estimated lines: 43
+	  type: Calculation
+
+	- name: makeNum
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: parseNum
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: calcCRC32
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: updateCRC32
+	  estimated lines: 18
+	  type: Calculation
+
+	- name: bytep
+	  estimated lines: 2
+	  type: Calculation
+
+	- name: byte-listp
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: chunktypep
+	  estimated lines: 2
+	  type: Calculation
+
+	- name: chunkp
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: chunk-listp
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: crc32Lookup
+	  estimated lines: 2
+	  type: Calculation
+
+	- name: ascii->bytes
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: bytes->ascii
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: explodeAPNG
+	  estimated lines: 43
+	  type: Calculation
+
+	- name: getIHDR
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getAcTL
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getFrames
+	  estimated lines: 7
+	  type: Calculation
+
+
+reused objects:
+
+	- name: mindomParser
+	  type: Parse
+	  estimated base: 317
+
+	- name: minidomSerializer
+	  type: Parse
+	  estimated base: 125
+
+	- name: basicLex
+	  type: Parse
+	  estimated base: 154
+
 time log:
 
 	- date: Jan 19, 2011
