@@ -9,6 +9,8 @@ actual base lines: 596
 
 new objects:
 
+    #### IO module ####
+
 	- name: animate
 	  estimated lines: 43
 	  type: IO
@@ -20,6 +22,8 @@ new objects:
 	- name: writeFiles
 	  estimated lines: 18
 	  type: IO
+
+    #### XMLUtils module ####
 
 	- name: parseXML
 	  estimated lines: 18
@@ -36,6 +40,8 @@ new objects:
 	- name: writeFrames
 	  estimated lines: 18
 	  type: Calculation
+
+    #### APNGBuilder module ####
 
 	- name: buildAPNG
 	  estimated lines: 43
@@ -60,6 +66,26 @@ new objects:
 	- name: buildFCTL
 	  estimated lines: 18
 	  type: Calculation
+
+    #### APNGExploder module ####
+
+	- name: explodeAPNG
+	  estimated lines: 43
+	  type: Calculation
+
+	- name: getIHDR
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getAcTL
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getFrames
+	  estimated lines: 7
+	  type: Calculation
+
+    #### PNGUtils module ####
 
 	- name: blowChunks
 	  estimated lines: 43
@@ -115,22 +141,6 @@ new objects:
 
 	- name: bytes->ascii
 	  estimated lines: 4
-	  type: Calculation
-
-	- name: explodeAPNG
-	  estimated lines: 43
-	  type: Calculation
-
-	- name: getIHDR
-	  estimated lines: 7
-	  type: Calculation
-
-	- name: getAcTL
-	  estimated lines: 7
-	  type: Calculation
-
-	- name: getFrames
-	  estimated lines: 7
 	  type: Calculation
 
 
