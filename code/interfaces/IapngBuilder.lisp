@@ -83,24 +83,33 @@
                   disposeOp blendOp))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;; Contracts
-;  (con buildFrames-returns-byte-list
-;	(implies (stringp prepd)
-;		(strip (buildFrames prepd 0))))
-;
-;  (con buildACTL-returns-valid-chunk
-;	(implies (and (stringp numPlays)
-;		      (stringp numFrames))
-;		 (equal (buildACTL numPlays numFrames) (makeChunk "acTL"
-;                        (ascii->byte (concatenate numPlays numFrames))))))
-;
-;  (con buildFCTL-returns-valid-chunk
-;       (implies (and (stringp seqNum) (stringp width) (stringp height)
-;		     (stringp xOff) (stringp yOff) (stringp delay)
-;		     (stringp dispOp) (stringp blendOp)
-;		(equal (buildFCTL seqNum width height xOff yOff delay 
-;				  dispOp blendOp)
-;		       (makeChunk "fcTL" (ascii->byte (concatenate seqNum
-;			width height xOff yOff delay dispOp blendOp)))))))
 
+
+  (con buildFrames-returns-byte-list
+	(implies (stringp prepd)
+		(strip (buildFrames prepd 0))))
+
+  (con buildACTL-returns-valid-chunk
+	(implies (and (stringp numPlays)
+		      (stringp numFrames))
+		 (equal (buildACTL numPlays numFrames) (makeChunk "acTL"
+                        (ascii->byte (concatenate numPlays numFrames))))))
+
+  (con buildFCTL-returns-valid-chunk
+       (implies (and (stringp seqNum) (stringp width) (stringp height)
+		     (stringp xOff) (stringp yOff) (stringp delay)
+	     (stringp dispOp) (stringp blendOp)
+		(equal (buildFCTL seqNum width height xOff yOff delay 
+				  dispOp blendOp)
+		       (makeChunk "fcTL" (ascii->byte (concatenate seqNum
+			width height xOff yOff delay dispOp blendOp)))))))
+
+  (con preparePNGs-preserves-length
+	(implies (and (rationalp time) (stringp data))
+		 (let ((flist (concatenate 'list 
+				(list data time) (list data time)
+				(list data time) (list data time)
+				(list data time) (list data time))))
+			 (= (len flist) (len (prepPNGs flist))))))
 
 )
