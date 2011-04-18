@@ -1,0 +1,60 @@
+name: Brett Marcott
+date: September 6, 2010
+program: Project 1
+instructor: Dr. Page
+language: ACL2
+
+time log:
+
+	- date: Sept 6, 2010
+	  start time: 1:51PM
+	  end time: 3:48PM
+	  phase: code
+	  comment: Coded the split-at-delimeter function using structural induction
+	  
+	- date: Sept 6, 2010
+	  start time: 3:54PM
+	  end time: 4:08PM
+	  phase: code
+	  comment: Only had to slightly modify split-at-delimeter to code this one
+
+	- date: Sept 6, 2010
+	  start time: 4:10PM
+	  end time: 4:51PM
+	  phase: code
+	  comment: 
+
+	- date: Sept 6, 2010
+	  start time: 4:52PM
+	  end time: 6:15PM
+	  phase: code
+	  comment: Only could figure out non-inductive cases
+
+	- date: Sept 6, 2010
+	  start time: 9:30PM
+	  end time: 11:39PM
+	  phase: code
+	  comment: Only could figure out non-inductive cases, used rac function defined in class
+
+
+
+
+
+
+defect log:
+	- date: Sept 6, 2010
+	  type: syntax
+	  fix time: 1
+	  comment: tests had incorrect syntax, once fixed tests passed
+
+	- date: Sept 6, 2010
+	  type: logic
+	  fix time: 1
+	  comment: incorrect inductive case for fourth function
+
+	- date: Sept 6, 2010
+	  type: algorithm
+	  fix time: 1
+	  comment: if tok not in xs return (xs nil), chose to redefine this test case
+
+actual added lines: 33

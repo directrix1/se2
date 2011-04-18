@@ -1,0 +1,32 @@
+name: Micah Morgan
+date: September 7, 2010
+program: Individual Exercise 1
+instructor: Dr. Page
+
+time log:
+
+	- date: September 6, 2010
+	  start time: 4:00PM
+	  end time: 9:30PM
+	  phase: programming
+	  comment: Begun and completed project
+
+defect log:
+
+	- date: September 6, 2010
+	  type: Logic Error
+	  fix time: 4
+	  comment: Fixed logic error in Compare function which would cause reverse of desired output.
+
+	- date: September 6, 2010
+	  type: Logic Error
+	  fix time: 2
+	  comment: Fixed error in span2 function's conditions, which previously allowed empty xs list to cause errors.
+
+	- date: September 6, 2010
+	  type: Logic Error
+	  fix time: 1
+	  comment: Fixed logic error in split-on-token2 function's recursion mechanism, which has previously not reduced on each recursion.
+
+actual added lines: 40
+

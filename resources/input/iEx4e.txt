@@ -1,0 +1,128 @@
+name: Edward Flick
+date: Oct 5, 2010
+program: iEx4
+instructor: Dr. Page
+language: ACL2
+actual added lines: 73
+actual base lines: 321
+actual modified lines: 171
+actual removed lines: 0
+
+
+time log:
+
+	- date: Sept 26, 2010
+	  start time: 12:00PM
+	  end time: 12:30PM
+	  phase: design
+	  comment: Drafted basic design document. Included necessary functions, data types and rough process.
+
+	- date: Sept 27, 2010
+	  start time: 12:30PM
+	  end time: 2:30PM
+	  phase: code
+	  comment: Implemented test suite and wrote this file.
+	 
+	- date: Oct 10, 2010
+	  start time: 12:00PM
+	  end time: 8:30PM
+	  phase: planning
+	  comment: Read several documents and all the examples on how to generate good tests. Still trying to find ways to form theorems for operations on structured lists and mvs that nest without using lots of implications. Eventually just resigned to its necessity.
+	
+	- date: Oct 11, 2010
+	  start time: 5:00PM
+	  end time: 1:00AM
+	  phase: code
+	  comment: Implemented all functions, fixed check-expects.
+	  
+	- date: Oct 12, 2010
+	  start time: 1:00AM
+	  end time: 3:00AM
+	  phase: code
+	  comment: Refined tests, and design documentation.
+
+	- date: Oct 14, 2010
+	  start time: 12:00PM
+	  end time: 2:00PM
+	  phase: code
+	  comment: Tried making working theorems.
+
+
+new objects:
+	- name: main
+	  type: IO
+	  estimated lines: 8
+
+	- name: getgames
+	  type: Calculation
+	  estimated lines: 7
+
+	- name: gethands
+	  type: Calculation
+	  estimated lines: 7
+
+	- name: gethandcards
+	  type: Calculation
+	  estimated lines: 7
+
+	- name: stringlist-append
+	  type: Calculation
+	  estimated lines: 3
+
+defect log:
+
+	- date: Oct 5, 2010
+	  type: code
+	  fix time: 1
+	  comment: Don't know. Can't run tests without implementations.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Forget to pass state to file->string.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Added code to append .xml and .html to the input and output filenames.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: file->string second return in mv null indicates success; not the other way around.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Reordered defuns because it matters.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Changed design getgames should get list of "game" nodes.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Changed to defconst instead of defconstant, duh.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Created stringutils with function stringlist-append that appends the items in a stringlist in order into one string.
+
+	- date: Oct 11, 2010
+	  type: code
+	  fix time: 1
+	  comment: Found significant variation in one of the example xml files. Corrected code to ignore this significantly more complex variation.
+
+	- date: Oct 12, 2010
+	  type: code
+	  fix time: 1
+	  comment: Accidentally had it showing direction instead of "Dealer"
+
+	- date: Oct 12, 2010
+	  type: code
+	  fix time: 1
+	  comment: Fixed check-expects to use stringlist-append instead of string-append. Also corrected some invalid expected values, and badly specified input.
+

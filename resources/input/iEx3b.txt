@@ -1,0 +1,175 @@
+name: Brett Marcott
+date: September 26, 2010
+program: iEx3
+instructor: Dr. Page
+language: ACL2
+
+
+
+time log:
+
+	- date: September 26, 2010
+	  start time: 3:00PM
+	  end time: 3:30PM
+	  phase: plan
+	  comment: Designing code and estimate lines of code in PSP
+
+	- date: September 26, 2010
+	  start time: 4:00PM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Figuring out how I/O works, testing outputting file text
+
+	- date: September 26, 2010
+	  start time: 6:00PM
+	  end time: 7:00PM
+	  phase: code
+	  comment: Write code for parsing lines between XML tags
+
+	- date: September 26, 2010
+	  start time: 8:00PM
+	  end time: 10:00PM
+	  phase: code
+	  comment: Extract header from XML file and write to file in instruction format
+	
+	- date: September 26, 2010
+	  start time: 11:00PM
+	  end time: 3:00AM
+	  phase: code
+	  comment: Extracting card data from XML file
+
+	- date: September 27, 2010
+	  start time: 9:00AM
+	  end time: 10:00AM
+	  phase: code
+	  comment: Extracting card data from XML file
+
+	- date: September 27, 2010
+	  start time: 10:20AM
+	  end time: 11:30AM
+	  phase: code
+	  comment: Sort Hands
+
+	- date: September 27, 2010
+	  start time: 9:00PM
+	  end time: 2:00AM
+	  phase: code
+	  comment: Sort Hands
+
+	- date: September 28, 2010
+	  start time: 2:00AM
+	  end time: 4:00AM
+	  phase: code
+	  comment: aggregate all into instruction file format
+
+	- date: September 28, 2010
+	  start time: 4:00AM
+	  end time: 5:00AM
+	  phase: code
+	  comment: Print out data correctly and create main function
+
+	- date: September 28, 2010
+	  start time: 5:00AM
+	  end time: 5:40AM
+	  phase: code
+	  comment: Commenting code
+
+	- date: September 28, 2010
+	  start time: 5:40AM
+	  end time: 5:40AM
+	  phase: code
+	  comment: Finishing tests and attempting theorems
+
+new objects:
+
+	- name: read-file
+	  estimated lines: 14
+	  type: IO
+
+	- name: instr-to-file
+	  estimated lines: 8
+	  type: IO
+
+	- name: parse-xml
+	  estimated lines: 16
+	  type: calculation
+
+	- name: create-tree
+	  estimated lines: 4
+	  type: calculation
+
+	- name: tree-to-Instr
+	  estimated lines: 7
+	  type: calculation
+
+	- name: extract-header
+	  estimated lines: 14
+	  type: calculation
+	
+
+reused objects:
+
+	- name: split-at-delimeter
+	  type: list operations
+	  estimated base: 4
+
+	- name: span
+	  type: list operations
+	  estimated base: 4
+
+	- name: splitoff-prefix
+	  type: list operations
+	  estimated base: 4
+
+	- name: split-on-token
+	  type: list operations
+	  estimated base: 4
+
+defect log:
+	- date: September 26, 2010
+	  type: logic
+	  fix time: 1
+	  comment: when looking between XML tags, unknowingly altered tag that was token
+
+	- date: September 26, 2010
+	  type: logic
+	  fix time: 1
+	  comment: had troubles with returning a variable to string-list->file function as a paramter, eventually got my file written correctly
+
+	- date: September 26, 2010
+	  type: logic
+	  fix time: 1
+	  comment: couldn't sift through all the hands properly, was getting extra junk at the end of my parsing 
+
+	- date: September 27, 2010
+	  type: syntax
+	  fix time: 1
+	  comment: giving append the wrong paramters, I keep giving it characters
+
+	- date: September 27, 2010
+	  type: logic
+	  fix time: 1
+	  comment: wasn't sorting hands correctly, now group by suits then order highest to lowest
+
+	- date: September 28, 2010
+	  type: syntax
+	  fix time: 1
+	  comment: having issues with append again
+
+	- date: September 28, 2010
+	  type: logic
+	  fix time: 1
+	  comment: found out that my get-boards method was returning wrong values, once fixed aggregating all info sorted was easy
+
+	- date: September 28, 2010
+	  type: logic
+	  fix time: 1
+	  comment: had to /r/n for notepad and wordpad to read instrfile correctly
+
+	- date: September 28, 2010
+	  type: logic
+	  fix time: 1
+	  comment: when trying to prove theorem, including iex3 won't work...doesn't like my syntax(seems doesn't like (mv-let))
+
+actual added lines: 125
+actual base lines: 7

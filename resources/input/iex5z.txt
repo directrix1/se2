@@ -1,0 +1,156 @@
+name: Zach Bartlett
+date: Oct 20, 2010
+program: iEx5
+instructor: Dr. Page
+	
+time log:
+	- date: Oct 20, 2010
+	  start time: 12:00PM
+	  end time: 2:00PM
+	  phase: plan
+	  comment: Worked on conceptual design. Found that will able to reuse much of iex4's functions. Primary change is the results traveler table. Added 3 new initial functions with room for several more.
+
+	- date: Oct 20, 2010
+	  start time: 4:00PM
+	  end time: 6:05PM
+	  phase: plan
+	  comment: Worked on iex5-tsts. Sanity Checks and Properties should be largely unchanged from iex4 as we are not changing how the directional data is obtained. Added sanity checks for 3 functions added, created two properites for 2 of these functions.
+
+	- date: Oct 20, 2010
+	  start time: 8:00PM
+	  end time: 8:30PM
+	  phase: plan
+	  comment: Ran PSP and updated project files.
+
+	- date: Oct 25, 2010
+	  start time: 3:00PM
+	  end time: 7:30PM
+	  phase: code
+	  comment: Worked on implementation of scores, result-tag, and obtain-inside-quotes. Needed to add a few "append-..." defuns to help keep out-string's readbility strong and LOC down. Tweaked hr-tag and out-string to encompass traveler records. Completed successful tests on two given xml input files 051115A and 090303A.
+
+	- date: Oct 26, 2010
+	  start time: 12:00PM
+	  end time: 1:30PM
+	  phase: test
+	  comment: Updated iex5-tsts, fixed a few small bugs with how tests were previously defined. All pass now. Defined iex5-thms, but still fails at irritating error about #\x character on (include-book "iex5"). This character doesn't appear in iex5 and must be occuring in list-utilities or io-utilities. No idea how to get this to pass.
+
+new objects:
+	- name: scores
+	  estimated lines: 7
+	  type: Calculation
+	  
+	- name: result-tag
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: obtain-inside-quotes
+	  estimated lines: 5
+	  type: Calculation
+
+	- name: parse-to->
+	  estimated lines: 5
+	  type: Calculation
+
+	- name: append-results
+	  estimated lines: 5
+	  type: Calculation
+
+	- name: append-game-results
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: append-ind-result
+	  estimated lines: 7
+	  type: Calculation
+
+reused objects:
+
+	- name: main-iex4
+	  estimated base: 15
+	  type: IO
+
+	- name: out-string
+	  estimated base: 36
+	  type: Calculation
+
+	- name: to-out-str
+	  estimated base: 2
+	  type: Calculation
+
+	- name: append-ns
+	  estimated base: 5
+	  type: Calculation
+
+	- name: append-we
+	  estimated base: 11
+	  type: Calculation
+
+	- name: find-card
+	  estimated base: 10
+	  type: Calculation
+
+	- name: game-tag
+	  estimated base: 6
+	  type: Calculation
+
+	- name: hr-tag
+	  estimated base: 10
+	  type: Calculation
+
+	- name: deal-tag
+	  estimated base: 10
+	  type: Calculation
+
+	- name: hand-tag
+	  estimated base: 14
+	  type: Calculation
+
+	- name: obtain-chrs-inside-tag
+	  estimated base: 8
+	  type: Calculation
+
+	- name: obtain-outside
+	  estimated base: 4
+	  type: Calculation
+
+defect log:
+
+	- date: Oct 20, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: Realized needed an additional tag content handling for multiquoted lines in result tag.
+
+	- date: Oct 25, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: Forgot the need for an endcase in append-game-results, was causing further problems by continuining to give append-ind an empty list.
+
+	- date: Oct 25, 2010
+	  type: Conceptual
+	  fix time: 25
+	  comment: Needed to make a distinction between opening and closing quotes (this is easy in brackets, but not in quotes). Fixed by sending in list after NEXT FIRST quote (opening).
+
+	- date: Oct 25, 2010
+	  type: Output
+	  fix time: 10
+	  comment: Needed to test number of tabs between header text to traveler results table to determine correct spacing for output.
+
+	- date: Oct 26, 2010
+	  type: API
+	  fix time: 12
+	  comment: pack-results data needed to convert the input numbers to characters and make them lists to work with append, fixed.
+
+	- date: Oct 26, 2010
+	  type: API
+	  fix time: 20
+	  comment: Several initial tests misinterpreted how result-tag and scores should output, concerning nil input as well. Fixed the check-expects for these.
+
+	- date: Oct 26, 2010
+	  type: API
+	  fix time: 5
+	  comment: defproperty that result-tag returns 6 was not well formed, revamped to fit idea that result-tag should return a list of 6 characters.
+
+actual added lines: 59
+actual base lines: 143
+actual modified lines: 3
+actual removed lines: 0

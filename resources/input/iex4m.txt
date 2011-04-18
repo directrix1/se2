@@ -1,0 +1,144 @@
+name: Micah Morgan
+date: October 5, 2010
+program: Individual Exercise 4
+instructor: Dr. Page
+
+new objects:
+	- name: cleanchrs
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: data-parsed->string-list
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: header-parsed->string-list
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: games-parsed->string-list
+	  estimated lines: 8
+	  type: Calculation
+
+	- name: cards-hdr-parsed->string-list
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: cards-parsed->string-list
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: board-parsed->string-list
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: cards-helper
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: header-helper
+	  estimated lines: 2
+	  type: Calculation
+
+	- name: card-hdr-parsed->string-list
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: cards-parsed->string-list
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: xml-data->hdr-parsed
+	  estimated lines: 8
+	  type: Calculation
+
+	- name: spade-deal
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: parse-deal
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: xml-data->hands-parsed
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: xml-data->board-parsed
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: xml-data->data-parsed
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: xml-file->xml-data
+	  estimated lines: 2
+	  type: IO
+
+time log:
+
+	- date: October 4, 2010
+	  start time: 5:00PM
+	  end time: 8:15PM
+	  phase: Design
+	  comment: Laid out the basic design and details, project file
+
+	- date: October 5, 2010
+	  start time: 2:00PM
+	  end time: 2:50PM
+	  phase: Design
+	  comment: Forgot about Sanity checks and actually running psp on stuff! Also cleaned up the design a bit
+
+	- date: October 10, 2010
+	  start time: 8:00PM
+	  end time: 11:50PM
+	  phase: Design / Test coding
+	  comment: Finished checks for the important parts, switched around the design some more
+
+	- date: October 11, 2010
+	  start time: 4:00PM
+	  end time: 11:50PM
+	  phase: Design / Test coding
+	  comment: Began coding 
+
+
+
+defect log:
+	- date: October 5, 2010
+	  type: Design Error
+	  fix time: 5
+	  comment: Changed the method for converting xml to the hands
+
+	- date: October 10, 2010
+	  type: Design Error
+	  fix time: 10
+	  comment: Fixed the design to work on common breakpoints, so it'll function with both HR05-.xml and HR09-.xml
+
+	- date: October 10, 2010
+	  type: Syntax Error
+	  fix time: 60
+	  comment: All the old tests were horribly written, scrapped them and rewrote
+
+	- date: October 11, 2010
+	  type: Logic Error
+	  fix time: 10
+	  comment: Header Parser does not like that /> self-closing tag at all, had to rewrite with bunches of checks
+
+	- date: October 11, 2010
+	  type: Logic Error
+	  fix time: 6
+	  comment: Same as above for empty suits in hands
+
+	- date: October 11, 2010
+	  type: Logic Error
+	  fix time: 13
+	  comment: Same as above for empty suits in hands
+
+
+
+
+actual base lines: 73
+actual added lines: 88
+actual modified lines: 13
+actual removed lines: 3

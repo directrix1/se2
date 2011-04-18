@@ -1,0 +1,166 @@
+name: Zach Bartlett
+date: Oct 2, 2010
+program: iEx4
+instructor: Dr. Page
+	
+time log:
+	- date: Oct 2, 2010
+	  start time: 2:00PM
+	  end time: 3:30PM
+	  phase: plan
+	  comment: Worked on the Conceptual Design for iex4. Completed a list of 6 functions to begin with: main, out-string, deal-list, hand-list, obtain-chrs-inside-tag, and customized-map-chrs->str.
+
+	- date: Oct 3, 2010
+	  start time: 3:00PM
+	  end time: 4:45PM
+	  phase: plan
+	  comment: Worked on sanity checks for iex4. Completed checks for deal-list, hand-list, obtain-chrs-inside-tag, and customized-map-chrs->str. Also border cases for out-string. 
+	  
+	- date: Oct 7, 2010
+	  start time: 4:30PM
+	  end time: 7:30PM
+	  phase: code
+	  comment: Ported hand-list-sub, hand-list, and deal-list to iex4 as obtain-chrs-inside-tag, hand-tag, and deal-tag respectively with appropriate modifications. Added function hr-tag to handle board, dealer, and vulnerable, and added find-card to provide easy access to the card list.
+
+	- date: Oct 8, 2010
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: code
+	  comment: Worked on out-string. Needed to create to-out-str as a simple "baton" function to help reduce lines of code in out-string. Additionally, began work on two functions that handle the formatting of the line strings (append-n and append-we).
+
+	- date: Oct 9, 2010
+	  start time: 1:00AM
+	  end time: 3:00AM
+	  phase: code
+	  comment: Continued to work on out-string, finishing up append-ns and append-we as well as the rest of the required output (dealing, vulnerable, etc.) Function is currently a rough attempt, will likely require a good deal of fine tuning.
+
+	- date: Oct 9, 2010
+	  start time: 5:00PM
+	  end time: 10:00PM
+	  phase: code
+	  comment: Continued to polish up out-string, added an end case and appears to function correctly based on tests. Tested deal-tag, passed, tested game-tag, passed, ran main on HR051115A, HR100818E, HR090826E, all passed. Added obtain-outside to fix small problem with extra tabs, etc. in a xml file.
+
+	- date: Oct 10, 2010
+	  start time: 11:00PM
+	  end time: 3:00AM
+	  phase: code
+	  comment: Polished up functions and performed more testing using input files. Revised sanity checks and worte two defproperties. Passed these and ported them to defthms. Could not admit the (include-book "iex4").
+
+	- date: Oct 10, 2010
+	  start time: 12:00PM
+	  end time: 2:00PM
+	  phase: code
+	  comment: Finished commenting iex4.lisp, polished up iex4-tsts, revised software design, ran psp on iex4, created three output files for given input files.
+
+
+new objects:
+	- name: main-iex4
+	  estimated lines: 10
+	  type: IO
+
+	- name: out-string
+	  estimated lines: 15
+	  type: Calculation
+
+	- name: to-out-str
+	  estimated lines: 2
+	  type: Calculation
+
+	- name: append-ns
+	  estimated lines: 5
+	  type: Calculation
+
+	- name: append-we
+	  estimated lines: 5
+	  type: Calculation
+
+	- name: find-card
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: game-tag
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: hr-tag
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: deal-tag
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: hand-tag
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: obtain-chrs-inside-tag
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: obtain-outside
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: customized-map-chrs->str
+	  estimated lines: 7
+	  type: Calculation
+
+reused objects:
+
+	- name: basiclex
+	  estimated base: 31
+	  type: Calculation
+
+defect log:
+
+	- date: Oct 3, 2010
+	  type: Conceptual
+	  fix time: 3
+	  comment: attempted to write customized-map-chrs->str with respect to a list of characters containing board-num, etc. Realized this should only take the card-list for formatting issues. 
+
+	- date: Oct 7, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: needed a way to separate the list of cards from the board, dealer, and vulnerable data, created hr-tag to fix this.
+
+	- date: Oct 7, 2010
+	  type: Conceptual
+	  fix time: 10
+	  comment: needed a more efficient way to access the list of cards provided by game-tag, created find-cards to handle this (shorter function than expected even).
+	
+	- date: Oct 8, 2010
+	  type: prog-lang
+	  fix time: 5
+	  comment: No caadddr function, had to split to (caar (cdddr ...)).
+
+	- date: Oct 8, 2010
+	  type: function-length
+	  fix time: 30
+	  comment: out-string became too length as it was currently being written, difficult to get around because of strict requirements on output and limited tools. Created "helpers" append-ns and append-we to help reduce the length of out-string.
+
+	- date: Oct 8, 2010
+	  type: API
+	  fix time: 15
+	  comment: Mixed up use of caadddr and cadddar for out-string, difficult dealing with lists of this size, but only really required in the initial let* for brd so as long as it is correct there the rest of the function should be fine.
+
+	- date: Oct 9, 2010
+	  type: API
+	  fix time: 45
+	  comment: Needed a way to get rid of any number of tabs and returns and newlines before the next tag, so added "obtain-outside" for this purpose. Vastly improved run times.
+
+	- date: Oct 9, 2010
+	  type: Conceptual
+	  fix time: 25
+	  comment: Mixed up orientation of the output (NWES) with orientation of the input (NESW, etc.). If inputs didn't match, output mixed up orientation for N W E S sometimes.
+
+	- date: Oct 10, 2010
+	  type: api
+	  fix time: 30
+	  comment: Fixed small issue in output where if one of w's hands were too long (greater than 4 in length), e's respective hand would be tabbed one too far.
+
+
+actual added lines: 143
+actual base lines: 31
+actual modified lines: 0
+actual removed lines: 0
