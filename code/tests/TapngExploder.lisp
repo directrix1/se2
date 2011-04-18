@@ -16,7 +16,8 @@
 (require "../modules/MpngUtils.lisp") ; XXX needed?
 
 
-
+(module TapngExploder
+  
 (defconst *APNG* 
   (list	(list "IHDR" (list 0 0 0 1 0 0 0 1 8 2 0 0 0))
         (list "acTL" 
@@ -36,7 +37,6 @@
         (list "IEND" 
               nil)))
 
-(module TapngExloder
   (import IapngExploder)
   
   (include-book "testing" :dir :teachpacks)
@@ -123,7 +123,7 @@
                             (list "IHDR" '(43)))
                nil)
     (list
-      (list "IHDR" '(42))
+     '(42)
       (list	  (list "fcTL" '(4))
                   (list "fdAT" '(8))
                   (list "IHDR" '(43)))))
@@ -156,10 +156,10 @@
                                99 84 76 0 0 0 3 0 0 0 1 0 0 0 1 0 0 0 0
                                0 0 0 0 0 1 0 1 0 0 32 207 230 12 0 0 0 0
                                73 69 78 68 174 66 96 130) "1/1"))))
-  )
-
+)
+  
 (link Test
-      (MpngUtils MapngExploder))
+      (MpngUtils MapngExploder TapngExploder))
 
 (invoke Test)
 
