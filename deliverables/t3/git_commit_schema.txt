@@ -1,3 +1,0 @@
-git commit -a -m "C|Z|B time: 90 comment: worked on bob module and did a lot of things that are very important and heres why"
-
-git commit -a -m "Z --defect type: conceptual time: 30 comment: fixed a huge problem"
