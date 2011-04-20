@@ -1,0 +1,3 @@
+There are two versions of the project here (2000 and 2006).  The 2000 version is our attempt to write the encoding process based on the ISO standard (which should be in the zip), and the 2006 version is the one we based off the Java package.
+
+I would recommend using the 2006 version.  And, since your group is presumably well-acquainted with the png format, you might look into implementing a module to create/read pngs...since the algorithm is fairly nasty.
