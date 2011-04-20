@@ -1,0 +1,178 @@
+name: Zach Bartlett
+date: Sep 17, 2010
+program: iEx3
+instructor: Dr. Page
+
+time log:
+		- date: Sep 17, 2010
+		  start time: 6:00PM
+		  end time: 7:30PM
+		  phase: plan	
+		  comment: Read project description and began work on project plan (functions, data structures, etc.)
+
+		- date: Sep 20, 2010
+		  start time: 10:30PM
+		  end time: 12:30AM
+		  phase: plan	
+		  comment: Worked more on project plan and predicting new objects / reused objects. Began work on psuedo-implementations of functions.
+
+		- date: Sep 21, 2010
+		  start time: 9:00PM
+		  end time: 11:30PM
+		  phase: plan	
+		  comment: Worked more on project plan and set out detailed ideas of how the functions should connect to provide the list. First implementation of find-next-card, hand-list, deal-list, and part of create-list. Created "link-list" as a means of reorganizing the data provided by deal-list.
+		
+		- date: Sep 22, 2010
+		  start time: 4:30PM
+		  end time: 9:30PM
+		  phase: code	
+		  comment: Worked on implementations of main, create-list, deal-list, and hand-list. Restructured plan based on feedback from Dr. Page on using str->chrs list rather than the raw string.
+
+		- date: Sep 23, 2010
+		  start time: 10:00AM
+		  end time: 12:30PM
+		  phase: code	
+		  comment: Cleaned up deal-list and hand-list, performed some initially testing on these two which produce the list of cards to parse for the output list. Initial testing good.
+		
+		- date: Sep 23, 2010
+		  start time: 6:00PM
+		  end time: 9:0PM
+		  phase: code	
+		  comment: Worked on link-list and link-list-sub, cleaned up the code contained and performed initial tests on these two functions. Find-next-card caused some errors, fixed, link-list passed test. Cleaned up create-list, had a small error, performed tests, passed test.
+	  
+		- date: Sep 23, 2010
+		  start time: 10:00PM
+		  end time: 12:30AM
+		  phase: code	
+		  comment: Worked on main, in-to-out, and created new sub functions to assist with string output (map-chrs->str did not cut it for this project, had to modify). Tested on sample xml file, all output correct (no header text at this time).
+	
+		- date: Sep 24, 2010
+		  start time: 3:00PM
+		  end time: 4:30PM
+		  phase: code	
+		  comment: Worked on strip-header and fixed header output. Still need to find a way to get rid of the extra spaces where there is no header info available. Tested on sample input and passed.
+
+		- date: Sep 24, 2010
+		  start time: 8:00PM
+		  end time: 1:30AM
+		  phase: code	
+		  comment: Worked on defproperties and defthms. Confused about what functions I should write these for, but using base calculation functions only for now. Defproperties and sanity checks passed, issue with defthm file importing my definitions.
+
+		
+		- date: Sep 25, 2010
+		  start time: 12:30PM
+		  end time: 6:00PM
+		  phase: code	
+		  comment: Worked more on defprops and defthms. Finished writing and passing defproperties, passed several defthms.
+
+new objects:
+
+	- name: main
+	  estimated lines: 15
+	  type: IO
+
+	- name: in-to-out
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: sub-chrs
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: my-chrs->str
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: sub-head-chrs
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: strip-header
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: create-list
+	  estimated lines: 15
+	  type: Calculation
+
+	- name: deal-list
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: hand-list
+          estimated lines: 7
+	  type: Calculation	
+	
+	- name: hand-list-sub
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: find-next-card
+	  estimated lines: 7
+          type: Calculation
+
+	- name: link-list
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: link-list-sub
+	  estimated lines: 7
+	  type: Calculation
+
+reused objects:
+
+	- name: basiclex
+	  estimated base: 31
+	  type: Calculation
+
+defect log:
+	- date: Sept 22, 2010
+	  type: API
+	  fix time: 3
+	  comment: Had to create "caadddr" from (caaddr(cdr *)). caadddr did not exist.
+
+	- date: Sept 23, 2010
+	  type: API
+	  fix time: 20
+	  comment: deal-list and hand-list weren't producing correct output, went into functions and noticed that I was not account for newline characters and tab characters, fixed in both
+
+	- date: Sept 23, 2010
+	  type: Logic
+	  fix time: 10
+	  comment: Fixed logic error in find-next-card where i was not functionining properly as the conditional statement, replaced position with member-equal.
+
+	- date: Sept 23, 2010
+	  type: Logic
+	  fix time: 15
+	  comment: Fixed logic error in find-next-card. Mixed up meaning of caadr and cadar, caaddr and caddar, etc. Fixed.
+
+	- date: Sept 23, 2010
+	  type: Logic
+	  fix time: 20
+	  comment: Had wrong end condition for create-list, changed to </GameDatabase> to correctly parse the char list. Fixed.
+
+	- date: Sept 23, 2010
+	  type: Logic
+	  fix time: 30
+	  comment: Issue with the way the Board # was being appended to the output string, had to convert it at a later point to fix this and not create one too many sublists.
+
+	- date: Sept 24, 2010
+	  type: io
+	  fix time: 45
+	  comment: Issue with strip-header where the Program and Seed information were not being output, added a let* and conditional to fix this.
+
+	- date: Sept 24, 2010
+	  type: mechanized logic
+	  fix time: 60
+	  comment: Cannot pass (include-book "iex3") in ACL2 Mechanized Logic. Says there's a problem with me using characters (i.e. #\S or #\E or #\D) in my definitions. Very strange error.
+
+	- date: Sept 25, 2010
+	  type: mechanized logic
+	  fix time: 45
+	  comment: Coudln't pass some functions based on strange error with or "redefining if statement", used xor instead (made logic sense as only one would be correct) and thm passed.
+
+
+actual added lines: 145
+actual base lines: 31
+actual modified lines: 0
+actual removed lines: 0

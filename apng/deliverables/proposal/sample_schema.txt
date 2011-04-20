@@ -1,0 +1,7 @@
+<pnga frames="5" plays="2">
+	<image src="bob0.png" length="1/12"></image>
+	<image src="bob1.png" length="1/14"></image>
+	<image src="bob2.png" length="1/14"></image>
+	<image src="bob3.png" length="1/14"></image>
+	<image src="bob4.png" length="1/10"></image> 
+</pnga>

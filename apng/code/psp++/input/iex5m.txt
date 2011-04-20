@@ -1,0 +1,182 @@
+name: Micah Morgan
+date: October 22, 2010
+program: Individual Exercise 5
+instructor: Dr. Page
+
+new objects:
+	- name: spaceclean
+	  estimated lines: 3
+	  type: Calculation
+
+	- name: finder
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: match-parsed->string-list
+	  estimated lines: 12
+	  type: Calculation
+
+	- name: matches-parsed->string-list
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: xml-data->matches-parsed
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: xml-data->match-parsed
+	  estimated lines: 16
+	  type: Calculation
+
+reused objects:
+	- name: cleanchrs
+	  estimated base: 4
+	  type: Calculation
+
+	- name: data-parsed->string-list
+	  estimated base: 6
+	  type: Calculation
+
+	- name: header-parsed->string-list
+	  estimated base: 6
+	  type: Calculation
+
+	- name: games-parsed->string-list
+	  estimated base: 8
+	  estimated added: 4
+	  estimated modified: 2
+	  type: Calculation
+
+	- name: cards-hdr-parsed->string-list
+	  estimated base: 4
+	  type: Calculation
+
+	- name: cards-parsed->string-list
+	  estimated base: 6
+	  type: Calculation
+
+	- name: board-parsed->string-list
+	  estimated base: 4
+	  type: Calculation
+
+	- name: cards-helper
+	  estimated base: 4
+	  type: Calculation
+
+	- name: header-helper
+	  estimated base: 2
+	  type: Calculation
+
+	- name: card-hdr-parsed->string-list
+	  estimated base: 6
+	  type: Calculation
+
+	- name: cards-parsed->string-list
+	  estimated base: 16
+	  type: Calculation
+
+	- name: xml-data->hdr-parsed
+	  estimated base: 8
+	  type: Calculation
+
+	- name: suit-deal
+	  estimated base: 6
+	  estimated added: 10
+	  estimated modified: 4
+	  type: Calculation
+
+	- name: parse-deal
+	  estimated base: 6
+	  estimated added: 10
+	  estimated modified: 4
+	  type: Calculation
+
+	- name: xml-data->hands-parsed
+	  estimated base: 4
+	  type: Calculation
+
+	- name: xml-data->board-parsed
+	  estimated base: 10
+	  estimated added: 4
+	  estimated modified: 2
+	  type: Calculation
+
+	- name: xml-data->data-parsed
+	  estimated base: 4
+	  type: Calculation
+
+	- name: xml-file->xml-data
+	  estimated base: 2
+	  type: IO
+
+time log:
+	- date: October 20, 2010
+	  start time: 10:00PM
+	  end time: 11:59PM
+	  phase: Design
+	  comment: Laid out the basic design and details, project file.
+
+	- date: October 21, 2010
+	  start time: 12:01PM
+	  end time: 2:55PM
+	  phase: Design
+	  comment: Sanity checks, and actually running PSP++.  Also edited design.
+
+	- date: October 28, 2010
+	  start time: 8:00AM
+	  end time: 2:55PM
+	  phase: Coding
+	  comment: Coding, tests, psp++. Basically everything
+
+
+defect log:
+	- date: October 21, 2010
+	  type: Design Error
+	  fix time: 6
+	  comment: Decided to include the fixing of suit-deal and parse-deal
+
+	- date: October 28, 2010
+	  type: Syntax Error
+	  fix time: 25
+	  comment: Realised each board is now bound by a Board tag and board number is now BoardNo, fixed test data and code to suit
+
+	- date: October 28, 2010
+	  type: Design Error
+	  fix time: 5
+	  comment: Removed xml-data->cards-parsed completely
+
+	- date: October 28, 2010
+	  type: Design Error
+	  fix time: 25
+	  comment: Created finder to help sort hands and suits; altered suit/parse-deal to compensate for missing data / nils
+
+	- date: October 28, 2010
+	  type: Design Error
+	  fix time: 15
+	  comment: Altered xml-data->board-parsed to work more efficiently by using tag-content+
+
+	- date: October 28, 2010
+	  type: Design Error
+	  fix time: 5
+	  comment: Added spaceclean to deal with leading/trailing spaces instead of cleanchrs, which would clean in the middle of multiword names
+
+	- date: October 28, 2010
+	  type: Logic Error
+	  fix time: 5
+	  comment: Modified the two helper functions to deal with nil inputs
+
+	- date: October 28, 2010
+	  type: Design Error
+	  fix time: 10
+	  comment: Repeated Tidying up of tables, names, etc for better looking output; Found &nbsp trick to deal with empty cells
+
+	- date: October 28, 2010
+	  type: Logic Error
+	  fix time: 15
+	  comment: Had to alter header-helper and its users to deal with nil values differently; append didn't work as expected
+
+
+actual base lines: 158
+actual added lines: 124
+actual modified lines: 32
+actual removed lines: 17

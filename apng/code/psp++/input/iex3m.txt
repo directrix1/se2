@@ -1,0 +1,61 @@
+name: Micah Morgan
+date: September 27, 2010
+program: Individual Exercise 3
+instructor: Dr. Page
+
+new objects:
+	- name: data-parsed->string-list
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: xml-data->data-parsed
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: xml-data->hdr-parsed
+	  estimated lines: 8
+	  type: Calculation
+
+	- name: xml-data->games-parsed
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: xml-data->board-parsed
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: xml-file->xml-data
+	  estimated lines: 4
+	  type: IO
+
+time log:
+
+	- date: September 26, 2010
+	  start time: 6:00PM
+	  end time: 11:15PM
+	  phase: Design and Code
+	  comment: Not enough Design, too much wasted code
+
+	- date: September 27, 2010
+	  start time: 5:00PM
+	  end time: 3:15AM
+	  phase: Design and Code
+	  comment: Same as above, only worse
+
+defect log:
+	- date: September 26, 2010
+	  type: Design Error
+	  fix time: 20
+	  comment: Decided against fully parsing the xml tree
+
+	 - date: September 26, 2010
+	  type: Logic Error
+	  fix time: 3
+	  comment: Reversed list caused some problems
+
+	- date: September 26, 2010
+	  type: Logic Error
+	  fix time: 15
+	  comment: Line parser couldn't handle attributes properly
+
+actual added lines: 71

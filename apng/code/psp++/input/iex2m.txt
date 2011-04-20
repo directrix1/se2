@@ -1,0 +1,27 @@
+name: Micah Morgan
+date: September 14, 2010
+program: Individual Exercise 2
+instructor: Dr. Page
+
+time log:
+
+	- date: Sept 12, 2010
+	  start time: 12:00PM
+	  end time: 5:30PM
+	  phase: programming
+	  comment: Completed Predicate Tests
+
+	- date: Sept 12, 2010
+	  start time: 9:00PM
+	  end time: 11:59PM
+	  phase: programming
+	  comment: Completed Theorems
+
+defect log:
+
+	 - date: Sept 12, 2010
+	  type: Programmer Error
+	  fix time: 1
+	  comment: Forgot to maintain an actual defect log while working
+
+actual added lines: 91

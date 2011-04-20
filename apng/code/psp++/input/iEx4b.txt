@@ -1,0 +1,180 @@
+name: Brett Marcott
+date: October 12, 2010
+program: iEx4
+instructor: Dr. Page
+language: ACL2
+
+time log:
+
+	- date: October 4, 2010
+	  start time: 9:00PM
+	  end time: 10:30PM
+	  phase: plan
+	  comment: Design way of solving the problem. Devised a method for displaying each board's info, including board number, dealer, vulnerable (if any), and all the hands
+
+	- date: October 4, 2010
+	  start time: 10:30PM
+	  end time: 11:00PM
+	  phase: plan
+	  comment: Estimate new and reused objects, then estimate lines of code using those objects and the estimation table
+
+	- date: October 4, 2010
+	  start time: 11:00PM
+	  end time: 1:00AM
+	  phase: plan
+	  comment: Wrote tests to all new functions (including xml-utilities). Also learned mainly how I will be formatting output with the html.
+
+	- date: October 8, 2010
+	  start time: 11:30PM
+	  end time: 2:30AM
+	  phase: code
+	  comment: read in file using modified xml-utilities (includes shorthand for empty content tag)
+
+	- date: October 10, 2010
+	  start time: 10:15PM
+	  end time: 1:00AM
+	  phase: code
+	  comment: started outputting the parsed xml string into html format
+
+	- date: October 11, 2010
+	  start time: 7:45PM
+	  end time: 11:30PM
+	  phase: code
+	  comment: program can now read in the xml bridge file and output an html file showing board number, dealer, vulnerable, and each hand
+
+	- date: October 12, 2010
+	  start time: 12:00AM
+	  end time: 12:20AM
+	  phase: document
+	  comment: Comment every function and add main method
+
+	- date: October 12, 2010
+	  start time: 1:30AM
+	  end time: 4:30AM
+	  phase: test
+	  comment: Write predicate tests and theorems for tag-packages, tag-content+, attribute-value, and my own function get-suits 
+
+	- date: October 12, 2010
+	  start time: 4:30AM
+	  end time: 5:00AM
+	  phase: plan
+	  comment: edit design to match current code/implementation. Now only have two main functions, game-content (parse-xml) and  formatted-string-to-html (to-html)
+
+new objects:
+
+	- name: parse-xml
+	  estimated lines: 1
+	  type: calculation
+
+	- name: format-xml-string
+	  estimated lines: 1
+	  type: calculation
+
+	- name: formatted-string-to-html
+	  estimated lines: 4
+	  type: calculation
+
+reused objects:
+
+	#### iex3 ####
+
+	- name:	intr-to-file
+	  type: xml operations
+	  estimated base: 8
+
+	- name:	to-instr-format
+	  type: xml operations
+	  estimated base: 7
+
+	- name:	get-header
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	main
+	  type: xml operations
+	  estimated base: 1
+
+	- name:	read-file
+	  type: xml operations
+	  estimated base: 4
+
+	#### xml-utilities ####
+
+	- name:	tag-content-given-open/close
+	  type: xml operations
+	  estimated base: 7
+
+	- name:	tag-content+
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	attribute-value
+	  type: xml operations
+	  estimated base: 4
+
+	- name:	tag-packets
+	  type: xml operations
+	  estimated base: 4
+
+	#### basic lex ####
+
+	- name: split-at-delimeter
+	  type: list operations
+	  estimated base: 1
+
+	- name: span
+	  type: list operations
+	  estimated base: 1
+
+	- name: splitoff-prefix
+	  type: list operations
+	  estimated base: 4
+
+	- name: split-on-token
+	  type: list operations
+	  estimated base: 4
+
+defect log:
+
+	- date: October 4, 2010
+	  type: design
+	  fix time: 1
+	  comment: incomplete design, created total of three steps, now need to define what functions i'll reuse and create and estimate their size
+
+	- date: October 4, 2010
+	  type: design
+	  fix time: 1
+	  comment: had not considered the three higher order methods that represent the main three steps, parse-xml, format-xml-string, and formatted-string-to-html
+
+	- date: October 4, 2010
+	  type: logic
+	  fix time: 1
+	  comment: when creating html didn't interpret formatted string right, hands are assumed to be in N E S W, but html order was N S E W. As a result mixed up which hands had which cards.
+
+	- date: October 5, 2010
+	  type: design
+	  fix time: 1
+	  comment: While writing check-expects figured out that the formatted-string-to-html should be much easier than I expected, which eliminates the need for the helper methods: hand-to-html, suit-to-html, cards-to-html. 
+
+	- date: October 8, 2010
+	  type: code
+	  fix time: 1
+	  comment: code doesn't read the shorthand opening/close tag properly (<suit/>)
+
+	- date: October 8, 2010
+	  type: code
+	  fix time: 1
+	  comment: having troubles going from parsed output to html format, I changed my original parsing to make changing it to html easier
+
+	- date: October 11, 2010
+	  type: design
+	  fix time: 1
+	  comment: had wrong number of methods to output to html format, also only need 2 major steps, parse-xml, and then to html format
+
+	- date: October 12, 2010
+	  type: program
+	  fix time: 1
+	  comment: large problem with multiple imports, tried installing newer drracket, but didn't solve anything. Manually made no copy file import same definitions.
+
+actual added lines: 175
+actual base lines: 17

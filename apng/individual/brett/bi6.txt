@@ -1,0 +1,189 @@
+name: Brett Marcott
+date: February 23, 2011
+program: PNGA
+instructor: Dr. Page
+language: ACL2
+
+time log:
+
+	- date: Jan 19, 2011
+	  start time: 4:30PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Brainstormed on team programming project ideas, including accounting systems and possibly a small game. Decided APNG editor and discussed further options.
+	  
+	- date: Jan 23, 2011
+	  start time: 8:00PM
+	  end time: 10:00PM
+	  phase: plan
+	  comment: Research more into the APNG and PRNG file specifications to plan for more concrete design.
+
+	- date: Jan 26, 2011
+	  start time: 2:00PM
+	  end time: 4:00PM
+	  phase: plan
+	  comment: Discussed the modular design of our project, including the XML schema as the interface for our program. Prepared for presentation to class.
+
+	- date: Jan 31, 2011
+	  start time: 5:00PM
+	  end time: 5:15PM
+	  phase: plan
+	  comment: Discussed and set our Code Style and Standards with Colby
+
+	- date: Feb 2, 2011
+	  start time: 9:00PM
+	  end time: 12:00AM
+	  phase: plan
+	  comment: Aggregated all team member's individual projects and last semester team's projects LOC information to create one comprehensive PROBE table.
+
+	- date: Feb 9, 2011
+	  start time: 4:30PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: completed i1 and team peer evaluations for i2
+
+	- date: Feb 14, 2011
+	  start time: 4:30PM
+	  end time: 4:35PM
+	  phase: plan
+	  comment: read over syllabus and delivers, let group know about classly submissions we were missing
+
+	- date: Feb 14, 2011
+	  start time: 4:45PM
+	  end time: 5:15PM
+	  phase: plan
+	  comment: Worked with Colby and Zach to revise project design, marked up paper copy
+
+	- date: Feb 17, 2011
+	  start time: 1:00PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: Completely redesign modules with detailed parameters, program flow, input/outputs, etc.
+
+	- date: Feb 21, 2011
+	  start time: 3:45PM
+	  end time: 4:00PM
+	  phase: plan
+	  comment: Discuss action items with Colby, plan to begin stub modules and write tests this week
+
+	- date: Feb 21, 2011
+	  start time: 4:30PM
+	  end time: 5:45PM
+	  phase: plan
+	  comment: Work with Zach on finishing up and reformatting t7, help guide meeting and urging completion of tasks
+
+	- date: Feb 23, 2011
+	  start time: 12:30AM
+	  end time: 1:00PM
+	  phase: plan
+	  comment: Work on and completed i3
+
+	- date: Mar 6, 2011
+	  start time: 3:00PM
+	  end time: 3:15PM
+	  phase: plan
+	  comment: Revised and edited defect database design. Added defect type descriptions and made prioritization of defects more clear.
+
+	- date: Mar 21, 2011
+	  start time: 4:00PM
+	  end time: 5:45PM
+	  phase: code
+	  comment: Revise all Function descriptions with Colby, and add helper functions
+
+	- date: Mar 28, 2011
+	  start time: 3:00PM
+	  end time: 5:45PM
+	  phase: code
+	  comment: work on animate function and all its helper functions with colby and zach
+
+	- date: Mar 28, 2011
+	  start time: 7:30PM
+	  end time: 9:30PM
+	  phase: code
+	  comment: Work on buildapng function and all related functions alone, fixed validateIHDR to be recursive
+
+	- date: Mar 29, 2011
+	  start time: 4:30PM
+	  end time: 6:30PM
+	  phase: code
+	  comment: Review already written code for animate procedure. Also add more code to MapngBuilder
+
+	- date: Apr 4, 2011
+	  start time: 4:30PM
+	  end time: 6:30PM
+	  phase: misc
+	  comment: Begin working on presentation. Assign who will do what segment of the presentation and how long each person will speak.
+
+	- date: Apr 6, 2011
+	  start time: 11:30PM
+	  end time: 12:30AM
+	  phase: misc
+	  comment: Add two slides to final presentation regarding potential additions to our software and implementation issues.
+
+	- date: Apr 7, 2011
+	  start time: 1:45PM
+	  end time: 4:20PM
+	  phase: misc
+	  comment: We looked over all of the slides today, finalizing the content I will be speaking about. We also helped Colby finish the defect section and decided on a coherent ordering of our presentation.
+
+	- date: Apr 9, 2011
+	  start time: 1:00PM
+	  end time: 1:45PM
+	  phase: misc
+	  comment: Update PSP log file and look over presentation. Emailed team about restructuring our presentation and suggestion to cut down the number of slides.
+
+	- date: Apr 10, 2011
+	  start time: 5:30PM
+	  end time: 8:00PM
+	  phase: misc
+	  comment: Prepared for class presentation. Not everyone was prepared, so took much time dividing time up between people instead of practicing parts.
+	
+	- date: Apr 11, 2011
+	  start time:3:30PM
+	  end time: 4:10PM
+	  phase: misc
+	  comment: Meet before class to finalize our presentation. Make a few run throughs.
+	
+	- date: Apr 14, 2011
+	  start time: 1:00PM
+	  end time: 4:00PM
+	  phase: misc
+	  comment: Attempt to finish up the last team assignments for our product: including installation manual, psp, design, and defect database.
+
+
+defect log:
+
+	- date: Feb 2, 2011
+	  type: design
+	  fix time: 45
+	  comment: PROBE table initially didn't include all the individual projects, merged into one file and recounted to include them
+
+	- date: Feb 2, 2011
+	  type: design
+	  fix time: 15
+	  comment: Mishandled the team file structure on github, but fixed in later commits.
+
+	- date: Feb 16, 2011
+	  type: design
+	  fix time: 15
+	  comment: Change function names to match our coding standards
+
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 180
+	  comment: Project design needed a complete overhaul, function parameters made logical as well as program flow and modularity
+
+	- date: Mar 6, 2011
+	  type: design
+	  fix time: 15
+	  comment: Fixed a few grammar mistakes in defect database design and added in descriptions of defect types.
+
+	- date: Mar 21, 2011
+	  type: design
+	  fix time: 15
+	  comment: Parameter descriptions did not match actual parameters for animate helper functions.
+
+	- date: Mar 29, 2011
+	  type: logical
+	  fix time: 15
+	  comment: validateIHDR only validated the first IHDR. I just added a recursive call at the end.

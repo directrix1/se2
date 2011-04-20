@@ -1,0 +1,470 @@
+name: Zach Bartlett
+date: Nov 11, 2010
+program: tImplTeamSteele
+instructor: Dr. Page
+
+time log:
+	- date: Nov 2, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: Completed a rough sketch (design) of modules and interfaces. Discussed Project Description and requirements. Discussed previous code implementations to be used in tImpl.
+
+	- date: Nov 4, 2010
+	  start time: 12:00PM
+	  end time: 2:00PM
+	  phase: plan
+	  comment: Worked more on the design, completed a visio diagram of modules and function definitions and assigned tasks to each team member for tDsgn. Looked more at the project description.
+
+	- date: Nov 9, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: Brought together the function descriptions, decided on github as our distributed version control system. Assigned additional assignments to team members. Looked even more at project description, noting possible difficulties.
+
+	- date: Nov 11, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: worked on PSP++ report, discussed the project description more to decide how to manage the linkage aspect. More difficult to do score cards and rankings. Set up github accounts, etc.
+
+	- date: Nov 14, 2010
+	  start time: 6:00PM
+	  end time: 8:00PM
+	  phase: plan
+	  comment: Colby, Edward, and Zach worked on Design Review more. Renamed several functions in design to better explain what they should do. Expanded upon annotations of functions especially in psc / rankings.
+
+	- date: Nov 15, 2010
+	  start time: 6:00PM
+	  end time: 8:00PM
+	  phase: plan
+	  comment: Kye, Brett, and Micah worked on Design Review. Updated PROBE data to be more accurate and appended IO module data.
+
+	- date: Nov 16, 2010
+	  start time: 11:45AM
+	  end time: 1:30PM
+	  phase: plan
+	  comment: Group met to perform a final review of tDsgn and tDsgnreview. Looked over function contracts and descriptions, finalized psp data, finalized architecture.
+		
+	- date: Nov 16, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Decided to use Ed's iex5 as a starting point for tImpl. Looked over code and began work on splitting up existing code into modules and interfaces. Realized we needed to repackage xmlminidom and basiclex into modules/interfaces as well.
+
+	- date: Nov 17, 2010
+	  start time: 6:00PM
+	  end time: 8:00PM
+	  phase: code
+	  comment: Ed worked on updating xmlminidom and repackaging it inside a module/interface.Kye worked on repackaging IO. Micah worked on creating module/interface stubs for Rankings. Colby worked on creating module/interface stubs PSC. Zach and Brett worked on repackaging Board.
+
+	- date: Nov 18, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Discussed tDsgn with group and began to understand, after creating modules / interfaces, what else would be required in modules. Focused primarily on Rankings and PSC modules / interfaces as they would require the most work. 
+
+	- date: Nov 22, 2010
+	  start time: 11:30PM
+	  end time: 1:00AM
+	  phase: code
+	  comment: Zach put together a general idea of what getseparateresults should look like. This included a mix of code and psuedo code comments.
+
+	- date: Nov 23, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Reviewed Mboard for tCodeRvw during class time. Group was able to cover this entire module (around 260 lines).
+
+	- date: Nov 30, 2010
+	  start time: 11:45AM
+	  end time: 3:00PM
+	  phase: code
+	  comment: Met and reviewed code so far. For this session this included going over the implemented functions so far in Mio (including boards-no-trav, boards-trav, and main primarily). 
+
+	- date: Nov 30, 2010
+	  start time: 3:00PM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Group met and fixed getseparateresults. Needed a somewhat complicated mixture of mv-let structures and associated lists from these mv-let structures to create an easily searchable list based on the unique id of a direction, id, and section.
+
+	- date: Dec 2, 2010
+	  start time: 11:45AM
+	  end time: 6:00PM
+	  phase: code
+	  comment: Group met and worked on Tmio and PSC. Ed, Colby, Micah, and Zach worked on implementing PSC and Brett and Kye worked on getting all other modules debugged and runnable in Tmio. PSC currently outputs all but Rankings related information.
+
+	- date: Dec 2, 2010
+	  start time: 6:00PM
+	  end time: 7:30PM
+	  phase: code
+	  comment: Colby worked on Rankings module to implement getcontestants and a few helper xml node functions. 
+
+	- date: Dec 3, 2010
+	  start time: 1:30PM
+	  end time: 6:00PM
+	  phase: code
+	  comment: Group worked together on finishing up the implementations to Rankings module. Created a few new functions (serializedcontestants, etc.) and renamed functions to fit scheme. Rankings is finished other than creating a list of name ID pairs for PSC.
+
+	- date: Dec 7, 2010
+	  start time: 11:45AM
+	  end time: 3:00PM
+	  phase: code
+	  comment: Colby worked on getcontestants and above, Micah worked on cleaning up the CSS. 
+
+	- date: Dec 7, 2010
+	  start time: 3:00PM
+	  end time: 6:00PM
+	  phase: code
+	  comment: Colby and Zach fixed PSC to display names for IDs in the "Versus" column. Group worked on contracts. 
+
+	- date: Dec 7, 2010
+	  start time: 9:00PM
+	  end time: 11:00PM
+	  phase: code
+	  comment: Ed worked on Ixmlminidom and created a working property function as well as functions that create "dummy" xml data.
+
+	- date: Dec 9, 2010
+	  start time: 11:45AM
+	  end time: 3:00PM
+	  phase: code
+	  comment: Finished up contracts, cleaned up design, worked on finalizing psp, made final changes to headers for psc cards.
+
+new objects:
+
+	- name: xml-getallnodes
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getseparateresults
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: getallseparateresults
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getgamestring
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: serializedPSC
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: pscheader
+	  estimated lines: 41
+	  type: Calculation
+
+	- name: getAllPairs
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getBoardsForPair
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: getBoardForPair
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: getnameforID
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getboardsforpair
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: serializedrankings
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getcontestantnames
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: findspecificsection
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: findspecificcontestants
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getranks
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getrankstring
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: getrankstring
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: serializedrankingsheader
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: serializedcontestants
+	  estimated lines: 41
+	  type: Calculation
+
+	- name: getmatchpointtotal
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: insert-sorted
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: sortedcontestants
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: sortmvranks
+	  estimated lines: 16
+	  type: Calculation
+
+	- name: boards-no-trav
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: boards-trav
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: rankings
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: personal-score-cards
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: main
+	  estimated lines: 16
+	  type: I/O
+
+	- name: xml-serialize-attributes
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: xml-serialize-nodes
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: xml-getdeepnode
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: glue-kids
+	  estimated lines: 4
+	  type: Calculation
+
+	- name: xml-bfsfindnodes
+	  estimated lines: 7
+	  type: Calculation
+
+reused objects:
+
+	- name: xml-gettext
+	  type: Calculation
+	  estimated base: 9
+
+	- name: xml-getattribute
+	  type: Calculation
+	  estimated base: 8
+
+	- name: xml-getnode
+	  type: Calculation
+	  estimated base: 2
+
+	- name: xml-getnodes
+	  type: Calculation
+	  estimated base: 10
+
+	- name: xml-readnode
+	  type: Calculation
+	  estimated base: 5
+
+	- name: xml-readnodes
+	  type: Calculation
+	  estimated base: 53
+
+	- name: xml-skipdontcares
+	  type: Calculation
+	  estimated base: 20
+
+	- name: xml-readnodeproperties
+	  type: Calculation
+	  estimated base: 24
+
+	- name: xmlunescape
+	  type: Calculation
+	  estimated base: 27
+
+	- name: splitoff-prefix-mv
+	  type: Calculation
+	  estimated base: 3
+
+	- name: split-at-delimiter-mv
+	  type: Calculation
+	  estimated base: 3
+
+	- name: span-mv
+	  type: Calculation
+	  estimated base: 3
+
+	- name: split-on-token-mv
+	  type: Calculation
+	  estimated base: 3
+
+	- name: serializedboards
+	  type: Calculation
+	  estimated base: 32
+
+	- name: serializedresults
+	  type: Calculation
+	  estimated base: 35
+
+	- name: serializedhands
+	  type: Calculation
+	  estimated base: 62
+
+	- name: serializedhandcards
+	  type: Calculation
+	  estimated base: 32
+
+	- name: suit-list?
+	  type: Calculation
+	  estimated base: 8
+
+	- name: suit?
+	  type: Calculation
+	  estimated base: 38
+
+defect log:
+
+	- date: Nov 4, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: Realized XML files given as examples had given schemas. Resulted in less work required to differentiate between placement of results tags for boards.
+
+	- date: Nov 4, 2010
+	  type: Conceptual
+	  fix time: 30
+	  comment: Wrote new xmlminidom (utilities) functions that performs a Depth First Search of nodes of a particular name. 
+
+	- date: Nov 9, 2010
+	  type: Conceptual
+	  fix time: 20
+	  comment: Decided that getseparateresults needed a helper function to send results data that is not appended with html tags.
+
+	- date: Nov 14, 2010
+	  type: Conceptual
+	  fix time: 30
+	  comment: Decided that board functions required addition specification and new names (serialized...).
+
+	- date: Nov 16, 2010
+	  type: Conceptual
+	  fix time: 45
+	  comment: Realized the need for functions that returned results in a way that could be easily searched based on a player's ID (direction, id, and section). Additionally this information cannot be serialized in html.
+
+	- date: Nov 23, 2010
+	  type: Conceptual
+	  fix time: 35
+	  comment: Fixed many syntax errors in Mboard and Mio, such as incorrect sigs and defuns and misplaced parenthesis. Ed, Zach, and Colby focused on Mboard and Brett, Kye, and Micah focused on Mio. 
+
+	- date: Nov 30, 2010
+	  type: Conceptual
+	  fix time: 35
+	  comment: Realized we needed to remove the old mv associated list structure from the list of associated lists we were creating after inserting its old information with our new information from a new board. This way a search on these lists returns a single list.
+
+	- date: Nov 30, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: Realized we need to pass in an initial north-south and east-west list to allow the structure of building the associated mvs we wanted. Called these ns1 and ew1.
+
+	- date: Nov 30, 2010
+	  type: Conceptual
+	  fix time: 45
+	  comment: Called wrong let in getseparateresults. Wanted TotalScore attribute text and gave function TotalScore node.
+	
+	- date: Dec 2, 2010
+	  type: Conceptual
+	  fix time: 25
+	  comment: Fixed error in getAllPairs where ew list was being iterated needlessly along with ns, causing the function to end on the end of the ns pairs and check only whatever ew pairs whose index was after the length of ns.
+		
+	- date: Dec 2, 2010
+	  type: Conceptual
+	  fix time: 35
+	  comment: Fixed problem in linking in Tmio where the order of the linkage mattered in terms of what modules relied on other modules. 
+
+	- date: Dec 3, 2010
+	  type: Conceptual
+	  fix time: 25
+	  comment: Created function sortmvranks so that we could fix an error where the lack of an A rank would cause an error in serializedrankings not outputting B and C if they existed, likewise with B not existing but C existing.
+
+	- date: Dec 3, 2010
+	  type: Conceptual
+	  fix time: 10
+	  comment: Replaced nil in sortmvranks with &nbsp; to solve need for separate handling of empty table entries.
+
+	- date: Dec 3, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: Fixed error syntax error in Rankings function sortmvranks, (mvs) should have been mvs, confused compiler.
+
+	- date: Dec 3, 2010
+	  type: Conceptual
+	  fix time: 10
+	  comment: Fixed infinite loop in rankings, forgot ending condition on serializedrankings after modifing it.
+
+	- date: Dec 3, 2010
+	  type: Conceptual
+	  fix time: 30
+	  comment: Fixed error where Rankings function sortmvranks was taking in the wrong order of ranks (such as Section / Overall).
+
+	- date: Dec 7, 2010
+	  type: Conceptual
+	  fix time: 30
+	  comment: Fixed error where Rankings function sortmvranks was taking in the wrong order of ranks (such as Section / Overall).
+
+	- date: Dec 8, 2010
+	  type: Conceptual
+	  fix time: 10
+	  comment: Moved bfsfindnodes out of rankings and into xmlminidom (personal score cards module now uses and made sense).
+	
+	- date: Dec 8, 2010
+	  type: Conceptual
+	  fix time: 15
+	  comment: Fixed formatting in link header for all files.
+
+	- date: Dec 8, 2010
+	  type: Conceptual
+	  fix time: 25
+	  comment: Made significant formatting changes to all html, centered output and table width.
+
+	- date: Dec 8, 2010
+	  type: Syntax
+	  fix time: 10
+	  comment: Improper signatures for new functions
+
+	- date: Dec 8, 2010
+	  type: Conceptual
+	  fix time: 20
+	  comment: Fixed sigs for many functions that were being modified.
+
+	- date: Dec 8, 2010
+	  type: Banjos
+	  fix time: 15
+	  comment: Fixed length of ragtime.wav to match property test time.
+
+
+actual added lines: 1515
+actual base lines: 394
+actual modified lines: 183
+actual removed lines: 10

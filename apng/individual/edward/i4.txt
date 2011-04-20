@@ -1,0 +1,197 @@
+name: Edward Flick
+date: Feb 7, 2011
+program: se2
+instructor: Dr. Page
+
+time log:
+	- date: Jan 19, 2011
+	  start time: 12:00PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Research APNG and PNG file formats.
+
+	- date: Jan 24, 2011
+	  start time: 1:30PM
+	  end time: 8:30PM
+	  phase: plan
+	  comment: Research Deflate file formats uploaded relevant standards to GIT. Help write project proposal.
+
+	- date: Jan 31, 2011
+	  start time: 4:30PM
+	  end time: 8:30PM
+	  phase: plan
+	  comment: Planned out PROBE estimate, and calculated number of lines for xmlminidom. Work on progress report A and engineering procedures and standards.
+
+	- date: Feb 7, 2011
+	  start time: 3:30PM
+	  end time: 9:30PM
+	  phase: plan
+	  comment: Work on multilevel design and PROBE estimate. Started split up of xmlminidom implementation into two modules.
+
+	- date: Feb 14, 2011
+	  start time: 3:00PM
+	  end time: 4:30PM
+	  phase: plan
+	  comment: Updated peer review and submitted i2. Worked on xmlminidom split documentation in t5, and assisted with updates to t5.
+
+	- date: Feb 14, 2011
+	  start time: 4:30PM
+	  end time: 7:00PM
+	  phase: plan
+	  comment: Worked on t6, and split xmlminidom into minidomSerialized and minidomParser.
+
+	- date: Feb 17, 2011
+	  start time: 12:30PM
+	  end time: 5:00PM
+	  phase: plan
+	  comment: Worked on t6 and t7 and did in-depth redesign of structure and interaction of all modules involved.
+
+	- date: Feb 17, 2011
+	  start time: 8:00PM
+	  end time: 9:40PM
+	  phase: plan
+	  comment: Scanned and formatted t6 revised document as PDF.
+
+	- date: Feb 20, 2011
+	  start time: 2:00PM
+	  end time: 3:00PM
+	  phase: plan
+	  comment: Documented APNGbuilder.
+
+	- date: Feb 21, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Helped revise design document.
+
+	- date: Feb 23, 2011
+	  start time: 4:00PM
+	  end time: 6:00PM
+	  phase: plan
+	  comment: Updated IapngExploder interface.
+
+	- date: Feb 24, 2011
+	  start time: 1:15PM
+	  end time: 2:45PM
+	  phase: plan
+	  comment: Added constructors and getters for the various xml types in minidomParser.
+
+	- date: Mar 3, 2011
+	  start time: 3:30PM
+	  end time: 4:30PM
+	  phase: code
+	  comment: Worked on pngUtils.
+
+	- date: Mar 5, 2011
+	  start time: 12:01AM
+	  end time: 2:01AM
+	  phase: code
+	  comment: Finished implementation of makeNum, and added a copy of the dracula folder to the resources directory for reference. In the process of changing everything to work with lists of bytes instead of strings because this is a binary format and UTF8 string encoding could really screw us if we used string.
+
+	- date: Mar 5, 2011
+	  start time: 2:02AM
+	  end time: 3:32AM
+	  phase: code
+	  comment: makeNum and parseNum implemented. Started researching CRC32 calculation.
+
+	- date: Mar 5, 2011
+	  start time: 3:40AM
+	  end time: 3:50AM
+	  phase: design
+	  comment: Added png_crc32 reference implementation in C.
+
+	- date: Mar 5, 2011
+	  start time: 11:30AM
+	  end time: 12:30PM
+	  phase: code
+	  comment: Implemented crc32 and made some check-expects generated from reference C implementation.
+
+	- date: Mar 5, 2011
+	  start time: 12:30PM
+	  end time: 2:30PM
+	  phase: code
+	  comment: Finished pngUtils implementation pending sufficient test coverage.
+
+	- date: Mar 5, 2011
+	  start time: 2:30PM
+	  end time: 2:35PM
+	  phase: design
+	  comment: Added a reference png image.
+
+	- date: Mar 5, 2011
+	  start time: 2:40PM
+	  end time: 3:40PM
+	  phase: code
+	  comment: Added a temporary function to make sure this all works with real files which it does. Found out the PNGs can have multiple IDAT sections, and that each IDAT section seems to cap out at 8192 bytes (at least the reference image output from GIMP does).
+
+	- date: Mar 7, 2011
+	  start time: 9:30AM
+	  end time: 9:40AM
+	  phase: design
+	  comment: Updated defect design document.
+
+	- date: Mar 7, 2011
+	  start time: 10:45AM
+	  end time: 12:15PM
+	  phase: test
+	  comment: Added decent contract coverage to pngUtils.
+
+	- date: Mar 7, 2011
+	  start time: 5:00PM
+	  end time: 5:30PM
+	  phase: design
+	  comment: Reviewed the defect database design document.
+
+	- date: Mar 7, 2011
+	  start time: 6:00PM
+	  end time: 6:30PM
+	  phase: design
+	  comment: Updated design.odt to include new pngUtils functions and PROBE estimate.
+
+defect log:
+
+	- date: Feb 7, 2011
+	  type: design
+	  fix time: 10
+	  comment: Decided how to split the xmlminidom functions up into modules for serialization/deserialization and xml dom traversal.
+
+	- date: Feb 14, 2011
+	  type: design
+	  fix time: 10
+	  comment: Updated t5 to show the proper location of the xmlminidom split.
+
+	- date: Feb 14, 2011
+	  type: misc
+	  fix time: 90
+	  comment: Changed xmlminidom into the split minidomParser and minidomSerializer modules.
+
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 180
+	  comment: Serious redesign of entire project, overhauled most modules and defined all functions.
+
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 10
+	  comment: Forgot to include revised module graph in design revision PDF, scanned page, and merged into final PDF.
+
+	- date: Feb 17, 2011
+	  type: design
+	  fix time: 1
+	  comment: Changed function signature for buildFrames to include framenum instead of just firstFrame flag. This is a recursive function that needs to know what frame number it is on.
+
+	- date: Mar 3, 2011
+	  type: edge
+	  fix time: 90
+	  comment: Replaced all mvs in the minidom with lists, so it might work with mechanical logic.
+
+	- date: Mar 3, 2011
+	  type: design
+	  fix time: 60
+	  comment: Changed makenum and parsenum signatures to use a more flexible form.
+
+	- date: Mar 5, 2011
+	  type: design
+	  fix time: 30
+	  comment: Added updateCRC32 to design.
+

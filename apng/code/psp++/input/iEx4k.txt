@@ -1,0 +1,115 @@
+name: Kye Rabon
+date: Oct 4, 2010
+program: Bridge Hand Displays (iEx4)
+instructor: Dr. Page
+language: ACL2
+actual added lines: 46
+
+actual base lines: 62
+
+
+time log:
+
+	- date: Oct 3, 2010
+	  start time: 3:00PM
+	  end time: 4:00PM
+	  phase: plan
+	  comment: Thought about the design and started on the document
+
+	- date: Oct 4, 2010
+	  start time: 7:00AM
+	  end time: 9:00AM
+	  phase: plan
+	  comment: Finished the design document. Ran PSP. Wrote check-expects
+
+	- date: Oct 8, 2010
+	  start time: 10:00AM
+	  end time: 5:00PM
+	  phase: code
+	  comment: Looked around at bridge hand displays on the internet. Coded the project. For time's sake, I displayed the hands in a straight up and down manner as opposed to a diamond shape since the directions are clearly labeled. 
+
+	- date: Oct 9, 2010
+	  start time: 10:00AM
+	  end time: 3:00PM
+	  phase: test
+	  comment: Finished up coding and wrote sanity checks for non I/O functions. All 15 tests passed.
+
+	- date: Oct 10, 2010
+	  start time: 11:00AM
+	  end time: 3:00PM
+	  phase: test
+	  comment: Defined properties for the non I/O functions. All tests were successful.
+
+	- date: Oct 11, 2010
+	  start time: 7:00AM
+	  end time: 9:00AM
+	  phase: test
+	  comment: Converted properties to theorems. Tried to get ACL2 to admit my definitions file.
+
+new objects:
+
+	- name: gethands
+	  estimated lines: 10
+	  type: Calculation
+
+	- name: getdealer
+	  estimated lines: 6
+	  type: Calculation
+
+	- name: getvulnerable
+	  estimated lines: 7
+	  type: Calculation
+
+	- name: direction
+	  estimated lines: 9
+	  type: Calculation
+
+	- name: getdirection
+	  estimated lines: 7
+	  type: Calculation
+
+reused objects:
+
+	- name: readfile
+	  type: I/O
+	  estimated base: 2
+
+	- name: writefile
+	  type: I/O
+	  estimated base: 6
+
+	- name: split-on-token
+	  type: Calculation
+	  estimated base: 10
+
+	- name: getspades
+	  type: Calculation
+	  estimated base: 6
+
+	- name: gethearts
+	  type: Calculation
+	  estimated base: 10
+
+	- name: getdiamonds
+	  type: Calculation
+	  estimated base: 6
+
+	- name: getclubs
+	  type: Calculation
+	  estimated base: 6
+
+defect log:
+	- date: Oct 4, 2010
+	  type: planning
+	  fix time: 0
+	  comment: Cannot get PSP to run on more than 3 files. "statistics.lisp:63:5: /: expects type <number> as 1st argument, given: '(); other arguments were: 0"
+
+	- date: Oct 9, 2010
+	  type: code
+	  fix time: 1
+	  comment: Check-expect failed on direction. Input should be "E" instead of E.
+
+	- date: Oct 9, 2010
+	  type: code
+	  fix time: 1
+	  comment: Check-expect failed on direction. Delivers '("EAST) instead of "EAST"

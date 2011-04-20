@@ -1,0 +1,29 @@
+name: Edward Flick
+date: Sept 6, 2010
+program: iEx1
+instructor: Dr. Page
+language: ACL2
+actual added lines: 31
+actual base lines: 0
+actual modified lines: 0
+actual removed lines: 0
+
+time log:
+
+	- date: Sept 6, 2010
+	  start time: 7:00AM
+	  end time: 9:30PM
+	  phase: plan 
+	  comment: Drank too much coffee while pondering on assignment.
+	  
+	- date: Sept 6, 2010
+	  start time: 9:30PM
+	  end time: 11:59PM
+	  phase: code
+	  comment: Total implementation.
+	  
+defect log:
+	- date: Sept 6, 2010
+	  type: Conceptual
+	  fix time: 1
+	  comment: Redownloaded assignment. No more span-out/in redundency.

@@ -1,0 +1,29 @@
+name: Colby Russell
+date: Feb 14, 2011
+program: i1
+instructor: Dr. Page
+
+time log:
+-date: Jan 19, 2011
+start time: 4:30PM
+end time: 6:00PM
+phase: plan
+comment: Discussed what to do about the team project.
+
+-date: Jan 24, 2011
+start time: 2:00PM
+end time: 6:00PM
+phase: plan
+comment: Talked with Micah about doing stuff with image formats.  Talked about doing something with PNG, since it's such a simple format.  Gave an overview of APNG.  Found at at team meeting that Kye and Ed were discussing the same thing independently, and wanted to work with APNG.  Came to an agreement with others to do APNG stuff.
+
+-date: Jan 26, 2011
+start time: 2:00PM
+end time: 6:00PM
+phase: plan
+comment: Discussed coding standards.  Started the standards document and worked on it with Brett and Zach.
+
+-date: Feb 7, 2011
+start time: 3:00PM
+end time: 6:00PM
+phase: plan
+comment: Worked on PROBE estimates.  Added to group repository.

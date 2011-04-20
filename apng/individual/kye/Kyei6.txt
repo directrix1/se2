@@ -1,0 +1,245 @@
+name: Kye Rabon
+date: Mar 29, 2011
+program: se2
+instructor: Dr. Page
+
+time log:
+
+	- date: 1-24-11
+	  start time: 9:30	
+	  end time: 10:15
+	  phase: plan
+	  comment: Researched PNG and APNG specifications.
+
+	- date: 1-24-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: plan
+	  comment: Talked about our APNG idea. Worked on the proposal document.
+
+	- date: 1-26-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: plan
+	  comment: Gave our proposal.
+
+	- date: 2-5-11
+	  start time: 2:00	
+	  end time: 2:15
+	  phase: plan
+	  comment: Counted LOC in MBasicLex for PROBE estimate
+
+	- date: 2-7-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: plan
+	  comment: Worked on items for Progress Report A. Started on t5.
+
+	- date: 2-12-11
+	  start time: 8:30	
+	  end time: 9:30
+	  phase: plan
+	  comment: Added a few things to the t5 document (t5update.odt) including interfaces for basic lex and the beginning of a PROBE estimate.
+
+	- date: 2-13-11
+	  start time: 1:00	
+	  end time: 1:30
+	  phase: plan
+	  comment: Added interface functions to t5update.odt and counted base LOC for a MinidomParser module.
+
+	- date: 2-13-11
+	  start time: 1:30	
+	  end time: 2:30
+	  phase: plan
+	  comment: Added some functions, relationship diagram, and PROBE estimate to t5update.odt
+
+	- date: 2-14-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: plan
+	  comment: Fixed the Minidom modules. Worked on finished up t5 in class.
+
+	- date: 2-17-11
+	  start time: 12:30	
+	  end time: 4:30
+	  phase: plan
+	  comment: Worked on t6 adn t7, rehashed design and module diagram after intensive reorganization of modules and functions.
+
+	- date: 2-20-11
+	  start time: 10:30	
+	  end time: 11:30
+	  phase: plan
+	  comment: Added documentation for IO and XMLUtils modules for t7
+
+	- date: 2-20-11
+	  start time: 1:30	
+	  end time: 2:00
+	  phase: plan
+	  comment: Added diagrams for t7
+
+	- date: 2-20-11
+	  start time: 3:00	
+	  end time: 3:00
+	  phase: plan
+	  comment: Changed a few minor things in IOandXML
+
+	- date: 2-21-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: plan
+	  comment: Added Iio.lisp to the repository
+
+	- date: 2-23-11
+	  start time: 4:30	
+	  end time: 4:35
+	  phase: code
+	  comment: Added Mio.lisp
+
+	- date: 3-1-11
+	  start time: 8:30	
+	  end time: 8:40
+	  phase: plan
+	  comment: Replaced instances of mv with list in design.odt, and wrote a couple of cons for XmlUtils
+
+	- date: 3-3-11
+	  start time: 12:30	
+	  end time: 12:45
+	  phase: code
+	  comment: Implemented the writeFiles function in Mio.lisp
+
+	- date: 3-6-11
+	  start time: 9:20	
+	  end time: 9:40
+	  phase: test
+	  comment: Wrote a test module for XMLUtils with a few check expects.
+
+	- date: 3-6-11
+	  start time: 1:15	
+	  end time: 2:00
+	  phase: plan
+	  comment: Tested Githubs issue tracking system and composed defect database design.
+
+	- date: 3-7-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: plan
+	  comment: Went over defect database design and design revision.
+
+	- date: 3-21-11
+	  start time: 4:30	
+	  end time: 5:45
+	  phase: test
+	  comment: Fixed several syntax errors in XmlUtils and got two check expects working in TXmlUtils.
+
+	- date: 3-24-11
+	  start time: 1:30	
+	  end time: 2:00
+	  phase: code
+	  comment: Wrote a helper function for writeXML in MXmlUtils.
+
+	- date: 3-25-11
+	  start time: 1:30	
+	  end time: 4:30
+	  phase: code
+	  comment: Got parseXML function working in XmlUtils. Wrote the writeFrames function in XmlUtils and check expects for it.
+
+	- date: 3-27-11
+	  start time: 3:30	
+	  end time: 4:30
+	  phase: code
+	  comment: Added the Rpnga file and linked all of the modules. Fixed a few syntax errors.
+
+	- date: 3-28-11
+	  start time: 4:30	
+	  end time: 6:30
+	  phase: test
+	  comment: Rounded up some test files and began to attempt to run the animate function. Put together an XML file to test with.
+
+	- date: 3-30-11
+	  start time: 4:30	
+	  end time: 6:30
+	  phase: code
+	  comment: Worked at getting animate to work correctly.
+
+	- date: 3-31-11
+	  start time: 12:30	
+	  end time: 6:30
+	  phase: code
+	  comment: Worked on various issues while trying to get Exploder to work.
+
+	- date: 4-1-11
+	  start time: 1:00	
+	  end time: 4:00
+	  phase: code
+	  comment: Did some testing of the animate and suspend functions for debugging.
+
+	- date: 4-2-11
+	  start time: 10:00	
+	  end time: 2:00
+	  phase: plan
+	  comment: Made a printable defect database document.
+
+	- date: 4-3-11
+	  start time: 9:00	
+	  end time: 10:00
+	  phase: code
+	  comment: Cleaned up some of the code and comments in various modules and interfaces.
+
+	- date: 4-14-11
+	  start time: 3:00	
+	  end time: 3:30
+	  phase: code
+	  comment: Fixed some check-expects that were old in TxmlUtils
+
+
+
+defect log:
+	- date: 2-14-11
+	  type: planning
+	  fix time: 1
+	  comment: I had split up the XMLMinidom functions into the wrong modules. Ed fixed this and I added it to the t5 document.
+
+	- date: 3-3-11
+	  type: coding
+	  fix time: 15
+	  comment: Wrong argument for string-list->file in writeFiles in Mio.lisp. I had to change the second argument to type list.
+
+	- date: 3-5-11
+	  type: coding
+	  fix time: 1
+	  comment: Had to change string-list->file to binary-list->binary-file in the writeFiles function in Mio.lisp.
+
+	- date: 3-21-11
+	  type: coding
+	  fix time: 1
+	  comment: There was a duplicate name in xml-readnode-serialize-dom-invertible.
+
+	- date: 3-25-11
+	  type: coding
+	  fix time: 30
+	  comment: xml-bfsfindnodes needed to be changed to xml-getchildren in the parseXML function of MXmlUtils. 
+
+	- date: 3-25-11
+	  type: coding
+	  fix time: 15
+	  comment: writeXML did not have a nil case in MXmlUtils.
+
+	- date: 3-25-11
+	  type: coding
+	  fix time: 15
+	  comment: Mio did not actually write the XML file to disk even though it called the writeXML function. I added the XML file onto the list of items to be written to disk.
+
+	- date: 3-29-11
+	  type: coding
+	  fix time: 15
+	  comment: The test png file names did not match up with the filenames in the XML document. Test filenames started with 0 and XML file names started with 1.
+
+	- date: 3-29-11
+	  type: coding
+	  fix time: 45
+	  comment: animate would not run due to lack of a nil case in openFiles in Mio.
+
+	- date: 4-1-11
+	  type: testing
+	  fix time: 20
+	  comment: frame and play values were coming out swapped in the XML file written by suspend. Swapped the arguments in writeXML.

@@ -1,0 +1,127 @@
+<html>
+<head>
+<title>PNG Animator</title>
+
+<style>
+span.filename {
+	font-family: Courier;
+	font-size: 90%;
+}
+body {
+	margin-left:20%;
+	margin-right:20%;
+}
+
+
+</style>
+</head>
+<center><h1>PNG Animator</h1></center>
+<br />
+<center><img src="example.apng"></center>
+<br />
+<br />
+<center><h2>Installation and Usage Instructions</h2></center>
+<p>PNG Animator is a tool for creating Animated PNG files from still PNG frames and vice versa. You can use a sequence of PNG images as frames to generate an Animated PNG, and you can also use an Animated PNG to generate it's frames as PNG images.</p>
+
+<i>Note:  The recommended way to view APNG files is to open them in the Mozilla Firefox web browser. For a list of other software that support APNG, go here: <br /><br /><center>http://en.wikipedia.org/wiki/APNG#Application_support</center></i>
+
+<br></br>
+
+<h2><center>Installing and Running PNG Animator</center></h2>
+Use the following steps to setup and run PNG Animator:
+<ol>
+<li>Extract PNGAnimator.zip to a location on your hard drive</li>
+<li>Using DrRacket, browse to the PNGAnimator folder and open <span class="filename">Rpnga.lisp</span>.</li> 
+<li>Make sure the language is set to Modular ACL2 in DrRacket.</li>
+<li>Click the Run button in the upper right. It will take a few seconds to get started.</li>
+</ol>
+
+<br></br>
+
+<h2><center>Using PNG Animator</center></h2>
+<p>Some example files are included to help demonstrate the usage of PNG Animator. These files are located in the "example" folder inside the PNGAnimator folder. In the example folder, you will find a collection of PNG image files and an XML document.
+<br />
+<br />
+<center><h3>XML</h3></center>
+<p>The XML document is used to store the specifications for the animation, and is structured as follows:<br></br>
+<span class="filename">
+&lt;pnga frames="38" plays="0"&gt;<br />
+  &nbsp &nbsp &nbsp &lt;image src="example/frame01.png" length="1/25"&gt;&lt;/image&gt;<br />
+  &nbsp &nbsp &nbsp &lt;image src="example/frame02.png" length="1/25"&gt;&lt;/image&gt;<br />
+  &nbsp &nbsp &nbsp &lt;image src="example/frame03.png" length="1/25"&gt;&lt;/image&gt;<br />
+  &nbsp &nbsp &nbsp &lt;image src="example/frame04.png" length="1/25"&gt;&lt;/image&gt;
+<br />&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp.
+<br />&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp.
+<br />&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp.
+<br />&lt;/pnga&gt;
+</span>
+<br />
+<br />
+The pnga tag, along with it's "frames" and "plays" attributes, are required. The value associated with "frames" specifies how many image files are to be used in the animation. The value associated with "plays" specifies the number of times the animation will loop. A value of 0 after "plays" indicates that the animation will loop infinitely.
+<br />
+<br />
+The image tags are next. There will be the same number of these as the value specified in "frames" attribute above them. The "src" attribute contains the path to the PNG image file (frame). The "length" attribute contains the amount of time that frame will be displayed in seconds.
+<br />
+<br />
+<i>NOTE:  The paths to each png file <b>must be relative to Rpnga.lisp, not the XML file.</b></i>
+<br />
+<br />
+<center><h3>The Animate Function</h3></center>
+Once you have PNG images and a properly structured XML file, an APNG can be created by using the "animate" command. Animate uses the <b>path to the XML file relative to Rpnga.lisp</b>, and "state" as it's parameters.
+<br />
+<br />
+The following command in DrRacket will animate the example images and produce a file in the same directory as the XML file called <span class="filename">example.apng</span>. 
+<br />
+<br />
+<pre>
+(animate "example/example" state)
+</pre>
+<br />
+<br />
+<i>NOTE: File extensions shouldn't be used in the animate command, so "example.xml" is simply "example".</i>
+<br />
+<br />
+The program will work for a short period of time (depending on the size of the animation) and, if all goes well a message will appear similar to this:
+<br />
+<br />
+<pre>("Read png files from [example/example.xml] and wrote [example/example.apng]" |STATE|)</pre>
+<br />
+<br />
+The APNG file will be in the same directory as the XML file and can be viewed with Firefox.
+<br />
+<br />
+<i>The animate function requires all of the PNG's to have the same width, height, bit depth, color type, compression method, filter method, and interlace method. If this is not the case, an error will be printed to the screen indicating that one of them did not match. Animate will also display an error message if it encounters an invalid PNG. </i>
+
+<center><h3>The Suspend Function</h3></center>
+The suspend command will take an existing APNG, and output each individual frame of the animation as a PNG image. It will also ouput the XML document that contains the information about the animation. This is useful in case you want to make changes to a APNG and reanimate it. The suspend command takes the path to the APNG file <b>relative to Rpnga.lisp</b>, and "state" as parameters. Here's what it looks like when we run it on <span class="filename">example.apng</span> that's located in the example folder:
+<br />
+<br />
+<pre>(suspend "example/example" state)</pre>
+<br />
+<br />
+<i>NOTE: Along with the example above, file extensions are not used in the commands.</i>
+<br />
+<br />
+<i>NOTE: Suspend will write an XML file with the same name as the APNG file, so make sure that there's not already one in that directory (possibly from a prior animation).</i>
+<br />
+<br />
+After a few moments, you should get a message similar to this:
+<br />
+<br />
+<pre>("OK" |STATE|)</pre>
+<br />
+<br />
+Now, in the same directory as the APNG file, you will find each individual frame from the APNG as a PNG along with the XML file containing the animation information.
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+</html>
