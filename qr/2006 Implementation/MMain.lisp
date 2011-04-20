@@ -30,13 +30,13 @@ ecLevel: the error correction lever to use while encoding
 filename: the name of the file to write to
 |#
   (defun encode (text ecLevel filename)
-    (write-binary-file
-     filename 
-     (create-bitmap 
+    ;(write-binary-file
+     ;filename 
+     ;(create-bitmap 
       (ByteMatrix:getArray
        (QRCode:getMatrix
         (Encoder:encode text ecLevel))))
-     state))
+     ;state))
   
   (export IMain))
 
