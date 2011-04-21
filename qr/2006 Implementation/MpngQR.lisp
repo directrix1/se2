@@ -1,6 +1,10 @@
 ;; The first four lines of this file were added by Dracula.
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
+#reader(planet "reader.ss" ("cce" "dracula.plt") "modular" "lang")
+;; The first four lines of this file were added by Dracula.
+;; They tell DrScheme that this is a Dracula Modular ACL2 program.
+;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
 #| Team Steele
    Software Engineering I
@@ -23,12 +27,23 @@
   ;  matrix = a list of lists like '((1 0 1 1 ... 0 1)
   ;                                  . . . . . . . . .
   ;                                  (0 1 1 0 ... 1 0))
-  (defun scalify (matrix))
-  
+  (defun scalify (matrix)
+    (if (null (car matrix))
+		nil
+		(append (scalifyRow (car matrix))
+                        (scalify (cdr matrix)))))
+
   ; Returns a row scaled by 8 horizontally and multiplied
   ; by 255, where:
   ;  row = a list like '(1 0 1 1 ... 0 1)
-  (defun scalifyRow (row))
+  (defun scalifyRow (row)
+    (if (null (car row))
+		nil
+		(let ((value (* 255 (- 1 (car row)))))
+			(append 
+				(value value value value
+			 	value value value value)
+			 	(scalifyRow (cdr row))))))
   
   ; Adds filter type 0 to the beginning of each row in the matrix where:
   ;  matrix = a list of lists like '((1 0 1 1 ... 0 1)
