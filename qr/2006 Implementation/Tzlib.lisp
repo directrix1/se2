@@ -12,6 +12,7 @@
 
 (require "Izlib.lisp")
 (require "Mzlib.lisp")
+;(require "MpngUtils.lisp")
 
 (module Tzlib
   (import Izlib)
@@ -22,6 +23,6 @@
 )
 
 (link Test
-      (Mzlib))
+      (MpngUtils Mzlib))
 
 (invoke Test)

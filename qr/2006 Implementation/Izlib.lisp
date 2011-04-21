@@ -11,6 +11,14 @@
 (in-package "ACL2")
 
 (interface Izlib
+  ; Return a byte list representing bytes compressed into the "deflate"
+  ; format where:
+  ;  bytes = a list of byte values (0 -> 255) which represent the
+  ;           data to be compressed into "deflate" format.
+  ;  compresslevel = a number representing the requested compression level 
+  ;                   (0 fast/least compressed -> 9 slow/most compressed)
+  (sig deflate (bytes compresslevel))
+    
   ; Returns the adler32 checksum of the given byte list continuing
   ; from an existing adler32 calculation where
   ;  bytes = list of bytes to calculate the adler32 checksum with
