@@ -11,6 +11,16 @@
 (in-package "ACL2")
 
 (interface Izlib
+  ; Returns the adler32 checksum of the given byte list continuing
+  ; from an existing adler32 calculation where
+  ;  bytes = list of bytes to calculate the adler32 checksum with
+  ;  adler = the existing adler32 calculation to continue off of
+  (sig update-adler32 (bytes adler))
+  
+  ; Returns the adler32 checksum of the given byte list where:
+  ;  bytes = list of bytes to calculate the adler32 checksum with
+  (sig adler32 (bytes))
+
   ; Returns a byte list representing bytes compressed into the zlib format
   ; where:
   ;  bytes = a list of byte values (0 -> 255) which represent the
