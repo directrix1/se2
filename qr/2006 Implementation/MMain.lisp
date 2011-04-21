@@ -8,7 +8,10 @@
 (require "IEncoder.lisp")
 (require "IMatrix.lisp")
 (require "IQRCode.lisp")
+(require "IpngQR.lisp")
+
 (module MMain
+  (import IpngQR)
   (import IIO)
   (import IBitmap)
   (import IMatrix)
@@ -29,14 +32,17 @@ text: the text to encode
 ecLevel: the error correction lever to use while encoding
 filename: the name of the file to write to
 |#
-  (defun encode (text ecLevel filename)
-    ;(write-binary-file
-     ;filename 
-     ;(create-bitmap 
-      (ByteMatrix:getArray
-       (QRCode:getMatrix
-        (Encoder:encode text ecLevel))))
-     ;state))
+  (defun encode (text ecLevel filename topng)
+    (write-binary-file
+     filename 
+     (let 
+         ((matrix (ByteMatrix:getArray
+                   (QRCode:getMatrix
+                    (Encoder:encode text ecLevel)))))
+       (if topng
+           (makePNG matrix)
+           (create-bitmap matrix))) 
+     state))
   
   (export IMain))
 

@@ -2,6 +2,9 @@
 ;; They tell DrScheme that this is a Dracula Modular ACL2 program.
 ;; Leave these lines unchanged so that DrScheme can properly load this file.
 #reader(planet "reader.rkt" ("cce" "dracula.plt") "modular" "lang")
+(require "Mzlib.lisp")
+(require "MpngUtils.lisp")
+(require "MpngQR.lisp")
 (require "MUtilities.lisp")
 (require "MMatrix.lisp")
 (require "MQRCode.lisp")
@@ -10,8 +13,8 @@
 (require "MIO.lisp")
 (require "MMain.lisp")
 
-(link Program (import) (export IMain)
-      (MUtilities MMatrix MQRCode MEncoder MBitmap MIO MMain))
+(link Program ; (import) (export IMain)
+      (Mzlib MpngUtils MpngQR MUtilities MMatrix MQRCode MEncoder MBitmap MIO MMain))
 (invoke Program)
 
 #| RUN THIS FILE!!!
